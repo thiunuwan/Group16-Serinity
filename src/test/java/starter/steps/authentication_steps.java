@@ -10,8 +10,8 @@ public class authentication_steps {
         String normalPassword = "password";
 
         // Store the normal user credentials in Serenity session variables
-        Serenity.setSessionVariable("normalUsername").to(normalUsername);
-        Serenity.setSessionVariable("normalPassword").to(normalPassword);
+        Serenity.setSessionVariable("username").to(normalUsername);
+        Serenity.setSessionVariable("password").to(normalPassword);
     }
 
     @Given("I am an admin user")
@@ -20,8 +20,8 @@ public class authentication_steps {
         String adminPassword = "password";
 
         // Store the admin credentials in Serenity session variables
-        Serenity.setSessionVariable("adminUsername").to(adminUsername);
-        Serenity.setSessionVariable("adminPassword").to(adminPassword);
+        Serenity.setSessionVariable("username").to(adminUsername);
+        Serenity.setSessionVariable("password").to(adminPassword);
 
     }
 }

@@ -4,6 +4,8 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.serenitybdd.core.Serenity;
 import net.serenitybdd.rest.SerenityRest;
+import starter.utils.AuthUtils;
+
 import static net.serenitybdd.rest.SerenityRest.restAssuredThat;
 
 
@@ -11,20 +13,16 @@ public class GetBookByIdSteps {
 
     private static final String BASE_URL = "http://localhost:8080/api";
 
-    // A helper method to generate the Basic Auth header
-    private String generateBasicAuthHeader(String username, String password) {
-        String authValue = username + ":" + password;
-        return "Basic " + java.util.Base64.getEncoder().encodeToString(authValue.getBytes());
-    }
 
     @When("I send a GET request to {string}")
     public void iSendAGETRequestTo(String path) {
         // Retrieve admin credentials from session variables
-        String username = Serenity.sessionVariableCalled("Username");
-        String password = Serenity.sessionVariableCalled("Password");
+        String username = Serenity.sessionVariableCalled("username");
+        String password = Serenity.sessionVariableCalled("password");
 
         // Generate Basic Auth header
-        String basicAuthHeader = generateBasicAuthHeader(username, password);
+        String basicAuthHeader = AuthUtils.generateBasicAuthHeader(username, password);
+
 
         // Send GET request to retrieve the book with ID 1
         SerenityRest.given()
