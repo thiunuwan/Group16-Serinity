@@ -1,5 +1,6 @@
 package starter.steps;
 
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.serenitybdd.core.Serenity;
@@ -7,8 +8,11 @@ import net.serenitybdd.rest.SerenityRest;
 import net.thucydides.core.util.EnvironmentVariables;
 import net.thucydides.core.util.SystemEnvironmentVariables;
 import starter.utils.AuthUtils;
+import io.restassured.response.Response;
 
 import static net.serenitybdd.rest.SerenityRest.restAssuredThat;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.notNullValue;
 
 
 public class GetBookByIdSteps {
@@ -39,9 +43,17 @@ public class GetBookByIdSteps {
         restAssuredThat(response -> response.statusCode(statusCode));
     }
 
-//    @And("the response should contain the book details for ID {int}")
-//    public void theResponseShouldContainTheBookDetailsForID(int arg0) {
-//
-//    }
+    @And("the response should contain the book details for ID {int}")
+    public void theResponseShouldContainTheBookDetailsForID(int bookID) {
+        // Get the response from SerenityRest
+        Response response = SerenityRest.lastResponse();
+
+        // Assert that the response contains the expected book ID
+        response.then().body("id", equalTo(bookID));
+
+        // Optionally, verify additional book details like title, author, etc.
+        response.then().body("title", notNullValue());
+        response.then().body("author", notNullValue());
+    }
 
 }
