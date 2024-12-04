@@ -2,7 +2,8 @@ name: Run Serenity Tests
 
 on:
   workflow_dispatch:
-
+    branches:
+      - api-test-ravindu
 jobs:
   run-tests:
     runs-on: ubuntu-latest
