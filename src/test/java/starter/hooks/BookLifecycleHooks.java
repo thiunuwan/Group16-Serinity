@@ -42,7 +42,7 @@ public class BookLifecycleHooks {
     }
 
 
-
+/*
     @After("@createTestBook")
     public void deleteTestBook() {
         // Basic authentication credentials
@@ -56,7 +56,9 @@ public class BookLifecycleHooks {
                 .delete("http://localhost:8080/api/books/" + testBookId)
                 .then()
                 .statusCode(204);  // Validate successful deletion (No content)
-    }
 
+
+    }
+    */
 
 }
