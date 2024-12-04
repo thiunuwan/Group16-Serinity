@@ -1,7 +1,7 @@
 name: Run Serenity Tests
 
 on:
-  workflow_dispatch:
+  push:
     branches:
       - api-test-ravindu
 jobs:
