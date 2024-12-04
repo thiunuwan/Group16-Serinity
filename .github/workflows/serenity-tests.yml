@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - api-test-ravindu
+
 jobs:
   run-tests:
     runs-on: ubuntu-latest
@@ -13,14 +14,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Set up Java (adjust Java version if needed)
+      # Set up Java
       - name: Set up Java
         uses: actions/setup-java@v3
         with:
           java-version: '17'
           distribution: 'temurin'
 
-      # Start the API server on a specific port
+      # Download the JAR file from dms
+      - name: Download JAR file
+        run: |
+          curl -L -o demo-0.0.1-SNAPSHOT.jar https://dms.uom.lk/s/b9pQz5L6BCQNMAx/download
+
+      # Start the API server on a 8080
       - name: Start API server
         run: |
           nohup java -jar demo-0.0.1-SNAPSHOT.jar --server.port=8080 &
@@ -34,7 +40,7 @@ jobs:
         run: |
           mvn clean verify
 
-      # stop the API server
+      # Stop the API server
       - name: Stop API server
         run: |
           pkill -f 'java -jar demo-0.0.1-SNAPSHOT.jar'
