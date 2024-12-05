@@ -8,6 +8,8 @@ on:
 jobs:
   run-tests:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write  # Allow write access to repository contents
 
     steps:
       # Checkout the repository
