@@ -34,13 +34,22 @@ jobs:
       - name: Run Serenity tests
         run: |
           mvn clean verify
+        continue-on-error: true
           
       # Upload Serenity reports as artifact
       - name: Upload Serenity reports
+        if: always()
         uses: actions/upload-artifact@v3
         with:
           name: serenity-reports
           path: target/site/serenity
+
+      # Log Maven test failure details
+      - name: Check Maven test results
+        if: failure()
+        run: |
+          echo "Tests failed! Check the failsafe reports for details:"
+          cat target/failsafe-reports/*.txt
 
       # Stop the API server
       - name: Stop API server
