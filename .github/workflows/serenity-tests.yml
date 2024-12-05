@@ -21,14 +21,6 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      # Print the current working directory
-      - name: Print working directory (pwd)
-        run: pwd
-
-      # List files in the libs directory
-      - name: List files
-        run: ls
-
         # Start the API server on port 8080 using the JAR file in the resources folder
       - name: Start API server
         run: |
@@ -42,6 +34,13 @@ jobs:
       - name: Run Serenity tests
         run: |
           mvn clean verify
+          
+      # Upload Serenity reports as artifact
+      - name: Upload Serenity reports
+        uses: actions/upload-artifact@v3
+        with:
+          name: serenity-reports
+          path: target/site/serenity
 
       # Stop the API server
       - name: Stop API server
