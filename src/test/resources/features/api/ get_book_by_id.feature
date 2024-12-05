@@ -1,6 +1,6 @@
 Feature: Get Book by ID
 
-#  @api
+  @api
   @createTestBook
   Scenario: Retrieve a book with a valid ID as a regular user
     Given I am a normal user
@@ -8,7 +8,7 @@ Feature: Get Book by ID
     Then the response status code should be 200
     And the response should contain the book details for testBook
 
-#  @api
+  @api
   @createTestBook
   Scenario: Retrieve a book with a valid ID as an admin
     Given I am a admin user
