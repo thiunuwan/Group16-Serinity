@@ -13,6 +13,8 @@ import io.restassured.response.Response;
 import static net.serenitybdd.rest.SerenityRest.restAssuredThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
+import static org.junit.Assert.assertTrue;
+
 import starter.hooks.BookLifecycleHooks;
 
 public class GetBookByIdSteps {
@@ -62,6 +64,30 @@ public class GetBookByIdSteps {
         response.then().body("author", equalTo(testBookAuthor));  // Check the book author
     }
 
+    @When("I send a GET request to retrieve a book with a non-existent ID {int}")
+    public void iSendAGETRequestToRetrieveABookWithANonExistentIDBook_id(int nonExistentBookID) {
+        // Retrieve admin credentials from session variables
+        String username = Serenity.sessionVariableCalled("username");
+        String password = Serenity.sessionVariableCalled("password");
+
+        // Generate Basic Auth header
+        String basicAuthHeader = AuthUtils.generateBasicAuthHeader(username, password);
 
 
+        // Send GET request to retrieve the book with ID 1
+        SerenityRest.given()
+                .header("Authorization", basicAuthHeader)
+                .get(BASE_URL +"/books/"+nonExistentBookID);
+    }
+
+    @And("the response should contain the error message {string}")
+    public void theResponseShouldContainTheErrorMessage(String expectedErrorMessage) {
+        // Retrieve the response body as a String
+        Response response = SerenityRest.lastResponse();
+        String responseBody = response.getBody().asString();
+
+        // Verify that the response body contains the expected error message
+        assertTrue("Response body should contain the error message: " + expectedErrorMessage,
+                responseBody.contains(expectedErrorMessage));
+    }
 }

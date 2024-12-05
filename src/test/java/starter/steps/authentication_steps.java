@@ -14,7 +14,7 @@ public class authentication_steps {
         Serenity.setSessionVariable("password").to(normalPassword);
     }
 
-    @Given("I am an admin user")
+    @Given("I am a admin user")
     public void iAmAnAdminUser() {
         String adminUsername = "admin";
         String adminPassword = "password";
