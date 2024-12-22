@@ -21,7 +21,6 @@ jobs:
       - name: Make chromedriver executable
         run: chmod +x $(pwd)/src/test/resources/drivers/chromedriver
 
-
       # Install required dependencies and Chrome
       - name: Install Dependencies and Chrome
         run: |
@@ -35,16 +34,17 @@ jobs:
           curl -sSL https://storage.googleapis.com/chrome-for-testing-public/${CHROME_VERSION}/linux64/chrome-headless-shell-linux64.zip -o chrome-headless-shell-linux64.zip
           unzip chrome-headless-shell-linux64.zip
           
-          # List the contents of the extracted directory to verify the location of 'chrome'
-          ls -al chrome-headless-shell-linux64
+          # List the contents of the extracted folder to verify the location of 'chrome-headless-shell'
+          ls -al
           
-          # Check if chrome binary exists, and move it to the correct directory
-          if [ -f "chrome-headless-shell-linux64/chrome" ]; then
-          sudo mv chrome-headless-shell-linux64/chrome /usr/bin/google-chrome
+          # Move the 'chrome-headless-shell' binary to /usr/bin
+          if [ -f "chrome-headless-shell-linux64/chrome-headless-shell" ]; then
+          sudo mv chrome-headless-shell-linux64/chrome-headless-shell /usr/bin/google-chrome
           else
           echo "Chrome binary not found in the expected location."
           exit 1
           fi
+          
           
 
       # Set up Java
