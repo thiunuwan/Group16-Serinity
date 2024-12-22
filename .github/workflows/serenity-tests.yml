@@ -17,6 +17,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      # Make chromedriver executable
+      - name: Make chromedriver executable
+        run: chmod +x $(pwd)/src/test/resources/drivers/chromedriver
+
       # Set up Java
       - name: Set up Java
         uses: actions/setup-java@v3
