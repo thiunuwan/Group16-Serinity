@@ -43,17 +43,10 @@ jobs:
           
           # Download and install Google Chrome for Testing
           export CHROME_VERSION=131.0.6778.204
-          curl -sSL https://storage.googleapis.com/chrome-for-testing-public/${CHROME_VERSION}/linux64/chrome-headless-shell-linux64.zip -o chrome-linux64.zip
+          curl -sSL https://storage.googleapis.com/chrome-for-testing-public/${CHROME_VERSION}/linux64/chrome-headless-shell-linux64.zip -o chrome-headless-shell-linux64.zip
           unzip chrome-linux64.zip
           sudo mv chrome-linux64/chrome /usr/bin/google-chrome
-          
-          # Download and install ChromeDriver
-          curl -sSL https://storage.googleapis.com/chrome-for-testing-public/${CHROME_VERSION}/linux64/chromedriver-linux64.zip -o chromedriver-linux64.zip
-          unzip chromedriver-linux64.zip
-          sudo mv chromedriver-linux64/chromedriver /usr/bin/chromedriver
-          
-          # Ensure permissions are set
-          sudo chmod +x /usr/bin/google-chrome /usr/bin/chromedriver
+
 
       # Make chromedriver executable
       - name: Make chromedriver executable
