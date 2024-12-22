@@ -29,18 +29,21 @@ jobs:
           sudo apt-get install -y libnss3 libatk-bridge2.0-0 libx11-xcb1 libxcomposite1 libxcursor1 libxi6 libxrandr2 libgbm1 libasound2 libu2f-udev
           sudo apt-get install -y libicu70
           
-        # Download and install Google Chrome for Testing
+          # Download and install Google Chrome for Testing
           export CHROME_VERSION=131.0.6778.204
           curl -sSL https://storage.googleapis.com/chrome-for-testing-public/${CHROME_VERSION}/linux64/chrome-headless-shell-linux64.zip -o chrome-headless-shell-linux64.zip
           unzip chrome-headless-shell-linux64.zip
           
-        # Move the 'chrome-headless-shell' binary to /usr/bin
+          # Move the 'chrome-headless-shell' binary to /usr/bin
           if [ -f "chrome-headless-shell-linux64/chrome-headless-shell" ]; then
-          sudo mv chrome-headless-shell-linux64/chrome-headless-shell /usr/bin/google-chrome
+            sudo mv chrome-headless-shell-linux64/chrome-headless-shell /usr/bin/google-chrome
           else
-          echo "Chrome binary not found in the expected location."
-          exit 1
+            echo "Chrome binary not found in the expected location."
+            exit 1
           fi
+
+          # Verify installation
+          google-chrome --version
 
       # Set up Java
       - name: Set up Java
@@ -52,15 +55,14 @@ jobs:
       # Modify serenity.conf to set chromedriver path and enable headless mode
       - name: Update serenity.conf
         run: |
-            # Set the chromedriver path and headless mode in serenity.conf
-            sed -i 's|webdriver.chrome.driver=src/test/resources/drivers/chromedriver.exe|webdriver.chrome.driver=src/test/resources/drivers/chromedriver|'  $(pwd)/src/test/resources/serenity.conf
-            sed -i 's|headless.mode=false|headless.mode=true|'  $(pwd)/src/test/resources/serenity.conf
+          # Set the chromedriver path and headless mode in serenity.conf
+          sed -i 's|webdriver.chrome.driver=src/test/resources/drivers/chromedriver.exe|webdriver.chrome.driver=src/test/resources/drivers/chromedriver|'  $(pwd)/src/test/resources/serenity.conf
+          sed -i 's|headless.mode=false|headless.mode=true|'  $(pwd)/src/test/resources/serenity.conf
 
-        # Start the API server on port 8080 using the JAR file in the resources folder
+      # Start the API server on port 8080 using the JAR file in the resources folder
       - name: Start API server
         run: |
-            nohup java -jar $(pwd)/src/test/resources/libs/demo-0.0.1-SNAPSHOT.jar --server.port=8080 &
-
+          nohup java -jar $(pwd)/src/test/resources/libs/demo-0.0.1-SNAPSHOT.jar --server.port=8080 &
 
       # Wait for the API to start
       - name: Wait for API to start
@@ -71,7 +73,7 @@ jobs:
         run: |
           mvn clean verify
         continue-on-error: true
-          
+
       # Upload Serenity reports as artifact
       - name: Upload Serenity reports
         if: always()
@@ -94,7 +96,3 @@ jobs:
           git add .
           git commit -m "Deploy Serenity reports"
           git push --force https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} gh-pages
-
-
-
-
