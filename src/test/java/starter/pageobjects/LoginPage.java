@@ -9,4 +9,5 @@ public class LoginPage extends PageObject {
     public static final By USERNAME_FIELD = By.name("username");
     public static final By PASSWORD_FIELD = By.name("password");
     public static final By LOGIN_BUTTON = By.xpath("//button[@type='submit']");
+    public static final By ERROR_MESSAGE = By.cssSelector("p.oxd-alert-content-text");
 }
