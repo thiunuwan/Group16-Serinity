@@ -21,20 +21,42 @@ jobs:
       - name: Make chromedriver executable
         run: chmod +x $(pwd)/src/test/resources/drivers/chromedriver
 
-      - name: Install Chrome 131.0.6778.204
+#      - name: Install Chrome 131.0.6778.204
+#        run: |
+#            CHROME_VERSION=131.0.6778.204
+#
+#            # Download Chrome binary
+#            curl -sSL https://storage.googleapis.com/chrome-for-testing-public/${CHROME_VERSION}/linux64/chrome-linux64.zip -o chrome-linux64.zip
+#            unzip chrome-linux64.zip
+#            sudo mv chrome-linux64/chrome /usr/bin/google-chrome
+#
+#            # Verify installation
+#            google-chrome --version
+          
+      - name: Install Chrome & Dependencies
         run: |
-            CHROME_VERSION=131.0.6778.204
-            
-            # Download Chrome binary
-            curl -sSL https://storage.googleapis.com/chrome-for-testing-public/${CHROME_VERSION}/linux64/chrome-linux64.zip -o chrome-linux64.zip
-            unzip chrome-linux64.zip
-            sudo mv chrome-linux64/chrome /usr/bin/google-chrome
+          sudo apt-get update
+          sudo apt-get install -y wget curl unzip libnss3 libatk-bridge2.0-0 libx11-xcb1 libxcomposite1 libxcursor1 libxi6 libxrandr2 libgbm1
           
-            # Verify installation
-            google-chrome --version
+          export CHROME_VERSION=131.0.6778.204
           
-
-        # Set up Java
+          curl -sSL https://storage.googleapis.com/chrome-for-testing-public/${CHROME_VERSION}/linux64/chrome-linux64.zip -o chrome-linux64.zip
+          unzip chrome-linux64.zip
+          sudo mv chrome-linux64/chrome /usr/bin/google-chrome
+          
+          curl -sSL https://storage.googleapis.com/chrome-for-testing-public/${CHROME_VERSION}/linux64/chromedriver-linux64.zip -o chromedriver-linux64.zip
+          unzip chromedriver-linux64.zip
+          sudo mv chromedriver-linux64/chromedriver /usr/bin/chromedriver
+          
+          sudo chmod +x /usr/bin/google-chrome /usr/bin/chromedriver
+          google-chrome --version
+          chromedriver --version
+          
+          google-chrome --headless --no-sandbox --disable-dev-shm-usage --remote-debugging-port=9222 https://www.google.com
+          
+          
+          
+          # Set up Java
       - name: Set up Java
         uses: actions/setup-java@v3
         with:
