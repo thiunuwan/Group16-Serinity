@@ -1,3 +1,12 @@
+# Serenity-BDD Testing Suite for UI and API - ITQA Assignment
+
+This repository is part of an assignment for the ITQA module, where Serenity-BDD is used as the testing tool for both UI and API testing.
+
+#### Technology Stack:
+- Serenity-BDD – For comprehensive UI and API testing
+- Cucumber – For writing and managing BDD test scenarios
+- GitHub Actions – For CI/CD automation and test execution
+
 ## Group Members
 
 | Student ID  | Name                        |
