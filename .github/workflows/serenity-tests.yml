@@ -44,8 +44,6 @@ jobs:
           echo "Chrome binary not found in the expected location."
           exit 1
           fi
-          
-          
 
       # Set up Java
       - name: Set up Java
@@ -69,29 +67,29 @@ jobs:
           mvn clean verify
         continue-on-error: true
           
-#      # Upload Serenity reports as artifact
-#      - name: Upload Serenity reports
-#        if: always()
-#        uses: actions/upload-artifact@v3
-#        with:
-#          name: serenity-reports
-#          path: target/site/serenity
-#
-#      # Deploy Serenity Reports to GitHub Pages
-#      - name: Deploy Serenity reports to GitHub Pages
-#        run: |
-#          mkdir gh-pages
-#          cp -R target/site/serenity/* gh-pages/
-#          cd gh-pages
-#          git init
-#          git config user.name "GitHub Actions"
-#          git config user.email "actions@github.com"
-#          git remote add origin https://github.com/${{ github.repository }}.git
-#          git checkout -b gh-pages
-#          git add .
-#          git commit -m "Deploy Serenity reports"
-#          git push --force https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} gh-pages
-#
-#
+      # Upload Serenity reports as artifact
+      - name: Upload Serenity reports
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: serenity-reports
+          path: target/site/serenity
+
+      # Deploy Serenity Reports to GitHub Pages
+      - name: Deploy Serenity reports to GitHub Pages
+        run: |
+          mkdir gh-pages
+          cp -R target/site/serenity/* gh-pages/
+          cd gh-pages
+          git init
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git remote add origin https://github.com/${{ github.repository }}.git
+          git checkout -b gh-pages
+          git add .
+          git commit -m "Deploy Serenity reports"
+          git push --force https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} gh-pages
+
+
 
 
