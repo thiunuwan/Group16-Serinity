@@ -52,12 +52,16 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      # Modify serenity.conf to set chromedriver path and enable headless mode
-      - name: Update serenity.conf
+      # Modify serenity.properties to set chromedriver path and enable headless mode
+      - name: Update serenity.properties
         run: |
-          # Set the chromedriver path and headless mode in serenity.conf
-          sed -i 's|webdriver.chrome.driver=src/test/resources/drivers/chromedriver.exe|webdriver.chrome.driver=src/test/resources/drivers/chromedriver|'  $(pwd)/src/test/resources/serenity.conf
-          sed -i 's|headless.mode=false|headless.mode=true|'  $(pwd)/src/test/resources/serenity.conf
+          # Set the chromedriver path and headless mode in serenity.properties
+          sed -i 's|webdriver.chrome.driver=src/test/resources/drivers/chromedriver.exe|webdriver.chrome.driver=src/test/resources/drivers/chromedriver|'  $(pwd)/serenity.properties
+          sed -i 's|headless.mode=false|headless.mode=true|' $(pwd)/serenity.properties
+      # Display the contents of the serenity.properties file after the changes
+          echo "Updated serenity.properties file:"     
+          cat $(pwd)/serenity.properties
+
 
       # Start the API server on port 8080 using the JAR file in the resources folder
       - name: Start API server
