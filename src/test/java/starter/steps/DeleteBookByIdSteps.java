@@ -45,4 +45,20 @@ public class DeleteBookByIdSteps {
         assertTrue("Response body should contain the success message: " + expectedMessage,
                 responseBody.contains(expectedMessage));
     }
+
+    @When("I send a DELETE request to delete a book with a non-existent ID {int}")
+    public void iSendADELETERequestToDeleteABookWithANonExistentIDBook_id(int nonExistingBookId) {
+        // Retrieve credentials from session variables
+        String username = Serenity.sessionVariableCalled("username");
+        String password = Serenity.sessionVariableCalled("password");
+
+        // Generate Basic Auth header
+        String basicAuthHeader = AuthUtils.generateBasicAuthHeader(username, password);
+
+        // Send DELETE request to delete the book by ID
+        SerenityRest.given()
+                .header("Authorization", basicAuthHeader)
+                .delete(BASE_URL + "/books/" + nonExistingBookId);
+    }
+
 }

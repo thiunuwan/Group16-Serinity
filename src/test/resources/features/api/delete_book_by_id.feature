@@ -16,3 +16,10 @@ Feature: Delete Book by ID
     Then the response status code should be 403
     And the response should contain the error message "Request api call is forbidden"
 
+  @api
+  Scenario: Delete a non-existent book by ID
+    Given I am a admin user
+    When I send a DELETE request to delete a book with a non-existent ID 999
+    Then the response status code should be 404
+    And the response should contain the error message "Book is not found"
+
