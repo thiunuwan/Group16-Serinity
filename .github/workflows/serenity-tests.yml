@@ -17,19 +17,24 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-    #  Install  Chrome V 131
-      - name: Install Compatible Chrome Version
-        run: |
-          wget https://storage.googleapis.com/chrome-for-testing-public/131.0.6778.204/linux64/chrome-linux64.zip
-          unzip chrome-linux64.zip
-          sudo mv chrome-linux64/google-chrome /usr/bin/google-chrome
-          chmod +x /usr/bin/google-chrome
+      # Make chromedriver executable
+      - name: Make chromedriver executable
+        run: chmod +x $(pwd)/src/test/resources/drivers/chromedriver
 
-      - name: Verify Chrome and ChromeDriver Version
+      - name: Install Chrome 131.0.6778.204
         run: |
-          google-chrome --version
+            CHROME_VERSION=131.0.6778.204
+            
+            # Download Chrome binary
+            curl -sSL https://storage.googleapis.com/chrome-for-testing-public/${CHROME_VERSION}/linux64/chrome-linux64.zip -o chrome-linux64.zip
+            unzip chrome-linux64.zip
+            sudo mv chrome-linux64/chrome /usr/bin/google-chrome
+          
+            # Verify installation
+            google-chrome --version
+          
 
-      # Set up Java
+        # Set up Java
       - name: Set up Java
         uses: actions/setup-java@v3
         with:
