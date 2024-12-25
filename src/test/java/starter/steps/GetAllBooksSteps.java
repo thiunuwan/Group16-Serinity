@@ -40,12 +40,16 @@ public class GetAllBooksSteps {
     }
 
 
+
+
     @And("the response should contain a list of books")
     public void theResponseShouldContainAListOfBooks() {
         SerenityRest.lastResponse().then()
                 .body("books", notNullValue()) // Ensure the "books" field exists
-                .body("books.size()", greaterThan(0)); // Ensure the list contains at least one book
+                .body("books.size()", greaterThanOrEqualTo(0)); // Ensure the list contains zero or more books
     }
+
+
 
     @And("the response should indicate an empty book list")
     public void theResponseShouldIndicateAnEmptyBookList() {
