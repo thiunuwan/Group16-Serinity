@@ -1,34 +1,29 @@
 Feature: Get All Book List
 
   @api
-  @createTestBook
-  Scenario: Retrieve all books as a regular user
-    Given I am a normal user
+  Scenario Outline: Retrieve all books as a logged-in user
+    Given I am a <user_role> user
     When I send a GET request to retrieve the book list
     Then the response status code for all books should be 200
     And the response should contain a list of books
 
-  @api
-  @createTestBook
-  Scenario: Retrieve all books as an admin user
-    Given I am a admin user
-    When I send a GET request to retrieve the book list
-    Then the response status code for all books should be 200
-    And the response should contain a list of books
+    Examples:
+      | user_role |
+      | admin     |
+      | normal    |
 
   @api
-  Scenario: Retrieve books with an empty database as an admin user
-    Given I am a admin user
+  Scenario Outline: Retrieve books with an empty database
+    Given I am a <user_role> user
     When I send a GET request to retrieve the book list
     Then the response status code for all books should be 200
     And the response should indicate an empty book list
 
-  @api
-  Scenario: Retrieve books with an empty database as a normal user
-    Given I am a normal user
-    When I send a GET request to retrieve the book list
-    Then the response status code for all books should be 200
-    And the response should indicate an empty book list
+    Examples:
+      | user_role |
+      | admin     |
+      | normal    |
+
 
   @api
   @createTestBook
