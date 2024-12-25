@@ -78,18 +78,4 @@ public class UpdateBookByIdSteps {
                 .body(requestBody)
                 .put(BASE_URL + "/books/" + testBookId);
     }
-    @Then("the response status code should be {int}")
-    public void theResponseStatusCodeShouldBe(int statusCode) {
-        restAssuredThat(response -> response.statusCode(statusCode));
-    }
-    @And("the response should contain the error message {string}")
-    public void theResponseShouldContainTheErrorMessage(String expectedErrorMessage) {
-        // Retrieve the response body as a String
-        Response response = SerenityRest.lastResponse();
-        String responseBody = response.getBody().asString();
-
-        // Verify that the response body contains the expected error message
-        assertTrue("Response body should contain the error message: " + expectedErrorMessage,
-                responseBody.contains(expectedErrorMessage));
-    }
 }
