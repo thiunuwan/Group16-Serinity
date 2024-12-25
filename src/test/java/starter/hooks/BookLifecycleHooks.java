@@ -41,12 +41,10 @@ public class BookLifecycleHooks {
                 .path("id"); // Extract the ID for later use
     }
 
-
-/*
     @After("@createTestBook")
     public void deleteTestBook() {
         // Basic authentication credentials
-        String username = "admin";
+        String username = "user"; // since access rights are swapped
         String password = "password";
 
         // Delete the test book via API with basic authentication
@@ -59,17 +57,6 @@ public class BookLifecycleHooks {
 
 
     }
-    */
-
-    @Before("@emptyDatabase")
-    public void clearDatabase() {
-        // Clear the database by calling the API endpoint to delete all books
-        SerenityRest.given()
-                .delete(BASE_URL + "/books/clear") // Replace with the actual endpoint for clearing the database
-                .then()
-                .statusCode(200); // Ensure the database is successfully cleared
-    }
-
 
 
 }

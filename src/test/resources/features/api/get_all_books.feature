@@ -1,6 +1,7 @@
 Feature: Get All Book List
 
   @api
+  @createTestBook
   Scenario: Retrieve all books as a regular user
     Given I am a normal user
     When I send a GET request to retrieve the book list
@@ -8,6 +9,7 @@ Feature: Get All Book List
     And the response should contain a list of books
 
   @api
+  @createTestBook
   Scenario: Retrieve all books as an admin user
     Given I am a admin user
     When I send a GET request to retrieve the book list
@@ -29,6 +31,7 @@ Feature: Get All Book List
     And the response should indicate an empty book list
 
   @api
+  @createTestBook
   Scenario: Unauthorized access to book list as a non-logged-in user
     Given I am an unauthorized user
     When I send a GET request to retrieve the book list
