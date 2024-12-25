@@ -24,4 +24,16 @@ public class authentication_steps {
         Serenity.setSessionVariable("password").to(adminPassword);
 
     }
+
+
+
+    @Given("I am an unauthorized user")
+    public void iAmAnUnauthorizedUser() {
+        // Do not set any credentials for unauthorized access
+        Serenity.setSessionVariable("username").to(null);
+        Serenity.setSessionVariable("password").to(null);
+    }
+
+
+
 }
