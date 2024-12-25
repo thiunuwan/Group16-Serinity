@@ -61,4 +61,15 @@ public class BookLifecycleHooks {
     }
     */
 
+    @Before("@emptyDatabase")
+    public void clearDatabase() {
+        // Clear the database by calling the API endpoint to delete all books
+        SerenityRest.given()
+                .delete(BASE_URL + "/books/clear") // Replace with the actual endpoint for clearing the database
+                .then()
+                .statusCode(200); // Ensure the database is successfully cleared
+    }
+
+
+
 }

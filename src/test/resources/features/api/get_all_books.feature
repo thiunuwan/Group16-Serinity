@@ -1,6 +1,5 @@
 Feature: Get All Book List
 
-
   @api
   Scenario: Retrieve all books as a regular user
     Given I am a normal user
