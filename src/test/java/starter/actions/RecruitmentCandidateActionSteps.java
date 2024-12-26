@@ -19,7 +19,7 @@ public class RecruitmentCandidateActionSteps extends UIInteractionSteps {
         recruitmentPage.enterFirstName(firstName);
         recruitmentPage.enterLastname(lastName);
         recruitmentPage.enterEmail(email);
-        recruitmentPage.enterContactnumber(contact);
+        recruitmentPage.enterContactNumber(contact);
         recruitmentPage.saveCandidate();
     }
 }
