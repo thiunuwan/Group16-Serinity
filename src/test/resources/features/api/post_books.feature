@@ -14,12 +14,12 @@ Feature: Create Book API Tests
       Then the response status code should be 400 for empty input as a normal user
       And the response should contain validation errors for empty title and author as a normal user
 
-#      @api
-#      Scenario: Attempt to create a book with a title that already exists
-#        Given a book with title "Duplicate Book" and author "John Doe" already exists
-#        When I send a POST request to create a book with title "Duplicate Book" and author "John Doe"
-#        Then the response status code should be 208 for duplicate book
-#        And the response should contain the error message "Book with the same title and author already exists" for duplicate book
-
+      @api
+      Scenario: Attempt to create a book with an ID that already exists
+        Given I am a normal user
+        And a book with ID 1, title "Unique Book" and author "Jane Doe" already exists
+        When I send a POST request to create a book with ID 1, title "Another Book" and author "John Smith"
+        Then the response status code should be 208 for duplicate ID
+        And the response should contain the error message "Book with the same ID already exists" for duplicate ID
 
 
