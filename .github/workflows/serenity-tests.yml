@@ -5,6 +5,7 @@ on:
     branches:
       - api-test-ravindu
       - ui-test-ravindu
+      - master
 
 jobs:
   run-tests:
