@@ -102,8 +102,13 @@ public class AdminPage extends PageObject {
 
 
     public List<String> getUserList() {
-        List<WebElement> userElements = getDriver().findElements(By.xpath("/html/body/div[1]/div[1]/div[2]/div[2]/div/div[2]/div[3]/div/div[2]/div[*]/div/div[2]/div"));
+        try {
+            Thread.sleep(5000); // 5 seconds wait
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
+        List<WebElement> userElements = getDriver().findElements(By.xpath("/html/body/div[1]/div[1]/div[2]/div[2]/div/div[2]/div[3]/div/div[2]/div[*]/div/div[2]/div"));
 
         // Extract the usernames from the web elements
         return userElements.stream()
