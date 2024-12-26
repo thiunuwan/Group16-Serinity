@@ -27,5 +27,5 @@ Feature: POST Book
   Scenario: Book Already Exists by name (Admin/user)
     Given I am a normal user
     When I send a POST request to create a book with an existing title "Existing Book Title"
-    Then the response status code should be 409 error
+    Then the response status code should be 208 error
     And the response message should indicate that the book already exists

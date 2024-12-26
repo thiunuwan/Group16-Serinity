@@ -102,9 +102,9 @@ public class CreateBookSteps {
                 .post(BASE_URL + "/books");
     }
 
-    @Then("the response status code should be 409 error")
+    @Then("the response status code should be 208 error")
     public void theResponseStatusCodeShouldBeConflict() {
-        restAssuredThat(response -> response.statusCode(409));
+        restAssuredThat(response -> response.statusCode(208));
     }
 
     @And("the response message should indicate that the book already exists")
