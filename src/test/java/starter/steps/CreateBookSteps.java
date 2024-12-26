@@ -44,11 +44,6 @@ public class CreateBookSteps {
                 .post(BASE_URL + "/books");
     }
 
-    @Then("the response status code should {int}")
-    public void theResponseStatusCodeForCreateOperationShouldBe(int statusCode) {
-        restAssuredThat(response -> response.statusCode(statusCode));
-    }
-
     @And("the response should contain the book details with title {string} and author {string}")
     public void theResponseShouldContainTheBookDetails(String expectedTitle, String expectedAuthor) {
         // Assert that the response contains the expected book details
@@ -75,21 +70,6 @@ public class CreateBookSteps {
                 .header("Content-Type", "application/json")
                 .body(payload)
                 .post(BASE_URL + "/books");
-    }
-
-    @Then("the response status code should be {int} for empty input as a normal user")
-    public void theResponseStatusCodeShouldBeForEmptyInputAsNormalUser(int statusCode) {
-        restAssuredThat(response -> response.statusCode(statusCode));
-    }
-
-    @And("the response should contain validation errors for empty title and author as a normal user")
-    public void theResponseShouldContainValidationErrorsForEmptyTitleAndAuthorAsNormalUser() {
-        // Retrieve the response body
-        Response response = SerenityRest.lastResponse();
-
-        // Validate the error messages in the response
-        response.then().body("errors.title", equalTo("Title is required"));
-        response.then().body("errors.author", equalTo("Author is required"));
     }
 
     @Given("a book with ID {int}, title {string} and author {string} already exists")
@@ -130,22 +110,6 @@ public class CreateBookSteps {
                 .header("Content-Type", "application/json")
                 .body(payload)
                 .post(BASE_URL + "/books");
-    }
-
-    @Then("the response status code should be {int} for duplicate ID")
-    public void theResponseStatusCodeShouldBeForDuplicateID(int statusCode) {
-        restAssuredThat(response -> response.statusCode(statusCode));
-    }
-
-    @And("the response should contain the error message {string} for duplicate ID")
-    public void theResponseShouldContainTheErrorMessageForDuplicateID(String expectedErrorMessage) {
-        // Retrieve the response body
-        Response response = SerenityRest.lastResponse();
-        String responseBody = response.getBody().asString();
-
-        // Assert the error message is present
-        assertTrue("Response body should contain the error message: " + expectedErrorMessage,
-                responseBody.contains(expectedErrorMessage));
     }
 
 }
