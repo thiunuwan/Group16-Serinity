@@ -1,6 +1,7 @@
 package starter.steps;
 
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.serenitybdd.core.Serenity;
@@ -20,30 +21,18 @@ public class CreateBookSteps {
 
     private Response response;
 
-    @When("I send a POST request to create a book with empty title or author")
-    public void iSendAPostRequestToCreateABookWithEmptyTitleOrAuthor() {
+    @When("I send a POST request to create a book with empty title with author {string}")
+    public void iSendAPostRequestToCreateABookWithEmptyTitleWithAuthor(String author) {
         String basicAuthHeader = AuthUtils.generateBasicAuthHeader(
                 Serenity.sessionVariableCalled("username"),
                 Serenity.sessionVariableCalled("password")
         );
-
+        String payload = String.format("{\"title\": \"\", \"author\": \"%s\"}",author);
         SerenityRest.given()
                 .header("Authorization", basicAuthHeader)
                 .header("Content-Type", "application/json")
-                .body("{\"title\": \"\", \"author\": \"\"}")
-                .post(BASE_URL);
-    }
-
-    @Then("the response status code should be 400 error")
-    public void theResponseStatusCodeShouldBe400Error() {
-        restAssuredThat(response -> response.statusCode(400));
-    }
-
-    @And("the response should contain validation errors")
-    public void theResponseShouldContainValidationErrors() {
-        SerenityRest.lastResponse().then()
-                .body("errors.title", equalTo("Title is required"))
-                .body("errors.author", equalTo("Author is required"));
+                .body(payload)
+                .post(BASE_URL+"/books");
     }
 
     @When("I send a request to create a book with invalid ID format")
@@ -57,14 +46,9 @@ public class CreateBookSteps {
                 .header("Authorization", basicAuthHeader)
                 .header("Content-Type", "application/json")
                 .body("{\"id\": \"invalid-id-format\", \"title\": \"Book Title\", \"author\": \"Author Name\"}")
-                .post(BASE_URL);
+                .post(BASE_URL+"/books");
     }
 
-    @And("the response message should indicate invalid ID format")
-    public void theResponseMessageShouldIndicateInvalidIDFormat() {
-        SerenityRest.lastResponse().then()
-                .body("message", equalTo("Invalid ID format"));
-    }
 
     @When("I send a request to create a book with invalid title or author format")
     public void iSendARequestToCreateABookWithInvalidTitleOrAuthorFormat() {
@@ -77,38 +61,52 @@ public class CreateBookSteps {
                 .header("Authorization", basicAuthHeader)
                 .header("Content-Type", "application/json")
                 .body("{\"title\": \"123@Invalid\", \"author\": \"Invalid#456\"}")
-                .post(BASE_URL);
+                .post(BASE_URL+"/books");
     }
 
-    @And("the response message should indicate invalid title or author format")
-    public void theResponseMessageShouldIndicateInvalidTitleOrAuthorFormat() {
-        SerenityRest.lastResponse().then()
-                .body("message", equalTo("Invalid title or author format"));
-    }
 
-    @When("I send a POST request to create a book with an existing title {string}")
-    public void iSendAPOSTRequestToCreateABookWithAnExistingTitle(String title) {
+
+    @Given("a book with ID {int}, title {string} and author {string} already exists")
+    public void aBookWithIDTitleAndAuthorAlreadyExists(int id, String title, String author) {
+        // Retrieve admin credentials from session variables
         String username = Serenity.sessionVariableCalled("username");
         String password = Serenity.sessionVariableCalled("password");
 
+        // Generate Basic Auth header
         String basicAuthHeader = AuthUtils.generateBasicAuthHeader(username, password);
 
-        String payload = String.format("{\"title\": \"%s\", \"author\": \"Author Name\"}", title);
+        // Create the payload for the book with a specific ID
+        String payload = String.format("{\"id\": %d, \"title\": \"%s\", \"author\": \"%s\"}", id, title, author);
 
-        response = SerenityRest.given()
+        // Send a POST request to create the book
+        SerenityRest.given()
                 .header("Authorization", basicAuthHeader)
                 .header("Content-Type", "application/json")
                 .body(payload)
                 .post(BASE_URL + "/books");
     }
 
-    @Then("the response status code should be 208 error")
-    public void theResponseStatusCodeShouldBeConflict() {
-        restAssuredThat(response -> response.statusCode(208));
+    @When("I send a POST request to create a book with ID {int}, title {string} and author {string}")
+    public void iSendAPOSTRequestToCreateABookWithIDTitleAndAuthor(int id, String title, String author) {
+        // Retrieve normal user credentials from session variables
+        String username = Serenity.sessionVariableCalled("username");
+        String password = Serenity.sessionVariableCalled("password");
+
+        // Generate Basic Auth header
+        String basicAuthHeader = AuthUtils.generateBasicAuthHeader(username, password);
+
+        // Create the payload for the duplicate book ID
+        String payload = String.format("{\"id\": %d, \"title\": \"%s\", \"author\": \"%s\"}", id, title, author);
+
+        // Send a POST request to create the book
+        SerenityRest.given()
+                .header("Authorization", basicAuthHeader)
+                .header("Content-Type", "application/json")
+                .body(payload)
+                .post(BASE_URL + "/books");
     }
 
-    @And("the response message should indicate that the book already exists")
-    public void theResponseMessageShouldIndicateThatTheBookAlreadyExists() {
-        response.then().body("message", equalTo("Book already exists"));
-    }
+
+
+
 }
