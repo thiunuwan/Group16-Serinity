@@ -17,7 +17,7 @@ Feature: Get Book by ID
     And the response should contain the book details for testBook
 
 
- @api
+  @api
   Scenario Outline: Retrieve a non-existent book by ID
     Given I am a <user_role> user
     When I send a GET request to retrieve a book with a non-existent ID <book_id>
