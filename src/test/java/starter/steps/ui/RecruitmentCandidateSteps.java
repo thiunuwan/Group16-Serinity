@@ -30,4 +30,14 @@ public class RecruitmentCandidateSteps {
     public void iShouldSeeTheNotification(String text) {
         recruitmentCandidateActionSteps.shouldSeeNotification(text);
     }
+
+    @When("I delete the candidate named {string}")
+    public void iDeleteTheCandidateNamed(String name) {
+        recruitmentCandidateActionSteps.deleteCandidate(name);
+    }
+
+    @Then("the candidate {string} should not appear in the candidate list")
+    public void theCandidateShouldNotAppearInTheCandidateList(String name) {
+        recruitmentCandidateActionSteps.verifyDeletingCandidate(name);
+    }
 }
