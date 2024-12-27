@@ -47,4 +47,18 @@ public class RecruitmentCandidateActionSteps extends UIInteractionSteps {
         boolean notificationExists = notificationPage.containsNotification(expectedText);
         Assert.assertTrue("Notification with text '" + expectedText + "' was not found!", notificationExists);
     }
+
+    @Step("verify  the deletion of candidate")
+    public void verifyDeletingCandidate(String candidateName) {
+
+        List<String> candidateList = recruitmentPage.getCandidateList();
+        System.out.println(candidateList);
+        Assert.assertFalse("candidate  found in the list!", candidateList.contains(candidateName));
+    }
+
+    @Step("Delete candidate")
+    public void deleteCandidate(String candidateName) {
+        recruitmentPage.open();
+        recruitmentPage.deleteCandidate(candidateName);
+    }
 }
