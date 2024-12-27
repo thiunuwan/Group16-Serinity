@@ -64,18 +64,12 @@ public class RecruitmentPage extends PageObject {
     }
 
     public List<String> getCandidateList() {
-        pause(9000);
-        // Wait for the elements to be present
-//       WebDriverWait wait = new WebDriverWait(getDriver(), 30); // Adjust timeout as needed
-//       wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[contains(@class, 'data')]")));
-
-        // Find all elements with the class 'data'
-        List<WebElement> nameElements = getDriver().findElements(By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div[2]/div[3]/div/div/div[*]/div/div/div[1]/div[1]/div/div/div[2]"));
-//                                                                                           /html/body/div/div[1]/div[2]/div[2]/div/div[2]/div[3]/div/div/div[*]/div/div/div[1]/div[1]/div/div/div[2]
-        // Extract the text from each element
-        return nameElements.stream()
+        List<WebElement> candidateElements = getDriver().findElements(By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div[2]/div[3]/div/div[2]/div[*]/div/div[3]/div"));
+        //                                                                                       /html/body/div/div[1]/div[2]/div[2]/div/div[2]/div[3]/div/div[2]/div[1]/div/div[3]/div
+        //                                                                                       /html/body/div/div[1]/div[2]/div[2]/div/div[2]/div[3]/div/div[2]/div[5]/div/div[3]/div
+        // Extract the usernames from the web elements
+        return candidateElements.stream()
                 .map(WebElement::getText)
-                .filter(text -> !text.isEmpty()) // Filter out any empty elements
                 .collect(Collectors.toList());
     }
 
