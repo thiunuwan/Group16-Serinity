@@ -18,6 +18,7 @@ public class RecruitmentPage extends PageObject {
     private final By emailInput = By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div/form/div[3]/div/div[1]/div/div[2]/input");
     private final By contactInput = By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div/form/div[3]/div/div[2]/div/div[2]/input");
     private final By saveButton = By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div/form/div[8]/button[2]");
+    private final By deleteButtonTemplate = By.xpath("//button[./i[contains(@class, 'bi-trash')]]\n");
 
 
     public void clickAddCandidate() {
@@ -53,6 +54,28 @@ public class RecruitmentPage extends PageObject {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    public void deleteCandidate(String candidateName) {
+        List<WebElement> rows = getDriver().findElements(By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div[2]/div[3]/div/div[2]/div[*]/div/div[3]/div"));
+        for (WebElement row : rows) {
+            if (row.getText().contains(candidateName)) {
+                WebElement deleteButton = row.findElement(deleteButtonTemplate);
+                pause(5000);
+                deleteButton.click();
+
+                // Confirm deletion if required
+                confirmDeletion();
+                break;
+            }
+        }
+
+    }
+
+    public void confirmDeletion() {
+        WebElement confirmButton = $(By.xpath("//button[contains(@class, 'oxd-button') and contains(@class, 'oxd-button--label-danger') and ./i[contains(@class, 'bi-trash')] and contains(., 'Yes, Delete')]"));
+        pause(3000);
+        confirmButton.click();
     }
 
     private void pause(long milliseconds) {
