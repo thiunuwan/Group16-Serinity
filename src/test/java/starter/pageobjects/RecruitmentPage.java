@@ -3,6 +3,12 @@ package starter.pageobjects;
 import net.serenitybdd.core.pages.PageObject;
 import net.thucydides.core.annotations.DefaultUrl;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @DefaultUrl("https://opensource-demo.orangehrmlive.com/web/index.php/recruitment/viewCandidates")
 public class RecruitmentPage extends PageObject {
@@ -55,6 +61,22 @@ public class RecruitmentPage extends PageObject {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    public List<String> getCandidateList() {
+        pause(9000);
+        // Wait for the elements to be present
+//       WebDriverWait wait = new WebDriverWait(getDriver(), 30); // Adjust timeout as needed
+//       wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[contains(@class, 'data')]")));
+
+        // Find all elements with the class 'data'
+        List<WebElement> nameElements = getDriver().findElements(By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div[2]/div[3]/div/div/div[*]/div/div/div[1]/div[1]/div/div/div[2]"));
+//                                                                                           /html/body/div/div[1]/div[2]/div[2]/div/div[2]/div[3]/div/div/div[*]/div/div/div[1]/div[1]/div/div/div[2]
+        // Extract the text from each element
+        return nameElements.stream()
+                .map(WebElement::getText)
+                .filter(text -> !text.isEmpty()) // Filter out any empty elements
+                .collect(Collectors.toList());
     }
 
 

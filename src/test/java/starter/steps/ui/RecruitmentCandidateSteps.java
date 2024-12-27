@@ -22,6 +22,7 @@ public class RecruitmentCandidateSteps {
     }
 
     @Then("I should see the candidate \\(testCandidate) {string} in the candidate list")
-    public void iShouldSeeTheCandidateTestCandidateInTheCandidateList(String arg0) {
+    public void iShouldSeeTheCandidateTestCandidateInTheCandidateList(String candidateName) {
+        recruitmentCandidateActionSteps.verifyAddingCandidate(candidateName);
     }
 }
