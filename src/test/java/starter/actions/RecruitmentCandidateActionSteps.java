@@ -3,6 +3,7 @@ package starter.actions;
 import net.serenitybdd.core.steps.UIInteractionSteps;
 import net.thucydides.core.annotations.Step;
 import org.junit.Assert;
+import starter.pageobjects.NotificationPage;
 import starter.pageobjects.RecruitmentPage;
 
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
 public class RecruitmentCandidateActionSteps extends UIInteractionSteps {
 
     RecruitmentPage recruitmentPage;
+    NotificationPage notificationPage;
 
     @Step("Open the OrangeHRM Recruitment page")
     public void openRecruitmentCPage() {
@@ -33,5 +35,16 @@ public class RecruitmentCandidateActionSteps extends UIInteractionSteps {
         List<String> candidateList = recruitmentPage.getCandidateList();
         System.out.println(candidateList);
         Assert.assertTrue("candidate not found in the list!", candidateList.contains(candidateName));
+    }
+
+
+    @Step("Verify notification contains the text: {0}")
+    public void shouldSeeNotification(String expectedText) {
+
+        List<String> notificationList = notificationPage.getAllNotificationTexts();
+        System.out.println(notificationList);
+
+        boolean notificationExists = notificationPage.containsNotification(expectedText);
+        Assert.assertTrue("Notification with text '" + expectedText + "' was not found!", notificationExists);
     }
 }

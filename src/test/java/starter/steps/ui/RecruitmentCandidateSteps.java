@@ -25,4 +25,9 @@ public class RecruitmentCandidateSteps {
     public void iShouldSeeTheCandidateTestCandidateInTheCandidateList(String candidateName) {
         recruitmentCandidateActionSteps.verifyAddingCandidate(candidateName);
     }
+
+    @Then("I should see the notification {string}")
+    public void iShouldSeeTheNotification(String text) {
+        recruitmentCandidateActionSteps.shouldSeeNotification(text);
+    }
 }
