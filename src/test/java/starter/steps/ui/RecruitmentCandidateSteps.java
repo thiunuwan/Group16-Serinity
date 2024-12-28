@@ -40,4 +40,9 @@ public class RecruitmentCandidateSteps {
     public void theCandidateShouldNotAppearInTheCandidateList(String name) {
         recruitmentCandidateActionSteps.verifyDeletingCandidate(name);
     }
+
+    @When("I search the candidate named {string}")
+    public void iSearchTheCandidateNamed(String name) {
+        recruitmentCandidateActionSteps.searchCandidate(name);
+    }
 }
