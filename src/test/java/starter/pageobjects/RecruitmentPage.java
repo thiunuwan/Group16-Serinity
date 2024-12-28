@@ -19,7 +19,8 @@ public class RecruitmentPage extends PageObject {
     private final By contactInput = By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div/form/div[3]/div/div[2]/div/div[2]/input");
     private final By saveButton = By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div/form/div[8]/button[2]");
     private final By deleteButtonTemplate = By.xpath("//button[./i[contains(@class, 'bi-trash')]]\n");
-
+    private final By searchCandidateNameInput = By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div[1]/div[2]/form/div[2]/div/div[1]/div/div[2]/div/div/input");
+    private final By searchButton = By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div[1]/div[2]/form/div[4]/button[2]");
 
     public void clickAddCandidate() {
 
@@ -42,6 +43,13 @@ public class RecruitmentPage extends PageObject {
         $(emailInput).type(email);
         pause(2000);
     }
+
+    public void enterNameForSearch(String name) {
+
+        $(searchCandidateNameInput).type(name);
+        pause(2000);
+    }
+
     public void enterContactNumber(String contactNumber) {
 
         $(contactInput).type(contactNumber);
@@ -49,6 +57,14 @@ public class RecruitmentPage extends PageObject {
     }
     public void saveCandidate() {
         $(saveButton).click();
+        try {
+            Thread.sleep(5000); // 5 seconds wait
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+    public void searchCandidate() {
+        $(searchButton).click();
         try {
             Thread.sleep(5000); // 5 seconds wait
         } catch (InterruptedException e) {
