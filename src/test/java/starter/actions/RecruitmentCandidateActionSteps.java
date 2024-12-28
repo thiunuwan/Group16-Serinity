@@ -28,6 +28,18 @@ public class RecruitmentCandidateActionSteps extends UIInteractionSteps {
         recruitmentPage.saveCandidate();
     }
 
+    @Step("Add newCandidate with consent")
+    public void addNewCandidateWithConsent(String firstName, String lastName, String email, String contact, boolean consent) {
+        recruitmentPage.clickAddCandidate();
+        recruitmentPage.enterFirstName(firstName);
+        recruitmentPage.enterLastname(lastName);
+        recruitmentPage.enterEmail(email);
+        recruitmentPage.enterContactNumber(contact);
+        recruitmentPage.setAgreeTermsCheckbox(consent);
+        recruitmentPage.saveCandidate();
+    }
+
+
     @Step("verify  Adding New candidate")
     public void verifyAddingCandidate(String candidateName) {
         recruitmentPage.open();

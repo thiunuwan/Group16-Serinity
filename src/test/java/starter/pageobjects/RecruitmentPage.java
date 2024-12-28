@@ -21,6 +21,7 @@ public class RecruitmentPage extends PageObject {
     private final By deleteButtonTemplate = By.xpath("//button[./i[contains(@class, 'bi-trash')]]\n");
     private final By searchCandidateNameInput = By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div[1]/div[2]/form/div[2]/div/div[1]/div/div[2]/div/div/input");
     private final By searchButton = By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div[1]/div[2]/form/div[4]/button[2]");
+    private final By checkBox = By.xpath("//span[contains(@class, 'oxd-checkbox-input')]/i");
 
     public void clickAddCandidate() {
 
@@ -54,6 +55,18 @@ public class RecruitmentPage extends PageObject {
 
         $(contactInput).type(contactNumber);
         pause(2000);
+    }
+
+    public void setAgreeTermsCheckbox(boolean state) {
+        if (state) {
+            if (!$(checkBox).isSelected()) {
+                $(checkBox).click(); // Check the checkbox
+            }
+        } else {
+            if ($(checkBox).isSelected()) {
+                $(checkBox).click(); // Uncheck the checkbox
+            }
+        }
     }
     public void saveCandidate() {
         $(saveButton).click();

@@ -1,5 +1,6 @@
 package starter.steps.ui;
 
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -45,4 +46,13 @@ public class RecruitmentCandidateSteps {
     public void iSearchTheCandidateNamed(String name) {
         recruitmentCandidateActionSteps.searchCandidate(name);
     }
+
+
+    @And("I add a new candidate with firstname {string} and lastname {string} and email {string} and contact {string} and consentCheckbox {string}")
+    public void iAddANewCandidateWithFirstnameAndLastnameAndEmailAndContactAndConsentCheckbox(String firstName, String lastName, String email, String contact, String checkbox) {
+            boolean enableConsentCheckbox = Boolean.parseBoolean(checkbox);
+            recruitmentCandidateActionSteps.addNewCandidateWithConsent(firstName, lastName, email, contact,enableConsentCheckbox);
+
+        }
+
 }
