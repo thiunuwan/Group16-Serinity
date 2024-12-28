@@ -5,8 +5,6 @@ import net.thucydides.core.annotations.DefaultUrl;
 import org.openqa.selenium.By;
 
 @DefaultUrl("https://opensource-demo.orangehrmlive.com/web/index.php/recruitment/viewJobVacancy")
-
-
 public class RecruitmentVacanciesPage extends PageObject {
 //    public static final By VACANCIES_TABLE = By.id("vacanciesTable");
 //    public static final By ADD_BUTTON = By.id("btnAdd");
@@ -28,6 +26,10 @@ public class RecruitmentVacanciesPage extends PageObject {
 
 
 
+    public void clickAddVacancy() {
+
+        $(ADD_BUTTON).click();
+    }
 
 
 

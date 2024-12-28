@@ -17,11 +17,12 @@ public class RecruitmentVacancySteps extends UIInteractionSteps {
     }
     @Step("Add a new vacancy with valid details")
     public void addNewVacancy() {
-        find(RecruitmentVacanciesPage.ADD_BUTTON).click();
-        find(RecruitmentVacanciesPage.JOB_TITLE_DROPDOWN).selectByVisibleText("Software Engineer");
-        find(RecruitmentVacanciesPage.HIRING_MANAGER_FIELD).sendKeys("John Doe");
-        find(RecruitmentVacanciesPage.NUMBER_OF_POSITIONS_FIELD).sendKeys("3");
-        find(RecruitmentVacanciesPage.SAVE_BUTTON).click();
+//        find(RecruitmentVacanciesPage.ADD_BUTTON).click();
+//        find(RecruitmentVacanciesPage.JOB_TITLE_DROPDOWN).selectByVisibleText("Software Engineer");
+//        find(RecruitmentVacanciesPage.HIRING_MANAGER_FIELD).sendKeys("John Doe");
+//        find(RecruitmentVacanciesPage.NUMBER_OF_POSITIONS_FIELD).sendKeys("3");
+//        find(RecruitmentVacanciesPage.SAVE_BUTTON).click();
+        vacanciesPage.clickAddVacancy();
     }
 
     @Step("Verify new vacancy is added")
