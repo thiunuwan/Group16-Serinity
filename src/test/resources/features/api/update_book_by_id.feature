@@ -21,7 +21,7 @@ Feature: Update Book by ID
     Given I am a admin user
     When I send a PUT request to update a book with a non-existent ID 999
     Then the response status code should be 404
-    And the response should contain the error message "Book not found"
+    And the response should contain the error message "Book id is not matched"
 
   @api
   @createTestBook
