@@ -24,6 +24,50 @@ public class CreateBookSteps {
 
     private Response response;
 
+    @When("I send a POST request to create a book with empty title with author {string}")
+    public void iSendAPostRequestToCreateABookWithEmptyTitleWithAuthor(String author) {
+        String basicAuthHeader = AuthUtils.generateBasicAuthHeader(
+                Serenity.sessionVariableCalled("username"),
+                Serenity.sessionVariableCalled("password")
+        );
+        String payload = String.format("{\"title\": \"\", \"author\": \"%s\"}",author);
+        SerenityRest.given()
+                .header("Authorization", basicAuthHeader)
+                .header("Content-Type", "application/json")
+                .body(payload)
+                .post(BASE_URL+"/books");
+    }
+
+    @When("I send a request to create a book with invalid ID format")
+    public void iSendARequestToCreateABookWithInvalidIDFormat() {
+        String basicAuthHeader = AuthUtils.generateBasicAuthHeader(
+                Serenity.sessionVariableCalled("username"),
+                Serenity.sessionVariableCalled("password")
+        );
+
+        SerenityRest.given()
+                .header("Authorization", basicAuthHeader)
+                .header("Content-Type", "application/json")
+                .body("{\"id\": \"invalid-id-format\", \"title\": \"Book Title\", \"author\": \"Author Name\"}")
+                .post(BASE_URL+"/books");
+    }
+
+
+    @When("I send a request to create a book with invalid title or author format")
+    public void iSendARequestToCreateABookWithInvalidTitleOrAuthorFormat() {
+        String basicAuthHeader = AuthUtils.generateBasicAuthHeader(
+                Serenity.sessionVariableCalled("username"),
+                Serenity.sessionVariableCalled("password")
+        );
+
+        SerenityRest.given()
+                .header("Authorization", basicAuthHeader)
+                .header("Content-Type", "application/json")
+                .body("{\"title\": \"123@Invalid\", \"author\": \"Invalid#456\"}")
+                .post(BASE_URL+"/books");
+    }
+
+
     @When("I send a POST request to create a new book with title {string} and author {string}")
     public void iSendAPOSTRequestToCreateANewBook(String title, String author) {
         // Retrieve admin credentials from session variables
