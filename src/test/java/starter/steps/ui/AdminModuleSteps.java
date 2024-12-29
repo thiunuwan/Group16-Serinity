@@ -27,4 +27,5 @@ public class AdminModuleSteps {
     public void iShouldSeeTheUserTestUserInTheUserList(String username) {
         adminPage.verifyAddingTestUser(username);
     }
+
 }
