@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - api-test-ravindu
-      - ui-test-ravindu
       - master
 
 jobs:
