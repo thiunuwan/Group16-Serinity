@@ -1,6 +1,6 @@
 Feature: Get Book by ID
 
-  @api
+ @api
   @createTestBook
   Scenario: Retrieve a book with a valid ID as a regular user
     Given I am a normal user

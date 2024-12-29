@@ -13,9 +13,12 @@ import io.restassured.response.Response;
 
 import static net.serenitybdd.rest.SerenityRest.restAssuredThat;
 import static org.hamcrest.Matchers.equalTo;
-
+import static org.hamcrest.Matchers.notNullValue;
+import static org.junit.Assert.assertTrue;
 
 public class CreateBookSteps {
+
+    // Retrieve BASE_URL from configuration
     private final EnvironmentVariables environmentVariables = SystemEnvironmentVariables.createEnvironmentVariables();
     private final String BASE_URL = environmentVariables.getProperty("api.base.url", "http://localhost:8080/api");
 
@@ -65,6 +68,53 @@ public class CreateBookSteps {
     }
 
 
+    @When("I send a POST request to create a new book with title {string} and author {string}")
+    public void iSendAPOSTRequestToCreateANewBook(String title, String author) {
+        // Retrieve admin credentials from session variables
+        String username = Serenity.sessionVariableCalled("username");
+        String password = Serenity.sessionVariableCalled("password");
+
+        // Generate Basic Auth header
+        String basicAuthHeader = AuthUtils.generateBasicAuthHeader(username, password);
+
+        // Build request payload
+        String payload = String.format("{\"title\": \"%s\", \"author\": \"%s\"}", title, author);
+
+        // Send POST request to create a book
+        response = SerenityRest.given()
+                .header("Authorization", basicAuthHeader)
+                .header("Content-Type", "application/json")
+                .body(payload)
+                .post(BASE_URL + "/books");
+    }
+
+    @And("the response should contain the book details with title {string} and author {string}")
+    public void theResponseShouldContainTheBookDetails(String expectedTitle, String expectedAuthor) {
+        // Assert that the response contains the expected book details
+        response.then().body("title", equalTo(expectedTitle));
+        response.then().body("author", equalTo(expectedAuthor));
+        response.then().body("id", notNullValue()); // Ensure the book ID is generated
+    }
+
+    @When("I send a POST request to create a book with empty title and author")
+    public void iSendAPOSTRequestToCreateABookWithEmptyTitleAndAuthorAsNormalUser() {
+        // Retrieve normal user credentials from session variables
+        String username = Serenity.sessionVariableCalled("username");
+        String password = Serenity.sessionVariableCalled("password");
+
+        // Generate Basic Auth header
+        String basicAuthHeader = AuthUtils.generateBasicAuthHeader(username, password);
+
+        // Build the payload with empty title and author
+        String payload = "{\"title\": \"\", \"author\": \"\"}";
+
+        // Send POST request
+        SerenityRest.given()
+                .header("Authorization", basicAuthHeader)
+                .header("Content-Type", "application/json")
+                .body(payload)
+                .post(BASE_URL + "/books");
+    }
 
     @Given("a book with ID {int}, title {string} and author {string} already exists")
     public void aBookWithIDTitleAndAuthorAlreadyExists(int id, String title, String author) {
@@ -105,8 +155,5 @@ public class CreateBookSteps {
                 .body(payload)
                 .post(BASE_URL + "/books");
     }
-
-
-
 
 }
