@@ -5,6 +5,7 @@ on:
     branches:
       - fixes
       - master
+  workflow_dispatch:
 
 jobs:
   run-tests:
@@ -81,7 +82,7 @@ jobs:
       # Upload Serenity reports as artifact
       - name: Upload Serenity reports
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: serenity-reports
           path: target/site/serenity
