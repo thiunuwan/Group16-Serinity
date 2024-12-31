@@ -34,4 +34,14 @@ public class LoginStepDefinitions {
     public void iShouldSeeAnErrorMessageIndicatingIncorrectLoginCredentials() {
         login.verifyLoginFailed();
     }
+
+    @When("I click the logout button")
+    public void iClickTheLogoutButton() {
+        login.performLogout();
+    }
+
+    @Then("I should be redirected to the login page")
+    public void iShouldBeRedirectedToTheLoginPage() {
+        login.verifyLogout();
+    }
 }
