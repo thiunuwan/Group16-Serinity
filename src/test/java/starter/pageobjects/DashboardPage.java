@@ -10,20 +10,14 @@ public class DashboardPage extends PageObject {
 
     public void openUserDropdown() {
         $(USER_DROPDOWN).click();
-        try {
-            Thread.sleep(5000); // 5 seconds wait
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        waitABit(2000);
+
     }
 
     public void clickLogout() {
         $(LOGOUT_BUTTON).click();
 
-        try {
-            Thread.sleep(5000); // 5 seconds wait
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        waitABit(2000);
+
     }
 }
