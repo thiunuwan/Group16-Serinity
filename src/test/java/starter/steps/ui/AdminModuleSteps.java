@@ -56,4 +56,12 @@ public class AdminModuleSteps {
     }
 
 
+    @When("I try to add a new user with same username {string} and password {string} and role {string}")
+    public void iTryToAddANewUserWithUsernameAndPasswordAndRole(String username, String password, String role) {
+        adminPage.addNewTestUser(username,password,role);
+    }
+
+    @Then("I should see an error message {string}")
+    public void iShouldSeeAnErrorMessage(String arg0) {
+    }
 }
