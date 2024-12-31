@@ -6,6 +6,7 @@ import io.cucumber.java.en.When;
 import net.thucydides.core.annotations.Steps;
 import starter.actions.RecruitmentVacancySteps;
 
+
 public class RecruitmentVacancyStepDefinitions {
 
     @Steps

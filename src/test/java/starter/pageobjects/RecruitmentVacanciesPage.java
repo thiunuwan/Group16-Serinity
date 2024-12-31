@@ -34,6 +34,7 @@ public class RecruitmentVacanciesPage extends PageObject {
 
 
 
+
 }
 
 

@@ -10,3 +10,4 @@ Feature: Recruitment Vacancies
     Then I should see the new vacancy in the list
 
 
+

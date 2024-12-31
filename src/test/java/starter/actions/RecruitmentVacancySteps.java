@@ -11,6 +11,7 @@ import static org.junit.Assert.assertTrue;
 public class RecruitmentVacancySteps extends UIInteractionSteps {
     RecruitmentVacanciesPage vacanciesPage;
 
+
     @Step("Open the Recruitment Vacancies page")
     public void openVacanciesPage() {
         vacanciesPage.open();
