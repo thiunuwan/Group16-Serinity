@@ -1,18 +1,12 @@
 package starter.steps;
 
-import io.cucumber.java.en.And;
-import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.restassured.response.Response;
 import net.serenitybdd.core.Serenity;
 import net.serenitybdd.rest.SerenityRest;
 import net.thucydides.core.util.EnvironmentVariables;
 import net.thucydides.core.util.SystemEnvironmentVariables;
 import starter.hooks.BookLifecycleHooks;
 import starter.utils.AuthUtils;
-
-import static net.serenitybdd.rest.SerenityRest.restAssuredThat;
-import static org.junit.Assert.assertTrue;
 
 public class UpdateBookByIdSteps {
     // Retrieve BASE_URL from configuration
