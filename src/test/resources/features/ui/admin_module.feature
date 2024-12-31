@@ -4,8 +4,8 @@ Feature: User Management in Admin Tab
   @loginAsAdmin
   Scenario: Add a new user
     Given I am on the "Admin" page
-    When I add a new user with username "Akash545" and password "test123" and role "ESS"
-    Then I should see the user (testUser) "Akash545" in the user list
+    When I add a new user with username and password "test123" and role "ESS"
+    Then I should see the added user in the user list
 
   @ui
   @loginAsAdmin
