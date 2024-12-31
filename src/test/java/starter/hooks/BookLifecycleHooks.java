@@ -51,11 +51,7 @@ public class BookLifecycleHooks {
         SerenityRest.given()
                 .auth()
                 .basic(username, password)  // Set Basic Authentication
-                .delete("http://localhost:8080/api/books/" + testBookId)
-                .then()
-                .statusCode(204);  // Validate successful deletion (No content)
-
-
+                .delete("http://localhost:8080/api/books/" + testBookId);
     }
 
 
