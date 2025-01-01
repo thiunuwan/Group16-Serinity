@@ -24,8 +24,9 @@ public class UpdateBookByIdSteps {
 
         // JSON body for the PUT request
         String requestBody = "{"
+                + "\"id\": " + testBookId + ","
                 + "\"title\": \"Updated Book Title\","
-                + "\"author\": \"Updated Author Name\","
+                + "\"author\": \"Updated Author Name\""
                 + "}";
 
         // Send PUT request to update the book with ID 1
@@ -46,8 +47,9 @@ public class UpdateBookByIdSteps {
 
         // JSON body for the PUT request
         String requestBody = "{"
-                + "\"title\": \"Non-existent Book Title\","
-                + "\"author\": \"Non-existent Author Name\","
+                + "\"id\": " + nonExistentBookID + ","
+                + "\"title\": \"Updated Book Title\","
+                + "\"author\": \"Updated Author Name\""
                 + "}";
         // Send PUT request to update the book with ID 1
         SerenityRest.given()
@@ -66,7 +68,9 @@ public class UpdateBookByIdSteps {
         String basicAuthHeader = AuthUtils.generateBasicAuthHeader(username, password);
 
         // JSON body for the PUT request with missing mandatory fields
-        String requestBody = "{}"; // Empty JSON body, simulating missing fields
+        String requestBody = "{"    // Empty JSON body, simulating missing fields
+                + "\"id\": " + testBookId
+                + "}";
 
         // Send PUT request to update the book
         SerenityRest.given()
