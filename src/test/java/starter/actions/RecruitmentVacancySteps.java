@@ -34,20 +34,9 @@ public class RecruitmentVacancySteps extends UIInteractionSteps {
         Assert.assertTrue("Success message not displayed!", recruitmentVacanciesPage.isSuccessMessageDisplayed());
     }
 
-    @Step("Search for a vacancy")
-    public void searchForVacancy(String jobTitle, String vacancyName, String hiringManager, String status) {
-        recruitmentVacanciesPage.selectJobTitleForSearch(jobTitle);
-        recruitmentVacanciesPage.selectVacancyForSearch(vacancyName);
-        recruitmentVacanciesPage.selectHiringManagerForSearch(hiringManager);
-        recruitmentVacanciesPage.selectStatusForSearch(status);
-        recruitmentVacanciesPage.clickSearchButton();
-    }
 
-    @Step("Verify vacancy is displayed in search results")
-    public void verifyVacancyInSearchResults(String vacancyName) {
-        Assert.assertTrue("Vacancy not found in search results!",
-                recruitmentVacanciesPage.isVacancyDisplayedInSearchResults(vacancyName));
-    }
+
+
 
     @Step("Delete vacancy")
     public void deleteVacancy(String vacancyName) {
@@ -71,6 +60,13 @@ public class RecruitmentVacancySteps extends UIInteractionSteps {
         List<String> vacancyList = recruitmentVacanciesPage.getVacancyList();
         System.out.println(vacancyList);
         Assert.assertFalse("vacancy not found in the list!", vacancyList.contains(vacancyName));
+    }
+
+    @Step("Search candidate")
+    public void searchVacancy(String vacancyName) {
+        recruitmentVacanciesPage.open();
+        recruitmentVacanciesPage.enterNameForSearch(vacancyName);
+        recruitmentVacanciesPage.searchCandidate();
     }
 
 }

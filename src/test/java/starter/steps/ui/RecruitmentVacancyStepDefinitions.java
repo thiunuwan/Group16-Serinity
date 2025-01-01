@@ -27,16 +27,7 @@ public class RecruitmentVacancyStepDefinitions {
         recruitmentVacancySteps.verifySuccessMessage();
     }
 
-    @When("I search for a vacancy with job title {string}, vacancy {string}, hiring manager {string}, and status {string}")
-    public void iSearchForAVacancyWithJobTitleVacancyHiringManagerAndStatus(
-            String jobTitle, String vacancy, String hiringManager, String status) {
-        recruitmentVacancySteps.searchForVacancy(jobTitle, vacancy, hiringManager, status);
-    }
 
-    @Then("I should see the vacancy record for {string} displayed in the results")
-    public void iShouldSeeTheVacancyRecordDisplayedInTheResults(String vacancyName) {
-        recruitmentVacancySteps.verifyVacancyInSearchResults(vacancyName);
-    }
 
 
     @When("I delete the vacancy named {string}")
@@ -53,5 +44,10 @@ public class RecruitmentVacancyStepDefinitions {
     @Then("I should see the vacancy \\(testVacancy) {string} in the vacancy list")
     public void iShouldSeeTheVacancyTestVacancyInTheVacancyList(String vacancyName) {
         recruitmentVacancySteps.verifyAddingVacancy(vacancyName);
+    }
+
+    @When("I search the vacancy named {string}")
+    public void iSearchTheVacancyNamed(String name) {
+        recruitmentVacancySteps.searchVacancy(name);
     }
 }

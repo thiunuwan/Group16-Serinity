@@ -27,16 +27,9 @@ public class RecruitmentVacanciesPage extends PageObject {
     private final By successMessage = By.xpath("/html/body/div/div[2]");
 
     // Elements for "Search for a vacancy" scenario
-    private final By searchJobTitleDropdown = By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div[1]/div[2]/form/div[1]/div/div[1]/div/div[2]/div/div");
-    private final By dropdownOptionsSearchJobTitle = By.xpath("//div[@role='listbox']//div[@role='option']");
-    private final By searchVacancyDropdown = By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div[1]/div[2]/form/div[1]/div/div[2]/div/div[2]/div/div");
-    private final By dropdownOptionsSearchVacancy = By.xpath("//div[@role='listbox']//div[@role='option']");
-    private final By searchHiringManagerDropdown = By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div[1]/div[2]/form/div[1]/div/div[3]/div/div[2]/div/div");
-    private final By dropdownOptionsSearchManager = By.xpath("//div[@role='listbox']//div[@role='option']");
-    private final By searchStatusDropdown = By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div[1]/div[2]/form/div[1]/div/div[4]/div/div[2]/div/div");
-    private final By dropdownOptionsSearchStatus = By.xpath("//div[@role='listbox']//div[@role='option']");
+    private final By searchVacancyNameInput = By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div[1]/div[2]/form/div[1]/div/div[2]/div/div[2]/div/div/div[1]");
     private final By searchButton = By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div[1]/div[2]/form/div[2]/button[2]");
-    private final By searchResultsTable = By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div[2]/div[3]/div/div/div/div/div");
+
 
     private final By deleteButtonTemplate = By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div[2]/div[3]/div/div/div[1]/div/div/div[1]/div[2]/div/div/button[1]");
 
@@ -85,56 +78,15 @@ public class RecruitmentVacanciesPage extends PageObject {
         return $(successMessage).isDisplayed();
     }
 
-    // Methods for "Search for a vacancy" scenario
-    public void selectJobTitleForSearch(String jobTitle) {
-        $(searchJobTitleDropdown).click();
-        List<WebElementFacade> options = findAll(dropdownOptionsSearchJobTitle);
-        WebElementFacade option = options.stream()
-                .filter(e -> e.getText().equalsIgnoreCase(jobTitle))
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("Job title not found: " + jobTitle));
-        option.click();
-    }
 
 
-    public void selectVacancyForSearch(String vacancyName) {
-        $(searchVacancyDropdown).click();
-        List<WebElementFacade> options = findAll(dropdownOptionsSearchVacancy);
-        WebElementFacade option = options.stream()
-                .filter(e -> e.getText().equalsIgnoreCase(vacancyName))
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("Vacancy not found for search: " + vacancyName));
-        option.click();
-    }
 
-    public void selectHiringManagerForSearch(String hiringManager) {
-        $(searchHiringManagerDropdown).click();
-        List<WebElementFacade> options = findAll(dropdownOptionsSearchManager);
-        WebElementFacade option = options.stream()
-                .filter(e -> e.getText().equalsIgnoreCase(hiringManager))
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("Hiring manager not found for search: " + hiringManager));
-        option.click();
-    }
 
-    public void selectStatusForSearch(String status) {
-        $(searchStatusDropdown).click();
-        List<WebElementFacade> options = findAll(dropdownOptionsSearchStatus);
-        WebElementFacade option = options.stream()
-                .filter(e -> e.getText().equalsIgnoreCase(status))
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("Status not found for search: " + status));
-        option.click();
-    }
 
-    public void clickSearchButton() {
-        $(searchButton).click();
-    }
 
-    public boolean isVacancyDisplayedInSearchResults(String vacancyName) {
-        return findAll(searchResultsTable).stream()
-                .anyMatch(row -> row.getText().contains(vacancyName));
-    }
+
+
+
 
     public void deleteVacancy(String vacancyName) {
         List<WebElement> rows = getDriver().findElements(By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div[2]/div[3]/div/div[2]/div[*]/div/div[3]/div"));
@@ -174,6 +126,21 @@ public class RecruitmentVacanciesPage extends PageObject {
         return vacancyElements.stream()
                 .map(WebElement::getText)
                 .collect(Collectors.toList());
+    }
+
+    public void enterNameForSearch(String name) {
+
+        $(searchVacancyNameInput).type(name);
+        pause(2000);
+    }
+
+    public void searchCandidate() {
+        $(searchButton).click();
+        try {
+            Thread.sleep(5000); // 5 seconds wait
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
 
