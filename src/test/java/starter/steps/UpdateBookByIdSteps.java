@@ -1,12 +1,17 @@
 package starter.steps;
 
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.When;
+import io.restassured.response.Response;
 import net.serenitybdd.core.Serenity;
 import net.serenitybdd.rest.SerenityRest;
 import net.thucydides.core.util.EnvironmentVariables;
 import net.thucydides.core.util.SystemEnvironmentVariables;
 import starter.hooks.BookLifecycleHooks;
 import starter.utils.AuthUtils;
+
+import static org.hamcrest.Matchers.equalTo;
+import static org.junit.Assert.assertTrue;
 
 public class UpdateBookByIdSteps {
     // Retrieve BASE_URL from configuration
@@ -78,5 +83,12 @@ public class UpdateBookByIdSteps {
                 .header("Content-Type", "application/json")
                 .body(requestBody)
                 .put(BASE_URL + "/books/" + testBookId);
+    }
+
+    @And("the response should contain the updated book details")
+    public void theResponseShouldContainTheUpdatedBookDetails() {
+        SerenityRest.then().body("id", equalTo(testBookId))
+                .body("title", equalTo("Updated Book Title"))
+                .body("author", equalTo("Updated Author Name"));
     }
 }

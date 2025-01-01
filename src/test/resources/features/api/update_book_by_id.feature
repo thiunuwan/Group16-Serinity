@@ -6,7 +6,7 @@ Feature: Update Book by ID
     Given I am a admin user
     When I send a PUT request to update the test book
     Then the response status code should be 200
-#    And the response should contain the success message "Successfully updated the book"
+    And the response should contain the updated book details
 
   @api
   @createTestBook
