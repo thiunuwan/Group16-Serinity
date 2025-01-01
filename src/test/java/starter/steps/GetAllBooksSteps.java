@@ -31,7 +31,7 @@ public class GetAllBooksSteps extends BaseSteps {
 
         // Send GET request to retrieve the book list
         SerenityRest.given()
-                .header("Authorization", basicAuthHeader)
+               .header("Authorization", basicAuthHeader)
                 .get(BASE_URL + "/books");
     }
 
@@ -39,8 +39,6 @@ public class GetAllBooksSteps extends BaseSteps {
     public void theResponseStatusCodeForAllBooksShouldBe(int statusCode) {
         restAssuredThat(response -> response.statusCode(statusCode));
     }
-
-
 
 
     @And("the response should contain a list of books")
@@ -59,10 +57,21 @@ public class GetAllBooksSteps extends BaseSteps {
                 .body("books.size()", equalTo(0)); // Ensure the list is empty
     }
 
-    @And("the response for all books should contain the error message {string}")
-    public void theResponseForAllBooksShouldContainTheErrorMessage(String expectedErrorMessage) {
-        // Your implementation here
-    }
 
+    @When("I send an unauthorized GET request to retrieve the book list")
+    public void iSendAnUnauthorizedGETRequestToRetrieveTheBookList() {
+        // Retrieve credentials from session variables
+        String username = Serenity.sessionVariableCalled("username");
+        String password = Serenity.sessionVariableCalled("password");
+
+        // Generate Basic Auth header (if credentials exist)
+        String basicAuthHeader = (username != null && password != null)
+                ? starter.utils.AuthUtils.generateBasicAuthHeader(username, password)
+                : null;
+
+        // Send GET request to retrieve the book list
+        SerenityRest.given()
+                .get(BASE_URL + "/books");
+    }
 
 }

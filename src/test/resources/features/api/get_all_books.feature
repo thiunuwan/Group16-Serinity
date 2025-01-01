@@ -13,6 +13,7 @@ Feature: Get All Book List
       | normal    |
 
   @api
+
   Scenario Outline: Retrieve books with an empty database
     Given I am a <user_role> user
     When I send a GET request to retrieve the book list
@@ -26,9 +27,6 @@ Feature: Get All Book List
 
 
   @api
-  @createTestBook
   Scenario: Unauthorized access to book list as a non-logged-in user
-    Given I am an unauthorized user
-    When I send a GET request to retrieve the book list
+    When I send an unauthorized GET request to retrieve the book list
     Then the response status code should be 401
-    And the response for all books should contain the error message "Unauthorized access"
