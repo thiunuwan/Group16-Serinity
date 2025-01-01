@@ -69,4 +69,22 @@ public class AdminPageSteps extends UIInteractionSteps {
         System.out.println(userSearchResult);
         Assert.assertEquals("User not found", username,userSearchResult);
     }
+
+    public void updateTestUser(String oldUserName, String newUserName, String oldRole, String newRole) {
+        List<String> userList = adminPage.getUserList();
+        System.out.println(userList);
+
+        // Find the index of the given username
+        int index = userList.indexOf(oldUserName);
+
+        if (index != -1) {
+            System.out.println("Username found at index: " + index);
+            adminPage.clickUpdate(index+1);
+        } else {
+            System.out.println("Username not found in the list");
+        }
+        waitABit(5000);
+        System.out.println("#");
+        adminPage.updateUserDetails(newUserName,newRole);
+    }
 }

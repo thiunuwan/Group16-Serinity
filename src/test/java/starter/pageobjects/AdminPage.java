@@ -27,6 +27,9 @@ public class AdminPage extends PageObject {
     private final By confirmPasswordInput = By.xpath("/html/body/div[1]/div[1]/div[2]/div[2]/div/div/form/div[2]/div/div[2]/div/div[2]/input");
     private final By searchButton = By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div[1]/div[2]/form/div[2]/button[2]");
     private final By usernameSearchInput = By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div[1]/div[2]/form/div[1]/div/div[1]/div/div[2]/input");
+    private final By usernameUpdateInput = By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div/form/div[1]/div/div[4]/div/div[2]/input");
+    private final By userRoleDropdownForSeach = By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div/form/div[1]/div/div[1]/div/div[2]/div/div/div[2]/i");
+    private final By saveButtonUpdate = By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div/form/div[2]/button[2]");
 
     @FindBy(xpath = "//input[@placeholder='Type for hints...']")
     private WebElementFacade employeeNameInput;
@@ -129,10 +132,19 @@ public class AdminPage extends PageObject {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
     }
 
     public String getUserSearchResult() {
         WebElement userElement = getDriver().findElement(By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div[2]/div[3]/div/div[2]/div/div/div[2]/div"));
+        try {
+            Thread.sleep(5000); // 5 seconds wait
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        // Extract the usernames from the web elements
+        return userElement.getText();
+    }
 
     public void clickDelete(int rowIndex) {
         // Construct the XPath dynamically using the rowIndex
@@ -156,15 +168,38 @@ public class AdminPage extends PageObject {
         WebElement confirmDeleteButton = getDriver().findElement(By.xpath("/html/body/div[1]/div[3]/div/div/div/div[3]/button[2]"));
         confirmDeleteButton.click();
 
+    }
+
+    public void clickUpdate(int index) {
+        // Construct the XPath dynamically using the rowIndex
+        String xpath = "/html/body/div[1]/div[1]/div[2]/div[2]/div/div[2]/div[3]/div/div[2]/div[" + index + "]/div/div[6]/div/button[2]";
+
+        // Find the delete button using the dynamically constructed XPath
+        WebElement updateButton = getDriver().findElement(By.xpath(xpath));
+
+
+        // Click the update button
+        updateButton.click();
+    }
+
+    public void updateUserDetails(String newUserName, String newRole) {
+        // Type the newUsername into the input field
+        $(usernameUpdateInput).type(newUserName);
+        // Click to open the dropdown
+        $(userRoleDropdownForSeach).click();
+
+        // Select the role from the dropdown list
+        WebElement option = findAll(dropdownOptions).stream()
+                .filter(e -> e.getText().equalsIgnoreCase(newRole))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Role not found: " + newRole));
+
+        option.click();
+        $(saveButtonUpdate).click();
         try {
             Thread.sleep(5000); // 5 seconds wait
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-    }
-
-        // Extract the usernames from the web elements
-        return userElement.getText();
     }
 }
