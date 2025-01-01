@@ -42,18 +42,22 @@ public class GetAllBooksSteps {
 
     @And("the response should contain a list of books")
     public void theResponseShouldContainAListOfBooks() {
+//        String responseBody = SerenityRest.lastResponse().prettyPrint();
+//        System.out.println("Response Body: \n" + responseBody);
+
         SerenityRest.lastResponse().then()
-                .body("books", notNullValue()) // Ensure the "books" field exists
-                .body("books.size()", greaterThanOrEqualTo(0)); // Ensure the list contains zero or more books
+                .body("", notNullValue()) // Ensure the response is not null
+                .body("size()", greaterThan(0)); // Ensure the root array contains one or more objects
     }
 
 
 
     @And("the response should indicate an empty book list")
     public void theResponseShouldIndicateAnEmptyBookList() {
+
         SerenityRest.lastResponse().then()
-                .body("books", notNullValue()) // Ensure the "books" field exists
-                .body("books.size()", equalTo(0)); // Ensure the list is empty
+                .body("", notNullValue()) // Ensure the response is not null
+                .body("size()", equalTo(0)); // Ensure the root array contains one or more objects
     }
 
 

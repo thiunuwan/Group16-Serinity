@@ -1,6 +1,7 @@
 Feature: Get All Book List
 
   @api
+    @createTestBook
   Scenario Outline: Retrieve all books as a logged-in user
     Given I am a <user_role> user
     When I send a GET request to retrieve the book list
@@ -13,7 +14,6 @@ Feature: Get All Book List
       | normal    |
 
   @api
-
   Scenario Outline: Retrieve books with an empty database
     Given I am a <user_role> user
     When I send a GET request to retrieve the book list
