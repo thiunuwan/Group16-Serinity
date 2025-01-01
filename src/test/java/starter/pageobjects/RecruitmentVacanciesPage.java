@@ -3,9 +3,16 @@ package starter.pageobjects;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+
+
 
 import java.util.List;
+import java.util.stream.Collectors;
+
 
 @DefaultUrl("https://opensource-demo.orangehrmlive.com/web/index.php/recruitment/viewJobVacancy")
 public class RecruitmentVacanciesPage extends PageObject {
@@ -33,8 +40,6 @@ public class RecruitmentVacanciesPage extends PageObject {
     private final By searchResultsTable = By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div[2]/div[3]/div/div/div/div/div");
 
     private final By deleteButtonTemplate = By.xpath("//button[./i[contains(@class, 'bi-trash')]]\n");
-    private final By checkBox = By.xpath("//span[contains(@class, 'oxd-checkbox-input')]/i");
-
 
     // Methods for "Add a new vacancy" scenario
     public void clickAddVacancy() {
@@ -121,4 +126,46 @@ public class RecruitmentVacanciesPage extends PageObject {
         return findAll(searchResultsTable).stream()
                 .anyMatch(row -> row.getText().contains(vacancyName));
     }
+
+    public void deleteVacancy(String vacancyName) {
+        List<WebElement> rows = getDriver().findElements(By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div[2]/div[3]/div/div[2]/div[*]/div/div[3]/div"));
+        for (WebElement row : rows) {
+            if (row.getText().contains(vacancyName)) {
+                WebElement deleteButton = row.findElement(deleteButtonTemplate);
+                pause(5000);
+                deleteButton.click();
+
+                // Confirm deletion if required
+                confirmDeletion();
+                break;
+            }
+        }
+
+    }
+
+    public void confirmDeletion() {
+        WebElement confirmButton = $(By.xpath("//button[contains(@class, 'oxd-button') and contains(@class, 'oxd-button--label-danger') and ./i[contains(@class, 'bi-trash')] and contains(., 'Yes, Delete')]"));
+        pause(3000);
+        confirmButton.click();
+    }
+
+    private void pause(long milliseconds) {
+        try {
+            Thread.sleep(milliseconds);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public List<String> getCandidateList() {
+        List<WebElement> candidateElements = getDriver().findElements(By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div[2]/div[3]/div/div[2]/div[*]/div/div[3]/div"));
+        //                                                                                       /html/body/div/div[1]/div[2]/div[2]/div/div[2]/div[3]/div/div[2]/div[1]/div/div[3]/div
+        //                                                                                       /html/body/div/div[1]/div[2]/div[2]/div/div[2]/div[3]/div/div[2]/div[5]/div/div[3]/div
+        // Extract the usernames from the web elements
+        return candidateElements.stream()
+                .map(WebElement::getText)
+                .collect(Collectors.toList());
+    }
+
+
 }

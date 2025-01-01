@@ -5,6 +5,9 @@ import net.thucydides.core.annotations.Step;
 import org.junit.Assert;
 import starter.pageobjects.RecruitmentVacanciesPage;
 
+import java.util.List;
+
+
 public class RecruitmentVacancySteps extends UIInteractionSteps {
 
     RecruitmentVacanciesPage recruitmentVacanciesPage;
