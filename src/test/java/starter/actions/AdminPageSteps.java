@@ -42,5 +42,9 @@ public class AdminPageSteps extends UIInteractionSteps {
         Assert.assertTrue("User not found in the list!", userList.contains(username));
     }
 
-
+    public void verifySearchingTestUser(String username) {
+        String userSearchResult = adminPage.getUserSearchResult();
+        System.out.println(userSearchResult);
+        Assert.assertEquals("User not found", username,userSearchResult);
+    }
 }

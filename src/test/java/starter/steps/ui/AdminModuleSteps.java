@@ -32,4 +32,8 @@ public class AdminModuleSteps {
         adminPage.verifyAddingTestUser(username);
     }
 
+    @Then("I should see the user \\(testUser) {string} in the search result list")
+    public void iShouldSeeTheUserTestUserInTheSearchResultList(String username) {
+        adminPage.verifySearchingTestUser(username);
+    }
 }

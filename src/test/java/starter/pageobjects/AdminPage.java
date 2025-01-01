@@ -126,4 +126,10 @@ public class AdminPage extends PageObject {
         }
     }
 
+    public String getUserSearchResult() {
+        WebElement userElement = getDriver().findElement(By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div[2]/div[3]/div/div[2]/div/div/div[2]/div"));
+
+        // Extract the usernames from the web elements
+        return userElement.getText();
+    }
 }
