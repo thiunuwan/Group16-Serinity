@@ -61,6 +61,4 @@ public class RecruitmentVacancySteps extends UIInteractionSteps {
         Assert.assertFalse("vacancy  found in the list!", vacancyList.contains(vacancyName));
     }
 
-
-    }
 }

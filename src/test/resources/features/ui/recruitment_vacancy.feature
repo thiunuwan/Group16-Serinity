@@ -17,6 +17,7 @@ Feature: Recruitment Vacancies
 
 
   @ui
+  @loginAsAdmin
   Scenario: Delete an added vacancy
     Given I navigate to the Recruitment Vacancies page
     And I add a new vacancy with name "Senior Software Engineer", job title "Software Engineer", hiring manager "Ranga Akunuri", and number of positions "3"
