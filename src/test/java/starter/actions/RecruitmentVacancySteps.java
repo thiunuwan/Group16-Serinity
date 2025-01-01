@@ -2,34 +2,33 @@ package starter.actions;
 
 import net.serenitybdd.core.steps.UIInteractionSteps;
 import net.thucydides.core.annotations.Step;
+import org.junit.Assert;
 import starter.pageobjects.RecruitmentVacanciesPage;
 
-import java.time.Duration;
-
-import static org.junit.Assert.assertTrue;
+import java.util.List;
 
 public class RecruitmentVacancySteps extends UIInteractionSteps {
-    RecruitmentVacanciesPage vacanciesPage;
 
+    RecruitmentVacanciesPage recruitmentVacanciesPage;
 
     @Step("Open the Recruitment Vacancies page")
-    public void openVacanciesPage() {
-        vacanciesPage.open();
-    }
-    @Step("Add a new vacancy with valid details")
-    public void addNewVacancy() {
-//        find(RecruitmentVacanciesPage.ADD_BUTTON).click();
-//        find(RecruitmentVacanciesPage.JOB_TITLE_DROPDOWN).selectByVisibleText("Software Engineer");
-//        find(RecruitmentVacanciesPage.HIRING_MANAGER_FIELD).sendKeys("John Doe");
-//        find(RecruitmentVacanciesPage.NUMBER_OF_POSITIONS_FIELD).sendKeys("3");
-//        find(RecruitmentVacanciesPage.SAVE_BUTTON).click();
-        vacanciesPage.clickAddVacancy();
+    public void openRecruitmentVacanciesPage() {
+        recruitmentVacanciesPage.open();
     }
 
-    @Step("Verify new vacancy is added")
-    public void verifyNewVacancyAdded() {
-        withTimeoutOf(Duration.ofSeconds(10))
-                .waitForPresenceOf(RecruitmentVacanciesPage.SUCCESS_MESSAGE);
+    @Step("Add a new vacancy")
+    public void addNewVacancy(String vacancyName, String jobTitle, String hiringManager, String numberOfPositions) {
+        recruitmentVacanciesPage.clickAddVacancy();
+        recruitmentVacanciesPage.enterVacancyName(vacancyName);
+        recruitmentVacanciesPage.selectJobTitle(jobTitle);
+        recruitmentVacanciesPage.enterHiringManager(hiringManager);
+        recruitmentVacanciesPage.enterNumberOfPositions(numberOfPositions);
+        recruitmentVacanciesPage.clickSaveButton();
+    }
+
+    @Step("Verify success message is displayed")
+    public void verifySuccessMessage() {
+        Assert.assertTrue("Success message not displayed!", recruitmentVacanciesPage.isSuccessMessageDisplayed());
     }
 
 

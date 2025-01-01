@@ -1,40 +1,61 @@
 package starter.pageobjects;
 
 import net.serenitybdd.core.pages.PageObject;
+import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @DefaultUrl("https://opensource-demo.orangehrmlive.com/web/index.php/recruitment/viewJobVacancy")
 public class RecruitmentVacanciesPage extends PageObject {
-//    public static final By VACANCIES_TABLE = By.id("vacanciesTable");
-//    public static final By ADD_BUTTON = By.id("btnAdd");
-//    public static final By JOB_TITLE_DROPDOWN = By.id("jobTitle");
-//    public static final By HIRING_MANAGER_FIELD = By.id("hiringManager");
-//    public static final By NUMBER_OF_POSITIONS_FIELD = By.id("numOfPositions");
-//    public static final By SAVE_BUTTON = By.id("btnSave");
-//    public static final By SUCCESS_MESSAGE = By.cssSelector(".success");
-//    public static final By SEARCH_JOB_TITLE_FIELD = By.id("searchJobTitle");
-//    public static final By SEARCH_BUTTON = By.id("btnSearch");
-//    public static final By SEARCH_RESULTS_TABLE = By.id("searchResultsTable");
 
-    public static final By ADD_BUTTON = By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div[2]/div[1]/button");
-    public static final By JOB_TITLE_DROPDOWN = By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div/form/div[1]/div[2]/div/div[2]");
-    public static final By HIRING_MANAGER_FIELD = By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div/form/div[3]/div[1]");
-    public static final By NUMBER_OF_POSITIONS_FIELD = By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div/form/div[3]/div[2]");
-    public static final By SAVE_BUTTON = By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div/form/div[7]/button[2]");
-    public static final By SUCCESS_MESSAGE = By.cssSelector(".success");
-
-
+    private final By addVacancyButton = By.xpath("//button[contains(@class, 'oxd-button') and contains(., 'Add')]");
+    private final By vacancyNameInput = By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div/form/div[1]/div[1]/div/div[2]/input");
+    private final By jobTitleDropdown = By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div/form/div[1]/div[2]/div/div[2]/div/div");
+    private final By dropdownOptions = By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div/form/div[1]/div[2]/div/div[2]/div/div/div[2]");
+    private final By hiringManagerInput = By.xpath("//input[@name='hiringManager']");
+    private final By numberOfPositionsInput = By.xpath("//input[@type='number']");
+    private final By saveButton = By.xpath("//button[contains(., 'Save')]");
+    private final By successMessage = By.xpath("//div[contains(@class, 'oxd-toast-container')]//p");
 
     public void clickAddVacancy() {
+        $(addVacancyButton).click();
+    }
 
-        $(ADD_BUTTON).click();
+    public void enterVacancyName(String vacancyName) {
+        $(vacancyNameInput).type(vacancyName);
+    }
+
+    public void selectJobTitle(String jobTitle) {
+        $(jobTitleDropdown).click();
+        WebElementFacade option = findAll(dropdownOptions).stream()
+                .filter(e -> e.getText().equalsIgnoreCase(jobTitle))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Job title not found: " + jobTitle));
+        option.click();
     }
 
 
+    public void enterHiringManager(String hiringManager) {
+        $(hiringManagerInput).type(hiringManager);
+        waitABit(2000); // Wait to ensure suggestions load
+        $(hiringManagerInput).sendKeys(Keys.ARROW_DOWN);
+        $(hiringManagerInput).sendKeys(Keys.ENTER);
+    }
 
+    public void enterNumberOfPositions(String numberOfPositions) {
+        $(numberOfPositionsInput).type(numberOfPositions);
+    }
 
+    public void clickSaveButton() {
+        $(saveButton).click();
+    }
+
+    public boolean isSuccessMessageDisplayed() {
+        return $(successMessage).isDisplayed();
+    }
 
 }
-
-
