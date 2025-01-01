@@ -21,6 +21,10 @@ public class AdminModuleSteps {
     public void iAddANewUserWithUsernameAndPassword(String username, String password,String role) {
         adminPage.addNewTestUser(username,password,role);
     }
+    @When("I search the user named {string}")
+    public void iSearchTheUserNamed(String name) {
+        adminPage.searchUser(name);
+    }
 
 
     @Then("I should see the user \\(testUser) {string} in the user list")

@@ -28,6 +28,12 @@ public class AdminPageSteps extends UIInteractionSteps {
         adminPage.enterPassword(password);
         adminPage.saveUser();
     }
+    @Step("Search User")
+    public void searchUser(String userName) {
+        adminPage.open();
+        adminPage.enterUsernameForSearch(userName);
+        adminPage.searchUser();
+    }
 
     @Step("verify  Adding New TestUser")
     public void verifyAddingTestUser(String username) {

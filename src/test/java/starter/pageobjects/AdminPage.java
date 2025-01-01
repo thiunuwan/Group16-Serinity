@@ -25,6 +25,8 @@ public class AdminPage extends PageObject {
     private final By statusDropdown = By.xpath("/html/body/div[1]/div[1]/div[2]/div[2]/div/div/form/div[1]/div/div[3]/div/div[2]/div/div/div[2]/i");
     private final By dropdownOptionsStatus = By.xpath("//div[@role='listbox']//div[@role='option']");
     private final By confirmPasswordInput = By.xpath("/html/body/div[1]/div[1]/div[2]/div[2]/div/div/form/div[2]/div/div[2]/div/div[2]/input");
+    private final By searchButton = By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div[1]/div[2]/form/div[2]/button[2]");
+    private final By usernameSearchInput = By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div[1]/div[2]/form/div[1]/div/div[1]/div/div[2]/input");
 
     @FindBy(xpath = "//input[@placeholder='Type for hints...']")
     private WebElementFacade employeeNameInput;
@@ -53,6 +55,11 @@ public class AdminPage extends PageObject {
     public void enterUsername(String username) {
         // Type the username into the input field
         $(usernameInput).type(username);
+    }
+
+    public void enterUsernameForSearch(String username) {
+        // Type the username into the input field
+        $(usernameSearchInput).type(username);
     }
 
     public void enterPassword(String password) {
@@ -110,6 +117,13 @@ public class AdminPage extends PageObject {
                 .map(WebElement::getText)
                 .collect(Collectors.toList());
     }
-
+    public void searchUser() {
+        $(searchButton).click();
+        try {
+            Thread.sleep(5000); // 5 seconds wait
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
