@@ -41,12 +41,15 @@ public class RecruitmentVacanciesPage extends PageObject {
     private final By deleteButtonTemplate = By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div[2]/div[3]/div/div/div[1]/div/div/div[1]/div[2]/div/div/button[1]");
 
     // Methods for "Add a new vacancy" scenario
+
     public void clickAddVacancy() {
         $(addVacancyButton).click();
+        pause(2000);
     }
 
     public void enterVacancyName(String vacancyName) {
         $(vacancyNameInput).type(vacancyName);
+        pause(2000);
     }
 
     public void selectJobTitle(String jobTitle) {
@@ -61,14 +64,21 @@ public class RecruitmentVacanciesPage extends PageObject {
 
     public void enterHiringManager(String hiringManager) {
         $(hiringManagerInput).typeAndEnter(hiringManager);
+        pause(2000);
     }
 
     public void enterNumberOfPositions(String numberOfPositions) {
         $(numberOfPositionsInput).type(numberOfPositions);
+        pause(2000);
     }
 
     public void clickSaveButton() {
         $(saveButton).click();
+        try {
+            Thread.sleep(5000); // 5 seconds wait
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public boolean isSuccessMessageDisplayed() {
@@ -157,7 +167,7 @@ public class RecruitmentVacanciesPage extends PageObject {
     }
 
     public List<String> getVacancyList() {
-        List<WebElement> vacancyElements = getDriver().findElements(By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div[2]/div[3]/div/div[2]/div[*]/div/div[3]/div"));
+        List<WebElement> vacancyElements = getDriver().findElements(By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div[2]/div[3]/div/div"));
         //                                                                                       /html/body/div/div[1]/div[2]/div[2]/div/div[2]/div[3]/div/div[2]/div[1]/div/div[3]/div
         //                                                                                       /html/body/div/div[1]/div[2]/div[2]/div/div[2]/div[3]/div/div[2]/div[5]/div/div[3]/div
         // Extract the usernames from the web elements

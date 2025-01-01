@@ -49,4 +49,9 @@ public class RecruitmentVacancyStepDefinitions {
     public void theVacancyShouldNotAppearInTheVacancyList(String name) {
         recruitmentVacancySteps.verifyDeletingVacancy(name);
     }
+
+    @Then("I should see the vacancy \\(testVacancy) {string} in the vacancy list")
+    public void iShouldSeeTheVacancyTestVacancyInTheVacancyList(String vacancyName) {
+        recruitmentVacancySteps.verifyAddingVacancy(vacancyName);
+    }
 }

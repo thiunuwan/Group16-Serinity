@@ -27,6 +27,8 @@ public class RecruitmentVacancySteps extends UIInteractionSteps {
         recruitmentVacanciesPage.clickSaveButton();
     }
 
+
+
     @Step("Verify success message is displayed")
     public void verifySuccessMessage() {
         Assert.assertTrue("Success message not displayed!", recruitmentVacanciesPage.isSuccessMessageDisplayed());
@@ -59,6 +61,16 @@ public class RecruitmentVacancySteps extends UIInteractionSteps {
         List<String> vacancyList = recruitmentVacanciesPage.getVacancyList();
         System.out.println(vacancyList);
         Assert.assertFalse("vacancy  found in the list!", vacancyList.contains(vacancyName));
+    }
+
+
+    @Step("verify  Adding New vacancy")
+    public void verifyAddingVacancy(String vacancyName) {
+        recruitmentVacanciesPage.open();
+
+        List<String> vacancyList = recruitmentVacanciesPage.getVacancyList();
+        System.out.println(vacancyList);
+        Assert.assertFalse("vacancy not found in the list!", vacancyList.contains(vacancyName));
     }
 
 }
