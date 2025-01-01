@@ -5,36 +5,25 @@ import net.serenitybdd.core.Serenity;
 public class authentication_steps {
     @Given("I am a normal user")
     public void iAmANormalUser() {
-        // Set the credentials for normal user
-        String normalUsername = "user";
-        String normalPassword = "password";
 
-        // Store the normal user credentials in Serenity session variables
-        Serenity.setSessionVariable("username").to(normalUsername);
-        Serenity.setSessionVariable("password").to(normalPassword);
+        String normalUsername = "user";
+        String normalUserPassword = "password";
+        setUserCredentials(normalUsername, normalUserPassword);
+
     }
 
     @Given("I am a admin user")
     public void iAmAnAdminUser() {
         String adminUsername = "admin";
-        String adminPassword = "password";
-
-        // Store the admin credentials in Serenity session variables
-        Serenity.setSessionVariable("username").to(adminUsername);
-        Serenity.setSessionVariable("password").to(adminPassword);
+        String adminUserPassword = "password";
+        setUserCredentials(adminUsername, adminUserPassword);
 
     }
 
-
-    @Given("I am an unauthorized user")
-    public void iAmAnUnauthorizedUser() {
-        String unauthorizedUsername = "otherUser";
-        String unauthorizedPassword = "otherPassword";
-
-        Serenity.setSessionVariable("username").to(unauthorizedUsername);
-        Serenity.setSessionVariable("password").to(unauthorizedPassword);
+    // Helper method to set credentials
+    private void setUserCredentials(String username, String password) {
+        Serenity.setSessionVariable("username").to(username);
+        Serenity.setSessionVariable("password").to(password);
     }
-
-
 
 }
