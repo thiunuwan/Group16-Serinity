@@ -5,6 +5,7 @@ on:
     branches:
       - fixes
       - master
+      - enhancements-fixes
   workflow_dispatch:
 
 jobs:
