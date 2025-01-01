@@ -77,7 +77,7 @@ jobs:
       # Run Serenity tests
       - name: Run Serenity tests
         run: |
-          mvn clean verify
+          mvn clean verify --no-transfer-progress
         continue-on-error: true
 
       # Upload Serenity reports as artifact
