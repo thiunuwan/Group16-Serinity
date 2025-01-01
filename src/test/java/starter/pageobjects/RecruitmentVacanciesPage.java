@@ -15,9 +15,9 @@ public class RecruitmentVacanciesPage extends PageObject {
     private final By addVacancyButton = By.xpath("//button[contains(@class, 'oxd-button') and contains(., 'Add')]");
     private final By vacancyNameInput = By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div/form/div[1]/div[1]/div/div[2]/input");
     private final By jobTitleDropdown = By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div/form/div[1]/div[2]/div/div[2]/div/div");
-    private final By dropdownOptions = By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div/form/div[1]/div[2]/div/div[2]/div/div/div[2]");
-    private final By hiringManagerInput = By.xpath("//input[@name='hiringManager']");
-    private final By numberOfPositionsInput = By.xpath("//input[@type='number']");
+    private final By dropdownOptions = By.xpath("//div[@role='listbox']//div[@role='option']");
+    private final By hiringManagerInput = By.xpath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div/form/div[3]/div[1]/div/div[2]/div/div/input");
+    private final By numberOfPositionsInput = By.xpath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div/form/div[3]/div[2]/div/div/div/div[2]/input");
     private final By saveButton = By.xpath("//button[contains(., 'Save')]");
     private final By successMessage = By.xpath("//div[contains(@class, 'oxd-toast-container')]//p");
 
@@ -31,6 +31,11 @@ public class RecruitmentVacanciesPage extends PageObject {
 
     public void selectJobTitle(String jobTitle) {
         $(jobTitleDropdown).click();
+        // Print all found dropdown options
+        List<WebElementFacade> options = findAll(dropdownOptions);
+        System.out.println("Found job titles in the dropdown:");
+        options.forEach(option -> System.out.println(option.getText()));
+
         WebElementFacade option = findAll(dropdownOptions).stream()
                 .filter(e -> e.getText().equalsIgnoreCase(jobTitle))
                 .findFirst()
