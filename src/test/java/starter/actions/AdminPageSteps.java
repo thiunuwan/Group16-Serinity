@@ -42,6 +42,28 @@ public class AdminPageSteps extends UIInteractionSteps {
         Assert.assertTrue("User not found in the list!", userList.contains(username));
     }
 
+
+    public void deleteTestUser(String username) {
+        List<String> userList = adminPage.getUserList();
+        System.out.println(userList);
+
+        // Find the index of the given username
+        int index = userList.indexOf(username);
+
+        if (index != -1) {
+            System.out.println("Username found at index: " + index);
+            adminPage.clickDelete(index+1);
+        } else {
+            System.out.println("Username not found in the list");
+        }
+
+    }
+
+    public void verifyDeletingTestUser(String username) {
+        List<String> userList = adminPage.getUserList();
+        System.out.println(userList);
+        Assert.assertFalse("User should not be in the list!", userList.contains(username));
+    }
     public void verifySearchingTestUser(String username) {
         String userSearchResult = adminPage.getUserSearchResult();
         System.out.println(userSearchResult);
