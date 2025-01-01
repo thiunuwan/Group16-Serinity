@@ -5,8 +5,6 @@ import net.thucydides.core.annotations.Step;
 import org.junit.Assert;
 import starter.pageobjects.RecruitmentVacanciesPage;
 
-import java.util.List;
-
 public class RecruitmentVacancySteps extends UIInteractionSteps {
 
     RecruitmentVacanciesPage recruitmentVacanciesPage;
@@ -31,5 +29,18 @@ public class RecruitmentVacancySteps extends UIInteractionSteps {
         Assert.assertTrue("Success message not displayed!", recruitmentVacanciesPage.isSuccessMessageDisplayed());
     }
 
+    @Step("Search for a vacancy")
+    public void searchForVacancy(String jobTitle, String vacancyName, String hiringManager, String status) {
+        recruitmentVacanciesPage.selectJobTitleForSearch(jobTitle);
+        recruitmentVacanciesPage.selectVacancyForSearch(vacancyName);
+        recruitmentVacanciesPage.selectHiringManagerForSearch(hiringManager);
+        recruitmentVacanciesPage.selectStatusForSearch(status);
+        recruitmentVacanciesPage.clickSearchButton();
+    }
 
+    @Step("Verify vacancy is displayed in search results")
+    public void verifyVacancyInSearchResults(String vacancyName) {
+        Assert.assertTrue("Vacancy not found in search results!",
+                recruitmentVacanciesPage.isVacancyDisplayedInSearchResults(vacancyName));
+    }
 }

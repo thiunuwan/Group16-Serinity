@@ -27,5 +27,14 @@ public class RecruitmentVacancyStepDefinitions {
         recruitmentVacancySteps.verifySuccessMessage();
     }
 
+    @When("I search for a vacancy with job title {string}, vacancy {string}, hiring manager {string}, and status {string}")
+    public void iSearchForAVacancyWithJobTitleVacancyHiringManagerAndStatus(
+            String jobTitle, String vacancy, String hiringManager, String status) {
+        recruitmentVacancySteps.searchForVacancy(jobTitle, vacancy, hiringManager, status);
+    }
 
+    @Then("I should see the vacancy record for {string} displayed in the results")
+    public void iShouldSeeTheVacancyRecordDisplayedInTheResults(String vacancyName) {
+        recruitmentVacancySteps.verifyVacancyInSearchResults(vacancyName);
+    }
 }

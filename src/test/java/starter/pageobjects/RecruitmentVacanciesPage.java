@@ -4,17 +4,13 @@ import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
 import java.util.List;
-
 
 @DefaultUrl("https://opensource-demo.orangehrmlive.com/web/index.php/recruitment/viewJobVacancy")
 public class RecruitmentVacanciesPage extends PageObject {
 
+    // Elements for "Add a new vacancy" scenario
     private final By addVacancyButton = By.xpath("//button[contains(@class, 'oxd-button') and contains(., 'Add')]");
     private final By vacancyNameInput = By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div/form/div[1]/div[1]/div/div[2]/input");
     private final By jobTitleDropdown = By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div/form/div[1]/div[2]/div/div[2]/div/div");
@@ -24,9 +20,19 @@ public class RecruitmentVacanciesPage extends PageObject {
     private final By saveButton = By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div[1]/form/div[7]/button[2]");
     private final By successMessage = By.xpath("/html/body/div/div[2]");
 
-    // Define the timeout duration
-    private final Duration timeout = Duration.ofSeconds(10);
+    // Elements for "Search for a vacancy" scenario
+    private final By searchJobTitleDropdown = By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div[1]/div[2]/form/div[1]/div/div[1]/div/div[2]/div/div");
+    private final By dropdownOptionsSearchJobTitle = By.xpath("//div[@role='listbox']//div[@role='option']");
+    private final By searchVacancyDropdown = By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div[1]/div[2]/form/div[1]/div/div[2]/div/div[2]/div/div");
+    private final By dropdownOptionsSearchVacancy = By.xpath("//div[@role='listbox']//div[@role='option']");
+    private final By searchHiringManagerDropdown = By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div[1]/div[2]/form/div[1]/div/div[3]/div/div[2]/div/div");
+    private final By dropdownOptionsSearchManager = By.xpath("//div[@role='listbox']//div[@role='option']");
+    private final By searchStatusDropdown = By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div[1]/div[2]/form/div[1]/div/div[4]/div/div[2]/div/div");
+    private final By dropdownOptionsSearchStatus = By.xpath("//div[@role='listbox']//div[@role='option']");
+    private final By searchButton = By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div[1]/div[2]/form/div[2]/button[2]");
+    private final By searchResultsTable = By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div[2]/div[3]/div/div/div/div/div");
 
+    // Methods for "Add a new vacancy" scenario
     public void clickAddVacancy() {
         $(addVacancyButton).click();
     }
@@ -37,24 +43,16 @@ public class RecruitmentVacanciesPage extends PageObject {
 
     public void selectJobTitle(String jobTitle) {
         $(jobTitleDropdown).click();
-        // Print all found dropdown options
         List<WebElementFacade> options = findAll(dropdownOptions);
-        System.out.println("Found job titles in the dropdown:");
-        options.forEach(option -> System.out.println(option.getText()));
-
-        WebElementFacade option = findAll(dropdownOptions).stream()
+        WebElementFacade option = options.stream()
                 .filter(e -> e.getText().equalsIgnoreCase(jobTitle))
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Job title not found: " + jobTitle));
         option.click();
     }
 
-
     public void enterHiringManager(String hiringManager) {
-        $(hiringManagerInput).type(hiringManager);
-        waitABit(2000); // Wait to ensure suggestions load
-        $(hiringManagerInput).sendKeys(Keys.ARROW_DOWN);
-        $(hiringManagerInput).sendKeys(Keys.ENTER);
+        $(hiringManagerInput).typeAndEnter(hiringManager);
     }
 
     public void enterNumberOfPositions(String numberOfPositions) {
@@ -65,31 +63,58 @@ public class RecruitmentVacanciesPage extends PageObject {
         $(saveButton).click();
     }
 
-
-
     public boolean isSuccessMessageDisplayed() {
-        try {
-            WebDriverWait wait = new WebDriverWait(getDriver(), timeout.getSeconds()); // Use getSeconds()
-            wait.until(ExpectedConditions.visibilityOfElementLocated(successMessage));
-            return $(successMessage).isDisplayed();
-        } catch (Exception e) {
-            System.err.println("Success message not displayed: " + e.getMessage());
-            return false;
-        }
+        return $(successMessage).isDisplayed();
     }
 
-    // Utility methods for explicit waits
-    private WebElementFacade waitForElement(By locator) {
-        WebDriverWait wait = new WebDriverWait(getDriver(), timeout.getSeconds()); // Use getSeconds()
-        wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-        return $(locator);
-    }
-
-    private List<WebElementFacade> waitForElements(By locator) {
-        WebDriverWait wait = new WebDriverWait(getDriver(), timeout.getSeconds()); // Use getSeconds()
-        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
-        return findAll(locator);
+    // Methods for "Search for a vacancy" scenario
+    public void selectJobTitleForSearch(String jobTitle) {
+        $(searchJobTitleDropdown).click();
+        List<WebElementFacade> options = findAll(dropdownOptionsSearchJobTitle);
+        WebElementFacade option = options.stream()
+                .filter(e -> e.getText().equalsIgnoreCase(jobTitle))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Job title not found: " + jobTitle));
+        option.click();
     }
 
 
+    public void selectVacancyForSearch(String vacancyName) {
+        $(searchVacancyDropdown).click();
+        List<WebElementFacade> options = findAll(dropdownOptionsSearchVacancy);
+        WebElementFacade option = options.stream()
+                .filter(e -> e.getText().equalsIgnoreCase(vacancyName))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Vacancy not found for search: " + vacancyName));
+        option.click();
+    }
+
+    public void selectHiringManagerForSearch(String hiringManager) {
+        $(searchHiringManagerDropdown).click();
+        List<WebElementFacade> options = findAll(dropdownOptionsSearchManager);
+        WebElementFacade option = options.stream()
+                .filter(e -> e.getText().equalsIgnoreCase(hiringManager))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Hiring manager not found for search: " + hiringManager));
+        option.click();
+    }
+
+    public void selectStatusForSearch(String status) {
+        $(searchStatusDropdown).click();
+        List<WebElementFacade> options = findAll(dropdownOptionsSearchStatus);
+        WebElementFacade option = options.stream()
+                .filter(e -> e.getText().equalsIgnoreCase(status))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Status not found for search: " + status));
+        option.click();
+    }
+
+    public void clickSearchButton() {
+        $(searchButton).click();
+    }
+
+    public boolean isVacancyDisplayedInSearchResults(String vacancyName) {
+        return findAll(searchResultsTable).stream()
+                .anyMatch(row -> row.getText().contains(vacancyName));
+    }
 }
