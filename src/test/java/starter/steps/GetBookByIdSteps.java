@@ -17,11 +17,11 @@ import static org.junit.Assert.assertTrue;
 
 import starter.hooks.BookLifecycleHooks;
 
-public class GetBookByIdSteps {
+public class GetBookByIdSteps extends BaseSteps {
 
     // Retrieve BASE_URL from configuration
-    private final EnvironmentVariables environmentVariables = SystemEnvironmentVariables.createEnvironmentVariables();
-    private final String BASE_URL = environmentVariables.getProperty("api.base.url", "http://localhost:8080/api");
+//    private final EnvironmentVariables environmentVariables = SystemEnvironmentVariables.createEnvironmentVariables();
+//    private final String BASE_URL = environmentVariables.getProperty("api.base.url", "http://localhost:8080/api");
 
     private final int testBookId = BookLifecycleHooks.getTestBookId();
     private  final String testBookTitle = BookLifecycleHooks.getTestBookTitle();

@@ -13,10 +13,10 @@ import starter.utils.AuthUtils;
 
 import static org.junit.Assert.assertTrue;
 
-public class DeleteBookByIdSteps {
+public class DeleteBookByIdSteps extends BaseSteps {
     // Retrieve BASE_URL from configuration
-    private final EnvironmentVariables environmentVariables = SystemEnvironmentVariables.createEnvironmentVariables();
-    private final String BASE_URL = environmentVariables.getProperty("api.base.url", "http://localhost:8080/api");
+//    private final EnvironmentVariables environmentVariables = SystemEnvironmentVariables.createEnvironmentVariables();
+//    private final String BASE_URL = environmentVariables.getProperty("api.base.url", "http://localhost:8080/api");
 
     private  final int testBookId = BookLifecycleHooks.getTestBookId();
 
