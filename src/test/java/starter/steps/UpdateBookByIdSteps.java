@@ -31,6 +31,7 @@ public class UpdateBookByIdSteps {
         // Send PUT request to update the book with ID 1
         SerenityRest.given()
                 .header("Authorization", basicAuthHeader)
+                .header("Content-Type", "application/json")
                 .body(requestBody)
                 .put(BASE_URL +"/books/"+ testBookId);
     }
@@ -51,6 +52,7 @@ public class UpdateBookByIdSteps {
         // Send PUT request to update the book with ID 1
         SerenityRest.given()
                 .header("Authorization", basicAuthHeader)
+                .header("Content-Type", "application/json")
                 .body(requestBody)
                 .put(BASE_URL +"/books/"+nonExistentBookID);
     }
@@ -69,6 +71,7 @@ public class UpdateBookByIdSteps {
         // Send PUT request to update the book
         SerenityRest.given()
                 .header("Authorization", basicAuthHeader)
+                .header("Content-Type", "application/json")
                 .body(requestBody)
                 .put(BASE_URL + "/books/" + testBookId);
     }
