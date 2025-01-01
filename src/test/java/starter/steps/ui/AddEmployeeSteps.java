@@ -17,15 +17,29 @@ public class AddEmployeeSteps {
         addEmployeeActionSteps.openPIMPage();
     }
 
-    @When("I add a new employee with firstname {string} and middlename {string} and lastname {string} and employeeId {string}")
-    public void iAddANewCandidateWithFirstnameAndLastnameAndEmailAndContact(String firstName, String lastName, String middleName, String userId) {
-        addEmployeeActionSteps.addNewEmployee(firstName, lastName, middleName, userId);
+    @When("I add a new test employee with firstname {string} and middlename {string} and lastname {string}")
+    public void iAddANewCandidateWithFirstnameAndMiddlenameAndLastname(String firstName, String middleName, String lastName) {
+        addEmployeeActionSteps.addNewEmployee(firstName, middleName, lastName);
     }
 
     @Then("I should see {string} in the employee list")
-    public void iShouldSeeTheCandidateTestCandidateInTheCandidateList(String candidateName) {
-        addEmployeeActionSteps.verifyAddingCandidate(candidateName);
+    public void iShouldSeeTheCandidateTestCandidateInTheCandidateList(String employeeName) {
+        addEmployeeActionSteps.verifyAddingEmployee(employeeName);
+    }
+
+    @When("I delete test employee")
+    public void iDeleteTestEmployee() {
+        addEmployeeActionSteps.deleteTestEmployee();
+    }
+
+    @Then("test employee should not appear in the employee list")
+    public void theEmployeeShouldNotAppearInTheEmployeeList() {
+        addEmployeeActionSteps.verifyEmployeeNotInList();
     }
 
 
+    @When("I add a new employee with firstname {string} and middlename {string} and lastname {string} and username {string} and password {string} confirmpassword {string}")
+    public void iAddANewEmployeeWithFirstnameAndMiddlenameAndLastnameAndUsernameAndPasswordConfirmpassword(String firstName, String middleName, String lastName, String userName, String password, String confirmPassword) {
+        addEmployeeActionSteps.addEmployeeWithUsername(firstName, middleName, lastName, userName, password, confirmPassword);
+    }
 }

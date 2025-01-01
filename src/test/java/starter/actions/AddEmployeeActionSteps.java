@@ -1,5 +1,6 @@
 package starter.actions;
 
+import net.serenitybdd.core.Serenity;
 import net.serenitybdd.core.steps.UIInteractionSteps;
 import net.thucydides.core.annotations.Step;
 import org.junit.Assert;
@@ -20,13 +21,17 @@ public class AddEmployeeActionSteps extends UIInteractionSteps {
     }
 
     @Step("Add newEmployee")
-    public void addNewEmployee(String firstName, String lastName, String middleName, String employeeId) {
+    public void addNewEmployee(String firstName, String middleName, String lastName) {
         addEmployeePage.clickAddEmployee();
         addEmployeePage.enterFirstName(firstName);
-        addEmployeePage.enterLastname(lastName);
         addEmployeePage.enterMiddleName(middleName);
-        addEmployeePage.enterEmployeeId(employeeId);
+        addEmployeePage.enterLastname(lastName);
+        String user_id = addEmployeePage.getEmployeeId();
+        Serenity.setSessionVariable("employee-id").to(user_id);
+        System.out.println("**");
+        System.out.println(user_id);
         addEmployeePage.saveEmployee();
+
     }
 
     @Step("Verify notification contains the text: {0}")
@@ -40,11 +45,75 @@ public class AddEmployeeActionSteps extends UIInteractionSteps {
     }
 
     @Step("verify  Adding New candidate")
-    public void verifyAddingCandidate(String employeeName) {
+    public void verifyAddingEmployee(String employeeName) {
         addEmployeePage.open();
+        List<String> employeeIDlist = addEmployeePage.getEmployeeIdlist();
+        String employee_id = Serenity.sessionVariableCalled("employee-id");
+        System.out.println("***");
+        System.out.println(employeeIDlist);
+        List<String> employeeNamelist = addEmployeePage.getEmployeeNamelist();
+        System.out.println(employeeNamelist);
+        int employeeIndex = employeeIDlist.indexOf(employee_id);
+        employeeIndex++;
+        String employeeIndexAsString = String.valueOf(employeeIndex);
+        String employeeNameFromTable = addEmployeePage.getEmployeeNameForGivenID(employeeIndexAsString);
+        System.out.println("***");
+        System.out.println(employeeNameFromTable);
+        System.out.println("***");
+        // Log the index
+        System.out.println("Index of employee_id (" + employee_id + "): " + employeeIndex);
 
-        List<String> employeeList = addEmployeePage.getEmployeeList();
-        System.out.println(employeeList);
-        Assert.assertTrue("Employee not found in the list!", employeeList.contains(employeeName));
+
+        Assert.assertEquals("Employee name does not match!", employeeName, employeeNameFromTable);
+
+    }
+
+//    @Step("Delete employee")
+//    public void deleteCandidate(String employeeName) {
+//        addEmployeePage.open();
+//        addEmployeePage.deleteEmployee(employeeName);
+//    }
+
+    @Step("Delete test employee")
+    public void deleteTestEmployee() {
+        addEmployeePage.open();
+        addEmployeePage.deleteEmployee();
+    }
+
+
+    @Step("Add a new employee with username")
+    public void addEmployeeWithUsername(String firstName, String middleName, String lastName, String username, String password, String confirmPassword) {
+        addEmployeePage.clickAddEmployee();
+        addEmployeePage.enterFirstName(firstName);
+        String user_id = addEmployeePage.getEmployeeId();
+        Serenity.setSessionVariable("employee-id").to(user_id);
+        addEmployeePage.enableToggle();
+        addEmployeePage.enterMiddleName(middleName);
+        addEmployeePage.enterLastname(lastName);
+        addEmployeePage.enterUsername(username);
+        addEmployeePage.enterPassword(password);
+        addEmployeePage.enterConfirmPassword(confirmPassword);
+        addEmployeePage.saveEmployee();
+
+
+        waitABit(5000);
+
+    }
+
+    @Step("Verify employee {0} in the list")
+    public void verifyEmployeeInList(String fullName) {
+        List<String> employeeNameList = addEmployeePage.getEmployeeNamelist();
+        Assert.assertTrue("Employee not found in the list!", employeeNameList.contains(fullName));
+    }
+
+    public void verifyEmployeeNotInList() {
+
+        List<String> employeeIDlist = addEmployeePage.getEmployeeIdlist();
+        System.out.println("###");
+        System.out.println(employeeIDlist);
+        System.out.println("###");
+        String employee_id = Serenity.sessionVariableCalled("employee-id");
+        Assert.assertFalse("User should not be in the list!", employeeIDlist.contains(employee_id));
+
     }
 }
