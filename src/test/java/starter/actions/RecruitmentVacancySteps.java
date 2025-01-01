@@ -43,4 +43,21 @@ public class RecruitmentVacancySteps extends UIInteractionSteps {
         Assert.assertTrue("Vacancy not found in search results!",
                 recruitmentVacanciesPage.isVacancyDisplayedInSearchResults(vacancyName));
     }
+
+    @Step("Delete vacancy")
+    public void deleteVacancy(String vacancyName) {
+        recruitmentVacanciesPage.open();
+        recruitmentVacanciesPage.deleteVacancy(vacancyName);
+
+    }
+
+    @Step("verify  the deletion of vacancy")
+    public void verifyDeletingVacancy(String vacancyName) {
+        List<String> vacancyList = recruitmentVacanciesPage.getVacancyList();
+        System.out.println(vacancyList);
+        Assert.assertFalse("vacancy  found in the list!", vacancyList.contains(vacancyName));
+    }
+
+
+    }
 }

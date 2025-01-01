@@ -32,6 +32,10 @@ public class RecruitmentVacanciesPage extends PageObject {
     private final By searchButton = By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div[1]/div[2]/form/div[2]/button[2]");
     private final By searchResultsTable = By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div[2]/div[3]/div/div/div/div/div");
 
+    private final By deleteButtonTemplate = By.xpath("//button[./i[contains(@class, 'bi-trash')]]\n");
+    private final By checkBox = By.xpath("//span[contains(@class, 'oxd-checkbox-input')]/i");
+
+
     // Methods for "Add a new vacancy" scenario
     public void clickAddVacancy() {
         $(addVacancyButton).click();

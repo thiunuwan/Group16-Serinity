@@ -37,4 +37,16 @@ public class RecruitmentVacancyStepDefinitions {
     public void iShouldSeeTheVacancyRecordDisplayedInTheResults(String vacancyName) {
         recruitmentVacancySteps.verifyVacancyInSearchResults(vacancyName);
     }
+
+
+    @When("I delete the vacancy named {string}")
+    public void iDeleteTheVacancyNamed(String name) {
+        recruitmentVacancySteps.deleteVacancy(name);
+    }
+
+
+    @Then("the vacancy {string} should not appear in the vacancy list")
+    public void theVacancyShouldNotAppearInTheVacancyList(String name) {
+        recruitmentVacancySteps.verifyDeletingVacancy(name);
+    }
 }
