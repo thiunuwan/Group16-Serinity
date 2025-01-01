@@ -5,9 +5,12 @@ import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 @DefaultUrl("https://opensource-demo.orangehrmlive.com/web/index.php/recruitment/viewJobVacancy")
 public class RecruitmentVacanciesPage extends PageObject {
@@ -18,8 +21,11 @@ public class RecruitmentVacanciesPage extends PageObject {
     private final By dropdownOptions = By.xpath("//div[@role='listbox']//div[@role='option']");
     private final By hiringManagerInput = By.xpath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div/form/div[3]/div[1]/div/div[2]/div/div/input");
     private final By numberOfPositionsInput = By.xpath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div/form/div[3]/div[2]/div/div/div/div[2]/input");
-    private final By saveButton = By.xpath("//button[contains(., 'Save')]");
-    private final By successMessage = By.xpath("//div[contains(@class, 'oxd-toast-container')]//p");
+    private final By saveButton = By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div[1]/form/div[7]/button[2]");
+    private final By successMessage = By.xpath("/html/body/div/div[2]");
+
+    // Define the timeout duration
+    private final Duration timeout = Duration.ofSeconds(10);
 
     public void clickAddVacancy() {
         $(addVacancyButton).click();
@@ -59,8 +65,31 @@ public class RecruitmentVacanciesPage extends PageObject {
         $(saveButton).click();
     }
 
+
+
     public boolean isSuccessMessageDisplayed() {
-        return $(successMessage).isDisplayed();
+        try {
+            WebDriverWait wait = new WebDriverWait(getDriver(), timeout.getSeconds()); // Use getSeconds()
+            wait.until(ExpectedConditions.visibilityOfElementLocated(successMessage));
+            return $(successMessage).isDisplayed();
+        } catch (Exception e) {
+            System.err.println("Success message not displayed: " + e.getMessage());
+            return false;
+        }
     }
+
+    // Utility methods for explicit waits
+    private WebElementFacade waitForElement(By locator) {
+        WebDriverWait wait = new WebDriverWait(getDriver(), timeout.getSeconds()); // Use getSeconds()
+        wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        return $(locator);
+    }
+
+    private List<WebElementFacade> waitForElements(By locator) {
+        WebDriverWait wait = new WebDriverWait(getDriver(), timeout.getSeconds()); // Use getSeconds()
+        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
+        return findAll(locator);
+    }
+
 
 }
