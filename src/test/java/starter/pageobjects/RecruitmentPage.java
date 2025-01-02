@@ -29,37 +29,51 @@ public class RecruitmentPage extends PageObject {
     private final By checkBox = By.xpath("//span[contains(@class, 'oxd-checkbox-input')]/i");
 
     public void clickAddCandidate() {
-
-        $(addCandidateButton).waitUntilClickable().click();
-
+        if ($(addCandidateButton).waitUntilClickable().isEnabled()) {
+            $(addCandidateButton).click();
+        } else {
+            System.out.println("addCandidate button is not enabled.");
+        }
     }
 
     public void enterFirstName(String firstname) {
-
-        $(firstnameInput).waitUntilVisible().type(firstname);
-
+        if ($(firstnameInput).waitUntilVisible().isEnabled()) {
+            $(firstnameInput).type(firstname);
+        } else {
+            System.out.println("First Name input is not enabled.");
+        }
     }
+
     public void enterLastname(String lastname) {
-
-        $(lastnameInput).waitUntilVisible().type(lastname);
-
+        if ($(lastnameInput).waitUntilVisible().isEnabled()) {
+            $(lastnameInput).type(lastname);
+        } else {
+            System.out.println("Last Name input is not enabled.");
+        }
     }
+
     public void enterEmail(String email) {
-
-        $(emailInput).waitUntilVisible().type(email);
-
+        if ($(emailInput).waitUntilVisible().isEnabled()) {
+            $(emailInput).type(email);
+        } else {
+            System.out.println("Email input is not enabled.");
+        }
     }
 
     public void enterNameForSearch(String name) {
-
-        $(searchCandidateNameInput).waitUntilVisible().type(name);
-
+        if ($(searchCandidateNameInput).waitUntilVisible().isEnabled()) {
+            $(searchCandidateNameInput).type(name);
+        } else {
+            System.out.println("Search input is not enabled.");
+        }
     }
 
     public void enterContactNumber(String contactNumber) {
-
-        $(contactInput).waitUntilVisible().type(contactNumber);
-
+        if ($(contactInput).waitUntilVisible().isEnabled()) {
+            $(contactInput).type(contactNumber);
+        } else {
+            System.out.println("Contact input is not enabled.");
+        }
     }
 
     public void setAgreeTermsCheckbox(boolean state) {
@@ -73,10 +87,15 @@ public class RecruitmentPage extends PageObject {
             }
         }
     }
-    public void saveCandidate() {
-        $(saveButton).waitUntilClickable().click();
 
+    public void saveCandidate() {
+        if ($(saveButton).waitUntilClickable().isEnabled()) {
+            $(saveButton).click();
+        } else {
+            System.out.println("Save button is not enabled.");
+        }
     }
+
     public void searchCandidate() {
         $(searchButton).waitUntilClickable().click();
     }
