@@ -18,7 +18,7 @@ public class DeleteBookByIdSteps {
     private final EnvironmentVariables environmentVariables = SystemEnvironmentVariables.createEnvironmentVariables();
     private final String BASE_URL = environmentVariables.getProperty("api.base.url", "http://localhost:8080/api");
 
-    private static final int testBookId = BookLifecycleHooks.getTestBookId();
+    private  final int testBookId = BookLifecycleHooks.getTestBookId();
 
     @When("I send a DELETE request to delete the test book")
     public void iSendADELETERequestToDeleteTheTestBook() {

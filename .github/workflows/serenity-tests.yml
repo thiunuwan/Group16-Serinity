@@ -3,8 +3,13 @@ name: Run Serenity Tests
 on:
   push:
     branches:
-      - api-test-ravindu
       - master
+      
+  pull_request:
+    branches:
+      - master
+      
+  workflow_dispatch:
 
 jobs:
   run-tests:
@@ -55,12 +60,12 @@ jobs:
       # Modify serenity.properties to set chromedriver path and enable headless mode
       - name: Update serenity.properties
         run: |
-         # Set the chromedriver path and headless mode in serenity.properties
-          sed -i 's|webdriver.chrome.driver=src/test/resources/drivers/chromedriver.exe|webdriver.chrome.driver=src/test/resources/drivers/chromedriver|'  $(pwd)/serenity.properties
-          sed -i 's|headless.mode=false|headless.mode=true|' $(pwd)/serenity.properties
-         # Display the contents of the serenity.properties file after the changes
-          echo "Updated serenity.properties file:"     
-          cat $(pwd)/serenity.properties
+          # Set the chromedriver path and headless mode in serenity.properties
+           sed -i 's|webdriver.chrome.driver=src/test/resources/drivers/chromedriver.exe|webdriver.chrome.driver=src/test/resources/drivers/chromedriver|'  $(pwd)/serenity.properties
+           sed -i 's|headless.mode=false|headless.mode=true|' $(pwd)/serenity.properties
+          # Display the contents of the serenity.properties file after the changes
+           echo "Updated serenity.properties file:"     
+           cat $(pwd)/serenity.properties
 
 
       # Start the API server on port 8080 using the JAR file in the resources folder
@@ -81,7 +86,7 @@ jobs:
       # Upload Serenity reports as artifact
       - name: Upload Serenity reports
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: serenity-reports
           path: target/site/serenity
