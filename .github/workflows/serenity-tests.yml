@@ -62,7 +62,7 @@ jobs:
         run: |
           # Set the chromedriver path and headless mode in serenity.properties
            sed -i 's|webdriver.chrome.driver=src/test/resources/drivers/chromedriver.exe|webdriver.chrome.driver=src/test/resources/drivers/chromedriver|'  $(pwd)/serenity.properties
-           sed -i 's|headless.mode=false|headless.mode=false|' $(pwd)/serenity.properties
+           sed -i 's|headless.mode=false|headless.mode=true|' $(pwd)/serenity.properties
           # Display the contents of the serenity.properties file after the changes
            echo "Updated serenity.properties file:"     
            cat $(pwd)/serenity.properties
