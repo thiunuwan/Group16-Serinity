@@ -131,8 +131,6 @@ public class RecruitmentPage extends PageObject {
 
     public List<String> getCandidateList() {
         List<WebElement> candidateElements = getDriver().findElements(By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div[2]/div[3]/div/div[2]/div[*]/div/div[3]/div"));
-        //                                                                                       /html/body/div/div[1]/div[2]/div[2]/div/div[2]/div[3]/div/div[2]/div[1]/div/div[3]/div
-        //                                                                                       /html/body/div/div[1]/div[2]/div[2]/div/div[2]/div[3]/div/div[2]/div[5]/div/div[3]/div
         // Extract the usernames from the web elements
         return candidateElements.stream()
                 .map(WebElement::getText)
@@ -148,7 +146,4 @@ public class RecruitmentPage extends PageObject {
 
         wait.until(ExpectedConditions.visibilityOf(element));
     }
-
-
-
 }
