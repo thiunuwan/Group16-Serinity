@@ -8,6 +8,7 @@ import starter.pageobjects.AdminPage;
 import java.util.List;
 
 
+
 public class AdminPageSteps extends UIInteractionSteps {
 
     AdminPage adminPage;
@@ -64,6 +65,7 @@ public class AdminPageSteps extends UIInteractionSteps {
         System.out.println(userList);
         Assert.assertFalse("User should not be in the list!", userList.contains(username));
     }
+
     public void verifySearchingTestUser(String username) {
         String userSearchResult = adminPage.getUserSearchResult();
         System.out.println(userSearchResult);
@@ -87,4 +89,4 @@ public class AdminPageSteps extends UIInteractionSteps {
         System.out.println("#");
         adminPage.updateUserDetails(newUserName,newRole);
     }
-}
+

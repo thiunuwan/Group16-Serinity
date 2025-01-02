@@ -45,6 +45,7 @@ public class AdminPage extends PageObject {
             e.printStackTrace();
         }
 
+
         Actions actions = new Actions(getDriver());
         actions.sendKeys(Keys.ARROW_DOWN)  // Simulate pressing the down arrow key
                 .sendKeys(Keys.ENTER)       // Simulate pressing the enter key
@@ -182,6 +183,7 @@ public class AdminPage extends PageObject {
         updateButton.click();
     }
 
+
     public void updateUserDetails(String newUserName, String newRole) {
         // Type the newUsername into the input field
         $(usernameUpdateInput).type(newUserName);
@@ -196,10 +198,38 @@ public class AdminPage extends PageObject {
 
         option.click();
         $(saveButtonUpdate).click();
+      }
+
+    public void clickDelete(int rowIndex) {
+        // Construct the XPath dynamically using the rowIndex
+        String xpath = "/html/body/div[1]/div[1]/div[2]/div[2]/div/div[2]/div[3]/div/div[2]/div[" + rowIndex + "]/div/div[6]/div/button[1]";
+
+
+        // Find the delete button using the dynamically constructed XPath
+        WebElement deleteButton = getDriver().findElement(By.xpath(xpath));
+
+
+        // Click the delete button
+        deleteButton.click();
+
+
+        // Wait for the confirmation modal or button to appear (optional, can be adjusted depending on the page behavior)
+       // WebDriverWait wait = new WebDriverWait(getDriver(), 10); // Adjust timeout as needed
+       // wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[contains(text(),'Yes, Delete')]")));
+
+
+        // Find the "Yes, Delete" button and click it
+        WebElement confirmDeleteButton = getDriver().findElement(By.xpath("/html/body/div[1]/div[3]/div/div/div/div[3]/button[2]"));
+        confirmDeleteButton.click();
+
         try {
             Thread.sleep(5000); // 5 seconds wait
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+
+
     }
+
 }

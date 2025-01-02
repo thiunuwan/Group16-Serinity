@@ -23,8 +23,6 @@ Feature: User Management in Admin Tab
     When I try to add a new user with same username "Akash545" and password "test456" and role "Admin"
     Then I should see an error message "Username already exists"
 
-
-
   @ui
   @loginAsAdmin
   Scenario: search an registered user
@@ -40,3 +38,4 @@ Feature: User Management in Admin Tab
     And I add a new user with username "Akash226" and password "test123" and role "Admin"
     When I update a user with username "Akash226" to "Ravindu113" and role "Admin" to "ESS"
     Then I should see the user (testUser) "Ravindu113" in the user list
+

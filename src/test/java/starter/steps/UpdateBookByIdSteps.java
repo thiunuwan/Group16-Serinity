@@ -18,7 +18,7 @@ public class UpdateBookByIdSteps {
     // Retrieve BASE_URL from configuration
     private final EnvironmentVariables environmentVariables = SystemEnvironmentVariables.createEnvironmentVariables();
     private final String BASE_URL = environmentVariables.getProperty("api.base.url", "http://localhost:8080/api");
-    private static final int testBookId = BookLifecycleHooks.getTestBookId();
+    private final int testBookId = BookLifecycleHooks.getTestBookId();
     @When("I send a PUT request to update the test book")
     public void iSendAPUTRequestToUpdateTheTestBook() {
         // Update admin credentials from session variables

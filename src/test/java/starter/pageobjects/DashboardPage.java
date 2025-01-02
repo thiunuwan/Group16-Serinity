@@ -21,3 +21,4 @@ public class DashboardPage extends PageObject {
 
     }
 }
+
