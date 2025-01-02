@@ -30,36 +30,36 @@ public class RecruitmentPage extends PageObject {
 
     public void clickAddCandidate() {
 
-        $(addCandidateButton).click();
-        pause(2000);
+        $(addCandidateButton).waitUntilClickable().click();
+
     }
 
     public void enterFirstName(String firstname) {
 
-        $(firstnameInput).type(firstname);
-        pause(2000);
+        $(firstnameInput).waitUntilVisible().type(firstname);
+
     }
     public void enterLastname(String lastname) {
 
-        $(lastnameInput).type(lastname);
-        pause(2000);
+        $(lastnameInput).waitUntilVisible().type(lastname);
+
     }
     public void enterEmail(String email) {
 
-        $(emailInput).type(email);
-        pause(2000);
+        $(emailInput).waitUntilVisible().type(email);
+
     }
 
     public void enterNameForSearch(String name) {
 
-        $(searchCandidateNameInput).type(name);
-        pause(2000);
+        $(searchCandidateNameInput).waitUntilVisible().type(name);
+
     }
 
     public void enterContactNumber(String contactNumber) {
 
-        $(contactInput).type(contactNumber);
-        pause(2000);
+        $(contactInput).waitUntilVisible().type(contactNumber);
+
     }
 
     public void setAgreeTermsCheckbox(boolean state) {
@@ -74,20 +74,11 @@ public class RecruitmentPage extends PageObject {
         }
     }
     public void saveCandidate() {
-        $(saveButton).click();
-        try {
-            Thread.sleep(5000); // 5 seconds wait
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        $(saveButton).waitUntilClickable().click();
+
     }
     public void searchCandidate() {
-        $(searchButton).click();
-        try {
-            Thread.sleep(5000); // 5 seconds wait
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        $(searchButton).waitUntilClickable().click();
     }
 
     public void deleteCandidate(String candidateName) {
@@ -95,7 +86,7 @@ public class RecruitmentPage extends PageObject {
         for (WebElement row : rows) {
             if (row.getText().contains(candidateName)) {
                 WebElement deleteButton = row.findElement(deleteButtonTemplate);
-                pause(5000);
+                waitForElement(deleteButton, 10, 500);
                 deleteButton.click();
 
                 // Confirm deletion if required
@@ -108,17 +99,16 @@ public class RecruitmentPage extends PageObject {
 
     public void confirmDeletion() {
         WebElement confirmButton = $(By.xpath("//button[contains(@class, 'oxd-button') and contains(@class, 'oxd-button--label-danger') and ./i[contains(@class, 'bi-trash')] and contains(., 'Yes, Delete')]"));
-        pause(3000);
-        confirmButton.click();
+        $(confirmButton).waitUntilClickable().click();
     }
 
-    private void pause(long milliseconds) {
-        try {
-            Thread.sleep(milliseconds);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
+//    private void pause(long milliseconds) {
+//        try {
+//            Thread.sleep(milliseconds);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     public List<String> getCandidateList() {
         List<WebElement> candidateElements = getDriver().findElements(By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div[2]/div[3]/div/div[2]/div[*]/div/div[3]/div"));
