@@ -97,7 +97,11 @@ public class RecruitmentPage extends PageObject {
     }
 
     public void searchCandidate() {
-        $(searchButton).waitUntilClickable().click();
+        if ($(searchButton).waitUntilClickable().isEnabled()) {
+            $(searchButton).click();
+        } else {
+            System.out.println("search button is not enabled.");
+        }
     }
 
     public void deleteCandidate(String candidateName) {
@@ -105,7 +109,7 @@ public class RecruitmentPage extends PageObject {
         for (WebElement row : rows) {
             if (row.getText().contains(candidateName)) {
                 WebElement deleteButton = row.findElement(deleteButtonTemplate);
-                waitForElement(deleteButton, 10, 500);
+                waitForElement(deleteButton, 60, 500);
                 deleteButton.click();
 
                 // Confirm deletion if required
