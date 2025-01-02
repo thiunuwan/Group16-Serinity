@@ -5,6 +5,10 @@ on:
     branches:
       - fixes
       - master
+  pull_request:
+    branches:
+      - master
+      
   workflow_dispatch:
 
 jobs:
@@ -86,3 +90,18 @@ jobs:
         with:
           name: serenity-reports
           path: target/site/serenity
+
+      # Deploy Serenity Reports to GitHub Pages
+      - name: Deploy Serenity reports to GitHub Pages
+        run: |
+          mkdir gh-pages
+          cp -R target/site/serenity/* gh-pages/
+          cd gh-pages
+          git init
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git remote add origin https://github.com/${{ github.repository }}.git
+          git checkout -b gh-pages
+          git add .
+          git commit -m "Deploy Serenity reports"
+          git push --force https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} gh-pages

@@ -53,6 +53,6 @@ public class RecruitmentCandidateSteps {
             boolean enableConsentCheckbox = Boolean.parseBoolean(checkbox);
             recruitmentCandidateActionSteps.addNewCandidateWithConsent(firstName, lastName, email, contact,enableConsentCheckbox);
 
-        }
+    }
 
 }
