@@ -22,7 +22,7 @@ public class JobTitlesActionsSteps extends UIInteractionSteps {
         jobTitlesPage.clickAddJobTitle();
         jobTitlesPage.enterJobTitle(jobTitle);
         jobTitlesPage.saveJobTitle();
-        waitABit(2000);
+        waitABit(7000);
     }
 
 
