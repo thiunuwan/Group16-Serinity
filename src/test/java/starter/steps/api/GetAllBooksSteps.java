@@ -9,9 +9,6 @@ import static org.hamcrest.Matchers.*;
 
 public class GetAllBooksSteps extends BaseSteps {
 
-    // Retrieve BASE_URL from configuration
-//    private final EnvironmentVariables environmentVariables = SystemEnvironmentVariables.createEnvironmentVariables();
-//    private final String BASE_URL = environmentVariables.getProperty("api.base.url", "http://localhost:8080/api");
 
     @When("I send a GET request to retrieve the book list")
     public void iSendAGETRequestToRetrieveTheBookList() {

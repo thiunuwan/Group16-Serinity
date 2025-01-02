@@ -15,10 +15,6 @@ import starter.hooks.BookLifecycleHooks;
 
 public class GetBookByIdSteps extends BaseSteps {
 
-    // Retrieve BASE_URL from configuration
-//    private final EnvironmentVariables environmentVariables = SystemEnvironmentVariables.createEnvironmentVariables();
-//    private final String BASE_URL = environmentVariables.getProperty("api.base.url", "http://localhost:8080/api");
-
     private final int testBookId = BookLifecycleHooks.getTestBookId();
     private  final String testBookTitle = BookLifecycleHooks.getTestBookTitle();
     private  final String testBookAuthor = BookLifecycleHooks.getTestBookAuthor();
@@ -41,12 +37,6 @@ public class GetBookByIdSteps extends BaseSteps {
                 .header("Authorization", basicAuthHeader)
                 .get(BASE_URL +"/books/"+testBookId);
     }
-
-//        @Then("the response status code should be {int}")
-//    public void theResponseStatusCodeShouldBe(int statusCode) {
-//        restAssuredThat(response -> response.statusCode(statusCode));
-//    }
-
 
     @And("the response should contain the book details for testBook")
     public void theResponseShouldContainTheBookDetailsForID() {

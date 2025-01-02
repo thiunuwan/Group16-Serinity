@@ -6,12 +6,7 @@ import net.serenitybdd.rest.SerenityRest;
 import starter.hooks.BookLifecycleHooks;
 import starter.utils.AuthUtils;
 
-import static org.junit.Assert.assertTrue;
-
 public class UpdateBookByIdSteps extends BaseSteps {
-    // Retrieve BASE_URL from configuration
-//    private final EnvironmentVariables environmentVariables = SystemEnvironmentVariables.createEnvironmentVariables();
-//    private final String BASE_URL = environmentVariables.getProperty("api.base.url", "http://localhost:8080/api");
 
     private final int testBookId = BookLifecycleHooks.getTestBookId();
 
