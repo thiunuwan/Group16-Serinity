@@ -22,14 +22,6 @@ public class RecruitmentVacancyStepDefinitions {
         recruitmentVacancySteps.addNewVacancy(vacancyName, jobTitle, hiringManager, numberOfPositions);
     }
 
-    @Then("I should see a success message confirming the vacancy was added")
-    public void iShouldSeeASuccessMessage() {
-        recruitmentVacancySteps.verifySuccessMessage();
-    }
-
-
-
-
     @When("I delete the vacancy named {string}")
     public void iDeleteTheVacancyNamed(String name) {
         recruitmentVacancySteps.deleteVacancy(name);

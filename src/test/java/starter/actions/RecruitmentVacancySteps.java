@@ -29,15 +29,6 @@ public class RecruitmentVacancySteps extends UIInteractionSteps {
 
 
 
-    @Step("Verify success message is displayed")
-    public void verifySuccessMessage() {
-        Assert.assertTrue("Success message not displayed!", recruitmentVacanciesPage.isSuccessMessageDisplayed());
-    }
-
-
-
-
-
     @Step("Delete vacancy")
     public void deleteVacancy(String vacancyName) {
         recruitmentVacanciesPage.open();
@@ -62,11 +53,11 @@ public class RecruitmentVacancySteps extends UIInteractionSteps {
         Assert.assertFalse("vacancy not found in the list!", vacancyList.contains(vacancyName));
     }
 
-    @Step("Search candidate")
+    @Step("Search Vacancy")
     public void searchVacancy(String vacancyName) {
         recruitmentVacanciesPage.open();
         recruitmentVacanciesPage.enterNameForSearch(vacancyName);
-        recruitmentVacanciesPage.searchCandidate();
+        recruitmentVacanciesPage.searchVacancy();
     }
 
 }
