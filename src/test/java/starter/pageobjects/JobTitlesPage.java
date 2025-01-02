@@ -4,9 +4,6 @@ import net.serenitybdd.core.pages.PageObject;
 import net.thucydides.core.annotations.DefaultUrl;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -66,8 +63,6 @@ public class JobTitlesPage extends PageObject {
     public void deleteJobTitle(String jobTitle) {
         List<WebElement> rows = getDriver().findElements(By.xpath("/html/body/div[1]/div[1]/div[2]/div[2]/div/div/div[3]/div/div[2]/div[*]/div"));
 
-//       /html/body/div[1]/div[1]/div[2]/div[2]/div/div/div[3]/div/div[2]/div[*]/div
-//        /html/body/div[1]/div[1]/div[2]/div[2]/div/div/div[3]/div/div[2]/div[2]/div
         for (WebElement row : rows) {
             if (row.getText().contains(jobTitle)) {
                 WebElement deleteButton = row.findElement(deleteButtonTemplate);

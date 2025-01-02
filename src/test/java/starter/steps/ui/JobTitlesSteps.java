@@ -1,6 +1,5 @@
 package starter.steps.ui;
 
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -26,10 +25,6 @@ public class JobTitlesSteps {
         jobTitlesActionsSteps.verifyAddingJobTitle(jobTitle);
     }
 
-//    @Then("I should see the notification {string}")
-//    public void iShouldSeeTheNotification(String text) {
-//        jobTitlesActionsSteps.shouldSeeNotification(text);
-//    }
 
     @When("I delete the job title named {string}")
     public void iDeleteTheJobTitleNamed(String jobTitle) {

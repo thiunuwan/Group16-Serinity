@@ -3,7 +3,6 @@ package starter.actions;
 import net.serenitybdd.core.steps.UIInteractionSteps;
 import net.thucydides.core.annotations.Step;
 import org.junit.Assert;
-//import starter.pageobjects.NotificationPage;
 import starter.pageobjects.JobTitlesPage;
 
 import java.util.List;
@@ -36,17 +35,6 @@ public class JobTitlesActionsSteps extends UIInteractionSteps {
         System.out.println(jobTitlesList);
         Assert.assertTrue("job title not found in the list!", jobTitlesList.contains(jobTitle));
     }
-
-
-    //@Step("Verify notification contains the text: {0}")
-//    public void shouldSeeNotification(String expectedText) {
-//
-//        List<String> notificationList = notificationPage.getAllNotificationTexts();
-//        System.out.println(notificationList);
-//
-//        boolean notificationExists = notificationPage.containsNotification(expectedText);
-//        Assert.assertTrue("Notification with text '" + expectedText + "' was not found!", notificationExists);
-//    }
 
     @Step("verify  the deletion of job title")
     public void verifyDeletingJobTitle(String jobTitle) {
