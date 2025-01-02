@@ -78,7 +78,7 @@ public class AdminPage extends PageObject {
     public void saveUser() {
         $(saveButton).click();
         try {
-            Thread.sleep(5000); // 5 seconds wait
+            Thread.sleep(10000); // 5 seconds wait
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
