@@ -12,6 +12,7 @@ import static org.junit.Assert.assertEquals;
 
 public class LoginSteps extends UIInteractionSteps {
     LoginPage loginPage;
+    DashboardPage dashboardPage;
 
     @Step("Open the OrangeHRM login page")
     public void openLoginPage() {
@@ -48,5 +49,15 @@ public class LoginSteps extends UIInteractionSteps {
         // Verify the error message text
         String actualErrorMessage = find(LoginPage.ERROR_MESSAGE).getText();
         assertEquals("Invalid credentials", actualErrorMessage);  // Assert the error message
+    }
+
+    public void performLogout() {
+        dashboardPage.openUserDropdown();
+        dashboardPage.clickLogout();
+    }
+
+    public void verifyLogout() {
+        String currentUrl = getDriver().getCurrentUrl();
+        assertEquals("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login", currentUrl);
     }
 }
