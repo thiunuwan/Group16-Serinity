@@ -6,8 +6,11 @@ import net.thucydides.core.annotations.DefaultUrl;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 
+import java.time.Duration;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -113,9 +116,12 @@ public class AddEmployeePage extends PageObject {
         }
 
     public List<String> getEmployeeNamelist() {
-        List<WebElement> EmployeeNames = getDriver().findElements(By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div[2]/div[3]/div/div[2]/div[*]/div/div[3]/div"));
+//        List<WebElement> EmployeeNames = getDriver().findElements(By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div[2]/div[3]/div/div[2]/div[*]/div/div[3]/div"));
 
-
+        WebDriverWait wait = new WebDriverWait(getDriver(), 5);
+        List<WebElement> EmployeeNames = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(
+                By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div[2]/div[3]/div/div[2]/div[*]/div/div[3]/div")
+        ));
         return EmployeeNames.stream()
                 .map(WebElement::getText)
                 .collect(Collectors.toList());
