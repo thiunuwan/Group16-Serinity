@@ -1,4 +1,4 @@
-package starter.steps;
+package starter.steps.api;
 
 import net.thucydides.core.util.EnvironmentVariables;
 import net.thucydides.core.util.SystemEnvironmentVariables;

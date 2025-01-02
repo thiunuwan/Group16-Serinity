@@ -1,16 +1,12 @@
-package starter.steps;
+package starter.steps.api;
 
 import io.cucumber.java.en.And;
-import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.serenitybdd.core.Serenity;
 import net.serenitybdd.rest.SerenityRest;
-import net.thucydides.core.util.EnvironmentVariables;
-import net.thucydides.core.util.SystemEnvironmentVariables;
 import starter.utils.AuthUtils;
 import io.restassured.response.Response;
 
-import static net.serenitybdd.rest.SerenityRest.restAssuredThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertTrue;
@@ -46,11 +42,11 @@ public class GetBookByIdSteps extends BaseSteps {
                 .get(BASE_URL +"/books/"+testBookId);
     }
 
+//        @Then("the response status code should be {int}")
+//    public void theResponseStatusCodeShouldBe(int statusCode) {
+//        restAssuredThat(response -> response.statusCode(statusCode));
+//    }
 
-    @Then("the response status code should be {int}")
-    public void theResponseStatusCodeShouldBe(int statusCode) {
-        restAssuredThat(response -> response.statusCode(statusCode));
-    }
 
     @And("the response should contain the book details for testBook")
     public void theResponseShouldContainTheBookDetailsForID() {
