@@ -21,6 +21,6 @@ Feature: Job Titles
   @loginAsAdmin
   Scenario: Delete an added job title from the job titles page
     Given I am in "Job Title" page
-    And I add a new job title with job title "Application manager"
-    When I delete the job title named "Application manager"
-    Then the job title "Application manager" should not appear in the job titles list
+    And I add a new job title with job title "Application manager2"
+    When I delete the job title named "Application manager2"
+    Then the job title "Application manager2" should not appear in the job titles list
