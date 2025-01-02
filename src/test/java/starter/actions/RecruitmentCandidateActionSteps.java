@@ -77,6 +77,7 @@ public class RecruitmentCandidateActionSteps extends UIInteractionSteps {
     @Step("Search candidate")
     public void searchCandidate(String candidateName) {
         recruitmentPage.open();
+        recruitmentPage.pause(1000);
         recruitmentPage.enterNameForSearch(candidateName);
         recruitmentPage.searchCandidate();
     }
