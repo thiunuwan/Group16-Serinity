@@ -200,7 +200,7 @@ public class AdminPage extends PageObject {
         $(saveButtonUpdate).click();
       }
 
-    public void clickDelete(int rowIndex) {
+    public void clickDelete2(int rowIndex) {
         // Construct the XPath dynamically using the rowIndex
         String xpath = "/html/body/div[1]/div[1]/div[2]/div[2]/div/div[2]/div[3]/div/div[2]/div[" + rowIndex + "]/div/div[6]/div/button[1]";
 

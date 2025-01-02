@@ -20,7 +20,7 @@ public class AdminPageSteps extends UIInteractionSteps {
 
 
     @Step("Add newTestUser")
-    public void addNewTestUser(String username, String password,String role) {
+    public void addNewTestUser(String username, String password, String role) {
         adminPage.clickAddUser();
         adminPage.addUserRole(role);
         adminPage.enterEmpName("Akash");
@@ -29,6 +29,7 @@ public class AdminPageSteps extends UIInteractionSteps {
         adminPage.enterPassword(password);
         adminPage.saveUser();
     }
+
     @Step("Search User")
     public void searchUser(String userName) {
         adminPage.open();
@@ -53,7 +54,7 @@ public class AdminPageSteps extends UIInteractionSteps {
 
         if (index != -1) {
             System.out.println("Username found at index: " + index);
-            adminPage.clickDelete(index+1);
+            adminPage.clickDelete(index + 1);
         } else {
             System.out.println("Username not found in the list");
         }
@@ -69,7 +70,7 @@ public class AdminPageSteps extends UIInteractionSteps {
     public void verifySearchingTestUser(String username) {
         String userSearchResult = adminPage.getUserSearchResult();
         System.out.println(userSearchResult);
-        Assert.assertEquals("User not found", username,userSearchResult);
+        Assert.assertEquals("User not found", username, userSearchResult);
     }
 
     public void updateTestUser(String oldUserName, String newUserName, String oldRole, String newRole) {
@@ -81,12 +82,13 @@ public class AdminPageSteps extends UIInteractionSteps {
 
         if (index != -1) {
             System.out.println("Username found at index: " + index);
-            adminPage.clickUpdate(index+1);
+            adminPage.clickUpdate(index + 1);
         } else {
             System.out.println("Username not found in the list");
         }
         waitABit(5000);
         System.out.println("#");
-        adminPage.updateUserDetails(newUserName,newRole);
+        adminPage.updateUserDetails(newUserName, newRole);
     }
+}
 
