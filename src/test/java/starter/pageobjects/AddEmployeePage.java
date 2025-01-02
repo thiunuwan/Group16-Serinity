@@ -116,12 +116,11 @@ public class AddEmployeePage extends PageObject {
         }
 
     public List<String> getEmployeeNamelist() {
-//        List<WebElement> EmployeeNames = getDriver().findElements(By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div[2]/div[3]/div/div[2]/div[*]/div/div[3]/div"));
+        List<WebElement> EmployeeNames = getDriver().findElements(By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div[2]/div[3]/div/div[2]/div[*]/div/div[3]/div"));
 
         WebDriverWait wait = new WebDriverWait(getDriver(), 5);
-        List<WebElement> EmployeeNames = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(
-                By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div[2]/div[3]/div/div[2]/div[*]/div/div[3]/div")
-        ));
+        WebElement Element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div[2]/div[3]/div/div[2]/div[1]/div/div[3]/div")));
+
         return EmployeeNames.stream()
                 .map(WebElement::getText)
                 .collect(Collectors.toList());
