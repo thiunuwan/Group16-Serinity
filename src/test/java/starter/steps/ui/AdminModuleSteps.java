@@ -23,9 +23,11 @@ public class AdminModuleSteps {
     }
 
 
+
     @Then("I should see the user \\(testUser) {string} in the user list")
     public void iShouldSeeTheUserTestUserInTheUserList(String username) {
         adminPage.verifyAddingTestUser(username);
     }
 
 }
+

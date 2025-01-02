@@ -12,3 +12,4 @@ Feature: Login
     Given I navigate to the login page
     When I enter invalid credentials (incorrect username or password)
     Then I should see an error message indicating incorrect login credentials
+
