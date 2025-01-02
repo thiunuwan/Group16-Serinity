@@ -3,7 +3,6 @@ name: Run Serenity Tests
 on:
   push:
     branches:
-      - fixes
       - master
   pull_request:
     branches:
