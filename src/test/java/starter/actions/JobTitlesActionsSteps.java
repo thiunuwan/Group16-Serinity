@@ -61,4 +61,9 @@ public class JobTitlesActionsSteps extends UIInteractionSteps {
         jobTitlesPage.deleteJobTitle(jobTitle);
     }
 
+    @Step("Edit job title")
+    public void editJobTitle(String jobTitle) {
+        jobTitlesPage.open();
+        jobTitlesPage.editJobTitle(jobTitle);
+    }
 }

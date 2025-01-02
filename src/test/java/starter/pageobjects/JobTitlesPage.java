@@ -16,9 +16,13 @@ public class JobTitlesPage extends PageObject {
     private final By jobTitleInput = By.xpath("/html/body/div[1]/div[1]/div[2]/div[2]/div/div/form/div[1]/div/div[2]/input");
     private final By saveButton = By.xpath("/html/body/div[1]/div[1]/div[2]/div[2]/div/div/form/div[5]/button[2]");
 
-    private final By updateButton = By.xpath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div/div[3]/div/div/div[1]/div/div/div[1]/div[2]/div/div/button[2]/i");
+    private final By editButtonTemplate = By.xpath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div/div[3]/div/div/div[1]/div/div/div[1]/div[2]/div/div/button[2]/i");
 
-    private final By deleteButtonTemplate = By.xpath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div/div[3]/div/div/div[1]/div/div/div[1]/div[2]/div/div/button[1]/i");
+    private final By deleteButtonTemplate = By.xpath("/html/body/div[1]/div[1]/div[2]/div[2]/div/div/div[3]/div/div[2]/div[1]/div/div[4]/div/button[1]/i");
+
+//    /html/body/div[1]/div[1]/div[2]/div[2]/div/div/div[3]/div/div[2]/div[1]/div/div[4]/div/button[1]
+//    /html/body/div[1]/div[1]/div[2]/div[2]/div/div/div[3]/div/div[2]/div[1]/div/div[4]/div/button[1]/i
+//    /html/body/div/div[1]/div[2]/div[2]/div/div/div[3]/div/div/div/div/div/div[1]/div[2]/div/div/button[1]/i
 
     public void clickAddJobTitle() {
 
@@ -50,7 +54,10 @@ public class JobTitlesPage extends PageObject {
     }
 
     public void deleteJobTitle(String jobTitle) {
-        List<WebElement> rows = getDriver().findElements(By.xpath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div/div[3]/div/div/div[1]/div/div/div[1]/div[2]/div/div/button[1]"));
+        List<WebElement> rows = getDriver().findElements(By.xpath("/html/body/div[1]/div[1]/div[2]/div[2]/div/div/div[3]/div/div[2]/div[*]/div"));
+
+//       /html/body/div[1]/div[1]/div[2]/div[2]/div/div/div[3]/div/div[2]/div[*]/div
+//        /html/body/div[1]/div[1]/div[2]/div[2]/div/div/div[3]/div/div[2]/div[2]/div
         for (WebElement row : rows) {
             if (row.getText().contains(jobTitle)) {
                 WebElement deleteButton = row.findElement(deleteButtonTemplate);
@@ -65,6 +72,8 @@ public class JobTitlesPage extends PageObject {
 
     }
 
+
+
     public void confirmDeletion() {
         WebElement confirmButton = $(By.xpath("//button[contains(@class, 'oxd-button') and contains(@class, 'oxd-button--label-danger') and ./i[contains(@class, 'bi-trash')] and contains(., 'Yes, Delete')]"));
         pause(3000);
@@ -73,12 +82,32 @@ public class JobTitlesPage extends PageObject {
 
 
     public List<String> getJobTitlesList() {
-        List<WebElement> candidateElements = getDriver().findElements(By.xpath("/html/body/div[1]/div[1]/div[2]/div[2]/div/div/div[3]"));
-        //                                                                                       /html/body/div/div[1]/div[2]/div[2]/div/div[2]/div[3]/div/div[2]/div[1]/div/div[3]/div
-        //                                                                                       /html/body/div/div[1]/div[2]/div[2]/div/div[2]/div[3]/div/div[2]/div[5]/div/div[3]/div
-        // Extract the usernames from the web elements
-        return candidateElements.stream()
+        List<WebElement> jobTitleElements = getDriver().findElements(By.xpath("/html/body/div[1]/div[1]/div[2]/div[2]/div/div/div[3]/div/div[2]/div[*]/div/div[2]/div"));
+//        /html/body/div[1]/div[1]/div[2]/div[2]/div/div/div[3]/div/div[2]/div[*]/div/div[2]/div
+//        /html/body/div[1]/div[1]/div[2]/div[2]/div/div/div[3]/div/div[2]/div[2]/div/div[2]/div
+
+        // Extract the job titles from the web elements
+        return jobTitleElements.stream()
                 .map(WebElement::getText)
                 .collect(Collectors.toList());
+    }
+
+    public void editJobTitle(String jobTitle) {
+        List<String> jobTitlesList = getJobTitlesList();
+        System.out.println("***");
+        System.out.println(jobTitlesList);
+
+        String matchingTitle = jobTitlesList.stream()
+                .filter(title -> title.equals(jobTitle))
+                .findFirst()
+                .orElse(null);
+
+        clickEdit(matchingTitle);
+    }
+
+    private void clickEdit(String matchingTitle) {
+//        String xpath =
+//                   /html/body/div[1]/div[1]/div[2]/div[2]/div/div/div[3]/div/div[2]/div[*]/div/div[4]/div/button[2]
+//                  /html/body/div[1]/div[1]/div[2]/div[2]/div/div/div[3]/div/div[2]/div[2]/div/div[4]/div/button[2]
     }
 }
