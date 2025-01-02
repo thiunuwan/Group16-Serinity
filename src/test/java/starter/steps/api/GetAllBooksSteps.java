@@ -1,15 +1,10 @@
-package starter.steps;
+package starter.steps.api;
 
 import io.cucumber.java.en.And;
-import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.serenitybdd.core.Serenity;
 import net.serenitybdd.rest.SerenityRest;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.util.EnvironmentVariables;
-import net.thucydides.core.util.SystemEnvironmentVariables;
 
-import static net.serenitybdd.rest.SerenityRest.restAssuredThat;
 import static org.hamcrest.Matchers.*;
 
 public class GetAllBooksSteps extends BaseSteps {
@@ -35,10 +30,10 @@ public class GetAllBooksSteps extends BaseSteps {
                 .get(BASE_URL + "/books");
     }
 
-    @Then("the response status code for all books should be {int}")
-    public void theResponseStatusCodeForAllBooksShouldBe(int statusCode) {
-        restAssuredThat(response -> response.statusCode(statusCode));
-    }
+//    @Then("the response status code for all books should be {int}")
+//    public void theResponseStatusCodeForAllBooksShouldBe(int statusCode) {
+//        restAssuredThat(response -> response.statusCode(statusCode));
+//    }
 
 
     @And("the response should contain a list of books")
