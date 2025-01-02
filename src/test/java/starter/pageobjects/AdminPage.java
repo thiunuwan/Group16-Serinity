@@ -40,6 +40,7 @@ public class AdminPage extends PageObject {
             e.printStackTrace();
         }
 
+
         Actions actions = new Actions(getDriver());
         actions.sendKeys(Keys.ARROW_DOWN)  // Simulate pressing the down arrow key
                 .sendKeys(Keys.ENTER)       // Simulate pressing the enter key

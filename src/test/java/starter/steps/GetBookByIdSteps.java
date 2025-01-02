@@ -23,9 +23,9 @@ public class GetBookByIdSteps {
     private final EnvironmentVariables environmentVariables = SystemEnvironmentVariables.createEnvironmentVariables();
     private final String BASE_URL = environmentVariables.getProperty("api.base.url", "http://localhost:8080/api");
 
-    private static final int testBookId = BookLifecycleHooks.getTestBookId();
-    private static final String testBookTitle = BookLifecycleHooks.getTestBookTitle();
-    private static final String testBookAuthor = BookLifecycleHooks.getTestBookAuthor();
+    private final int testBookId = BookLifecycleHooks.getTestBookId();
+    private  final String testBookTitle = BookLifecycleHooks.getTestBookTitle();
+    private  final String testBookAuthor = BookLifecycleHooks.getTestBookAuthor();
 
     @When("I send a GET request to retrieve the test book")
     public void iSendAGETRequestTo() {
@@ -36,6 +36,9 @@ public class GetBookByIdSteps {
         // Generate Basic Auth header
         String basicAuthHeader = AuthUtils.generateBasicAuthHeader(username, password);
 
+        System.out.println("LOG: BASE_URL: " + BASE_URL);
+
+        System.out.println("send get request to retrieve book" + testBookId);
 
         // Send GET request to retrieve the book with ID 1
         SerenityRest.given()
