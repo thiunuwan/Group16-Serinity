@@ -9,7 +9,6 @@ import net.serenitybdd.cucumber.CucumberWithSerenity;
 @CucumberOptions(
         plugin = {"pretty"},
         features = "classpath:features",
-//        tags = ("@ui or @api")
-        tags = ("@ui")
+        tags = ("@ui or @api")
 )
 public class CucumberTestSuite {}
