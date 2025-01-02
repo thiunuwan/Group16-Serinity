@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - ui-test-denuwan
       
   pull_request:
     branches:
