@@ -23,6 +23,7 @@ public class JobTitlesActionsSteps extends UIInteractionSteps {
         jobTitlesPage.clickAddJobTitle();
         jobTitlesPage.enterJobTitle(jobTitle);
         jobTitlesPage.saveJobTitle();
+        waitABit(2000);
     }
 
 
@@ -59,11 +60,13 @@ public class JobTitlesActionsSteps extends UIInteractionSteps {
     public void deleteJobTitle(String jobTitle) {
         jobTitlesPage.open();
         jobTitlesPage.deleteJobTitle(jobTitle);
+//        waitABit(2000);
     }
 
     @Step("Edit job title")
-    public void editJobTitle(String jobTitle) {
+    public void editJobTitle(String jobTitle, String updatedTitle) {
         jobTitlesPage.open();
-        jobTitlesPage.editJobTitle(jobTitle);
+        jobTitlesPage.editJobTitle(jobTitle,updatedTitle);
+        waitABit(2000);
     }
 }

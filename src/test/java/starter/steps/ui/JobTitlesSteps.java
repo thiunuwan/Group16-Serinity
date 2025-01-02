@@ -42,8 +42,8 @@ public class JobTitlesSteps {
     }
 
 
-    @When("I edit the existing job title named {string}")
-    public void iEditTheExistingJobTitleNamed(String jobTitle) {
-        jobTitlesActionsSteps.editJobTitle(jobTitle);
+    @When("I edit the existing job title named {string} to {string}")
+    public void iEditTheExistingJobTitleNamed(String jobTitle, String updatedTitle) {
+        jobTitlesActionsSteps.editJobTitle(jobTitle,updatedTitle);
     }
 }

@@ -14,15 +14,16 @@ import java.util.stream.Collectors;
 public class JobTitlesPage extends PageObject {
     private final By addJobTitleButton = By.xpath("/html/body/div[1]/div[1]/div[2]/div[2]/div/div/div[1]/div/button");
     private final By jobTitleInput = By.xpath("/html/body/div[1]/div[1]/div[2]/div[2]/div/div/form/div[1]/div/div[2]/input");
+    private final By jobTitleEditInput = By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div/form/div[1]/div/div[2]/input");
+//                                                          /html/body/div/div[1]/div[2]/div[2]/div/div/form/div[1]/div/div[2]/input
     private final By saveButton = By.xpath("/html/body/div[1]/div[1]/div[2]/div[2]/div/div/form/div[5]/button[2]");
+//                                                          /html/body/div/div[1]/div[2]/div[2]/div/div/form/div[5]/button[2]
+    private final By saveButtonEdit = By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div/form/div[5]/button[2]");
 
-    private final By editButtonTemplate = By.xpath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div/div[3]/div/div/div[1]/div/div/div[1]/div[2]/div/div/button[2]/i");
+
+    private final By editButton = By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div/div[3]/div/div[2]/div[1]/div/div[4]/div/button[2]/i");
 
     private final By deleteButtonTemplate = By.xpath("/html/body/div[1]/div[1]/div[2]/div[2]/div/div/div[3]/div/div[2]/div[1]/div/div[4]/div/button[1]/i");
-
-//    /html/body/div[1]/div[1]/div[2]/div[2]/div/div/div[3]/div/div[2]/div[1]/div/div[4]/div/button[1]
-//    /html/body/div[1]/div[1]/div[2]/div[2]/div/div/div[3]/div/div[2]/div[1]/div/div[4]/div/button[1]/i
-//    /html/body/div/div[1]/div[2]/div[2]/div/div/div[3]/div/div/div/div/div/div[1]/div[2]/div/div/button[1]/i
 
     public void clickAddJobTitle() {
 
@@ -38,6 +39,15 @@ public class JobTitlesPage extends PageObject {
 
     public void saveJobTitle() {
         $(saveButton).click();
+        try {
+            Thread.sleep(5000); // 5 seconds wait
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void saveJobTitleEdit() {
+        $(saveButtonEdit).click();
         try {
             Thread.sleep(5000); // 5 seconds wait
         } catch (InterruptedException e) {
@@ -73,7 +83,6 @@ public class JobTitlesPage extends PageObject {
     }
 
 
-
     public void confirmDeletion() {
         WebElement confirmButton = $(By.xpath("//button[contains(@class, 'oxd-button') and contains(@class, 'oxd-button--label-danger') and ./i[contains(@class, 'bi-trash')] and contains(., 'Yes, Delete')]"));
         pause(3000);
@@ -82,9 +91,7 @@ public class JobTitlesPage extends PageObject {
 
 
     public List<String> getJobTitlesList() {
-        List<WebElement> jobTitleElements = getDriver().findElements(By.xpath("/html/body/div[1]/div[1]/div[2]/div[2]/div/div/div[3]/div/div[2]/div[*]/div/div[2]/div"));
-//        /html/body/div[1]/div[1]/div[2]/div[2]/div/div/div[3]/div/div[2]/div[*]/div/div[2]/div
-//        /html/body/div[1]/div[1]/div[2]/div[2]/div/div/div[3]/div/div[2]/div[2]/div/div[2]/div
+        List<WebElement> jobTitleElements = getDriver().findElements(By.xpath(" /html/body/div/div[1]/div[2]/div[2]/div/div/div[3]/div/div[2]/div[*]/div/div[2]/div"));
 
         // Extract the job titles from the web elements
         return jobTitleElements.stream()
@@ -92,22 +99,38 @@ public class JobTitlesPage extends PageObject {
                 .collect(Collectors.toList());
     }
 
-    public void editJobTitle(String jobTitle) {
-        List<String> jobTitlesList = getJobTitlesList();
-        System.out.println("***");
-        System.out.println(jobTitlesList);
+    public void editJobTitle(String jobTitle, String updatedTitle) {
+        List<WebElement> jobList = getDriver().findElements(By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div/div[3]/div/div[2]/div[*]/div"));
 
-        String matchingTitle = jobTitlesList.stream()
-                .filter(title -> title.equals(jobTitle))
-                .findFirst()
-                .orElse(null);
+        int rowIndex = -1;
 
-        clickEdit(matchingTitle);
-    }
+        // Iterate through the job list to find the matching jobTitle
+        for (int i = 0; i < jobList.size(); i++) {
+            String currentTitle = jobList.get(i).getText().trim(); // Get the text and trim whitespace
+            if (currentTitle.equalsIgnoreCase(jobTitle)) { // Compare ignoring case
+                rowIndex = i + 1; // Add 1 if you want 1-based indexing
+                break;
+            }
+        }
 
-    private void clickEdit(String matchingTitle) {
-//        String xpath =
-//                   /html/body/div[1]/div[1]/div[2]/div[2]/div/div/div[3]/div/div[2]/div[*]/div/div[4]/div/button[2]
-//                  /html/body/div[1]/div[1]/div[2]/div[2]/div/div/div[3]/div/div[2]/div[2]/div/div[4]/div/button[2]
+        // If the jobTitle is found, update it
+        if (rowIndex != -1) {
+            System.out.println("Job Title found at row: " + rowIndex);
+
+        }
+
+        String xpath ="/html/body/div/div[1]/div[2]/div[2]/div/div/div[3]/div/div[2]/div[" + rowIndex + "]/div/div[4]/div/button[2]";
+
+        // Find the delete button using the dynamically constructed XPath
+        WebElement editButton = getDriver().findElement(By.xpath(xpath));
+
+        // Click the edit button
+        editButton.click();
+
+        $(jobTitleEditInput).type(updatedTitle);
+        waitABit(1000);
+
+        saveJobTitleEdit();
+
     }
 }

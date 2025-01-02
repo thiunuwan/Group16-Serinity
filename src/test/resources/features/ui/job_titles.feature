@@ -13,8 +13,8 @@ Feature: Job Titles
   Scenario: Update an added job title from the job titles page
     Given I am in the "Job Title" page
     And I add a new job title with job title "Test manager"
-    When I edit the existing job title named "Test manager"
-    Then the job title should be changed into "Updated Test Manager" in the job titles list
+    When I edit the existing job title named "Test manager" to "updated Test Manager"
+    Then I should see the job title (testJobTitle) "updated Test Manager" in the job titles list
 
 
   @ui
