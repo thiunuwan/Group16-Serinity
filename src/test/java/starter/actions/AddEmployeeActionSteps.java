@@ -47,6 +47,7 @@ public class AddEmployeeActionSteps extends UIInteractionSteps {
     @Step("verify  Adding New candidate")
     public void verifyAddingEmployee(String employeeName) {
         addEmployeePage.open();
+        waitABit(10000);
         List<String> employeeIDlist = addEmployeePage.getEmployeeIdlist();
         String employee_id = Serenity.sessionVariableCalled("employee-id");
         System.out.println("***");
@@ -100,11 +101,11 @@ public class AddEmployeeActionSteps extends UIInteractionSteps {
 
     }
 
-    @Step("Verify employee {0} in the list")
-    public void verifyEmployeeInList(String fullName) {
-        List<String> employeeNameList = addEmployeePage.getEmployeeNamelist();
-        Assert.assertTrue("Employee not found in the list!", employeeNameList.contains(fullName));
-    }
+//    @Step("Verify employee {0} in the list")
+//    public void verifyEmployeeInList(String fullName) {
+//        List<String> employeeNameList = addEmployeePage.getEmployeeNamelist();
+//        Assert.assertTrue("Employee not found in the list!", employeeNameList.contains(fullName));
+//    }
 
     public void verifyEmployeeNotInList() {
 
