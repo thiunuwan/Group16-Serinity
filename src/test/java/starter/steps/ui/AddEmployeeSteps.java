@@ -5,7 +5,6 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.thucydides.core.annotations.Steps;
 import starter.actions.AddEmployeeActionSteps;
-import starter.actions.RecruitmentCandidateActionSteps;
 
 public class AddEmployeeSteps {
 

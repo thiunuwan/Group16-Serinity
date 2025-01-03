@@ -4,18 +4,14 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.When;
 import net.serenitybdd.core.Serenity;
 import net.serenitybdd.rest.SerenityRest;
-import net.thucydides.core.util.EnvironmentVariables;
-import net.thucydides.core.util.SystemEnvironmentVariables;
 import starter.hooks.BookLifecycleHooks;
 import starter.utils.AuthUtils;
 
 import static org.hamcrest.Matchers.equalTo;
 
 
-public class UpdateBookByIdSteps {
-    // Retrieve BASE_URL from configuration
-    private final EnvironmentVariables environmentVariables = SystemEnvironmentVariables.createEnvironmentVariables();
-    private final String BASE_URL = environmentVariables.getProperty("api.base.url", "http://localhost:8080/api");
+public class UpdateBookByIdSteps extends BaseSteps{
+
     private final int testBookId = BookLifecycleHooks.getTestBookId();
     @When("I send a PUT request to update the test book")
     public void iSendAPUTRequestToUpdateTheTestBook() {

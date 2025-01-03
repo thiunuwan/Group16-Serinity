@@ -28,10 +28,7 @@ public class AddEmployeeActionSteps extends UIInteractionSteps {
         addEmployeePage.enterLastname(lastName);
         String user_id = addEmployeePage.getEmployeeId();
         Serenity.setSessionVariable("employee-id").to(user_id);
-        System.out.println("**");
-        System.out.println(user_id);
         addEmployeePage.saveEmployee();
-
     }
 
     @Step("Verify notification contains the text: {0}")

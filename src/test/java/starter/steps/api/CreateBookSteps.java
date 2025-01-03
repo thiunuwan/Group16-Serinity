@@ -6,18 +6,12 @@ import io.cucumber.java.en.When;
 import io.restassured.response.Response;
 import net.serenitybdd.core.Serenity;
 import net.serenitybdd.rest.SerenityRest;
-import net.thucydides.core.util.EnvironmentVariables;
-import net.thucydides.core.util.SystemEnvironmentVariables;
 import starter.utils.AuthUtils;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
 
-public class CreateBookSteps {
-
-    // Retrieve BASE_URL from configuration
-    private final EnvironmentVariables environmentVariables = SystemEnvironmentVariables.createEnvironmentVariables();
-    private final String BASE_URL = environmentVariables.getProperty("api.base.url", "http://localhost:8080/api");
+public class CreateBookSteps  extends BaseSteps{
 
     private Response response;
 
