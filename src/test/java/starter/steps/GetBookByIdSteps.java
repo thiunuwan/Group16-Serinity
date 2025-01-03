@@ -93,4 +93,18 @@ public class GetBookByIdSteps {
         assertTrue("Response body should contain the error message: " + expectedErrorMessage,
                 responseBody.contains(expectedErrorMessage));
     }
+
+    @When("I send a GET request to retrieve the test book non-logged-in user")
+    public void iSendAGETRequestToRetrieveTheTestBookNonLoggedInUser() {
+
+        System.out.println("LOG: BASE_URL: " + BASE_URL);
+
+        System.out.println("send get request to retrieve book" + testBookId);
+
+        // Send GET request to retrieve the book with ID 1
+        SerenityRest.given()
+                .get(BASE_URL +"/books/"+testBookId);
+    }
+
+
 }

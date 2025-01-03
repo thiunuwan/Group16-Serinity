@@ -50,7 +50,6 @@ public class GetAllBooksSteps {
     }
 
 
-
     @And("the response should indicate an empty book list")
     public void theResponseShouldIndicateAnEmptyBookList() {
         SerenityRest.lastResponse().then()
@@ -64,4 +63,11 @@ public class GetAllBooksSteps {
     }
 
 
+    @When("I send a GET request to retrieve the book list as non-logged-in user")
+    public void iSendAGETRequestToRetrieveTheBookListAsNonLoggedInUser() {
+
+        // Send GET request to retrieve the book list
+        SerenityRest.given()
+                .get(BASE_URL + "/books");
+    }
 }

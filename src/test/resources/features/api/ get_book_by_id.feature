@@ -30,4 +30,15 @@ Feature: Get Book by ID
       | normal    | 999   |
 
 
+  @api
+  @createTestBook
+  Scenario: Retrieve a book with a valid ID as a non-logged-in user
+    Given I am an unauthorized user
+    When I send a GET request to retrieve the test book non-logged-in user
+    Then the response status code should be 401
+#    And the response should contain the error message "Unauthorized access"
+
+
+
+
 
