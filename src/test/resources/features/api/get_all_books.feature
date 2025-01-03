@@ -31,4 +31,4 @@ Feature: Get All Book List
     Given I am an unauthorized user
     When I send a GET request to retrieve the book list as non-logged-in user
     Then the response status code should be 401
-#   And the response should contain the error message "Unauthorized access"
+   And the response should contain the error message "Unauthorized access"
