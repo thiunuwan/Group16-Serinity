@@ -10,5 +10,6 @@ import net.serenitybdd.cucumber.CucumberWithSerenity;
         plugin = {"pretty"},
         features = "classpath:features",
         tags = ("@ui or @api")
+//        tags = ("@ui")
 )
 public class CucumberTestSuite {}
