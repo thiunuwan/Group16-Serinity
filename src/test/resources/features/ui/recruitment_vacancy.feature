@@ -5,7 +5,9 @@ Feature: Recruitment Vacancies
   @ui
   @loginAsAdmin
   Scenario: Add a new vacancy
-    Given I navigate to the Recruitment Vacancies page
+    Given I am in this "Add Job Title" page
+    And I add a new job title with job title "Account Assistant"
+    And I navigate to the Recruitment Vacancies page
     When I add a new vacancy with name "Senior Software Engineer", job title "Account Assistant", hiring manager "Ranga Akunuri", and number of positions "3"
     Then I should see the vacancy (testVacancy) "Senior Software Engineer" in the vacancy list
 

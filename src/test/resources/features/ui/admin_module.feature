@@ -1,6 +1,7 @@
 Feature: User Management in Admin Tab
 
   @ui
+  @ab
   @loginAsAdmin
   Scenario: Add a new user
     Given I am on the "Admin" page
