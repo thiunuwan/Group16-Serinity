@@ -117,7 +117,7 @@ public class AddEmployeePage extends PageObject {
 
     public List<String> getEmployeeNamelist() {
         WebDriverWait wait = new WebDriverWait(getDriver(), 5);
-        WebElement Element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div[2]/div[3]/div/div[2]/div[1]/div/div[3]/div")));
+//        WebElement Element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div[2]/div[3]/div/div[2]/div[1]/div/div[3]/div")));
         waitABit(1000);
         List<WebElement> EmployeeNames = getDriver().findElements(By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div[2]/div[3]/div/div[2]/div[*]/div/div[3]/div"));
 
