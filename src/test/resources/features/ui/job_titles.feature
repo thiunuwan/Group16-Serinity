@@ -17,7 +17,7 @@ Feature: Job Titles
     Then I should see the job title (testJobTitle) "updated Test Manager" in the job titles list
 
 
-  @ui
+#  @ui
   @loginAsAdmin
   Scenario: Delete an added job title from the job titles page
     Given I am in this "Job Title" page

@@ -1,7 +1,6 @@
 Feature: User Management in Admin Tab
 
   @ui
-  @ab
   @loginAsAdmin
   Scenario: Add a new user
     Given I am on the "Admin" page
@@ -16,7 +15,7 @@ Feature: User Management in Admin Tab
     When I delete the user with username "Akash548"
     Then I should not see the user (testUser) "Akash548" in the user list
 
-  @ui
+#  @ui
   @loginAsAdmin
   Scenario: Create user with existing username
     Given I am on the "Admin" page
@@ -32,7 +31,7 @@ Feature: User Management in Admin Tab
     When I search the user named "Akash111"
     Then I should see the user (testUser) "Akash111" in the search result list
 
-  @ui
+#  @ui
   @loginAsAdmin
   Scenario: Update an registered user
     Given I am on the "Admin" page

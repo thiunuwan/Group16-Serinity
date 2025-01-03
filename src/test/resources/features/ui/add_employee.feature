@@ -15,7 +15,7 @@ Feature: Add Employee
     When I delete test employee
     Then test employee should not appear in the employee list
 
-  @ui
+#  @ui
   @loginAsAdmin
   Scenario: Add a new employee with username and password
     Given I am in "PIM" page

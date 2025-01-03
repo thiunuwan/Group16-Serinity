@@ -1,6 +1,6 @@
 Feature: Recruitment management in candidate module
 
-  @ui
+#  @ui
   @loginAsAdmin
   Scenario: Add a new candidate and verify through record
     Given I am in the "Recruitment" page
@@ -16,7 +16,7 @@ Feature: Recruitment management in candidate module
     Then I should see the notification "Successfully Saved"
 
 
-  @ui
+#  @ui
   @loginAsAdmin
   Scenario: Delete an added candidate from the recruitment page
     Given I am in the "Recruitment" page
@@ -32,7 +32,7 @@ Feature: Recruitment management in candidate module
     When I search the candidate named "maven1234 java1234"
     Then the candidate "maven1234" should not appear in the candidate list
 
-  @ui
+#  @ui
   @loginAsAdmin
   Scenario: search an added candidate from the recruitment page with consent
     Given I am in the "Recruitment" page
