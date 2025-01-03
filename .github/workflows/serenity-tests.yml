@@ -5,6 +5,7 @@ on:
     branches:
       - master
       - ui-fixes
+      - enhancements-fixes-2
       
   pull_request:
     branches:

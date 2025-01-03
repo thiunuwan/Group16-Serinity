@@ -116,11 +116,6 @@ public class RecruitmentVacanciesPage extends PageObject {
                 .collect(Collectors.toList());
     }
 
-//    public void enterNameForSearch(String name) {
-//
-//        $(searchVacancyNameInput).type(name);
-//        pause(2000);
-//    }
 
     public void enterNameForSearch(String name) {
         // Click on the search input field
@@ -153,8 +148,6 @@ public class RecruitmentVacanciesPage extends PageObject {
     }
 
 
-
-
     public void searchVacancy() {
         $(searchButton).click();
         try {
@@ -163,8 +156,6 @@ public class RecruitmentVacanciesPage extends PageObject {
             e.printStackTrace();
         }
     }
-
-
 
 
 }

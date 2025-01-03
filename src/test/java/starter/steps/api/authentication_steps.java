@@ -1,4 +1,4 @@
-package starter.steps;
+package starter.steps.api;
 import io.cucumber.java.en.Given;
 import net.serenitybdd.core.Serenity;
 

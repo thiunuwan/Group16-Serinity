@@ -12,9 +12,7 @@ public class JobTitlesPage extends PageObject {
     private final By addJobTitleButton = By.xpath("/html/body/div[1]/div[1]/div[2]/div[2]/div/div/div[1]/div/button");
     private final By jobTitleInput = By.xpath("/html/body/div[1]/div[1]/div[2]/div[2]/div/div/form/div[1]/div/div[2]/input");
     private final By jobTitleEditInput = By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div/form/div[1]/div/div[2]/input");
-//                                                          /html/body/div/div[1]/div[2]/div[2]/div/div/form/div[1]/div/div[2]/input
     private final By saveButton = By.xpath("/html/body/div[1]/div[1]/div[2]/div[2]/div/div/form/div[5]/button[2]");
-//                                                          /html/body/div/div[1]/div[2]/div[2]/div/div/form/div[5]/button[2]
     private final By saveButtonEdit = By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div/form/div[5]/button[2]");
 
 
@@ -61,19 +59,6 @@ public class JobTitlesPage extends PageObject {
     }
 
     public void deleteJobTitle(String jobTitle) {
-//        List<WebElement> rows = getDriver().findElements(By.xpath("/html/body/div[1]/div[1]/div[2]/div[2]/div/div/div[3]/div/div[2]/div[*]/div"));
-//
-//        for (WebElement row : rows) {
-//            if (row.getText().contains(jobTitle)) {
-//                WebElement deleteButton = row.findElement(deleteButtonTemplate);
-//                pause(5000);
-//                deleteButton.click();
-//
-//                // Confirm deletion if required
-//                confirmDeletion();
-//                break;
-//            }
-//        }
 
         List<WebElement> jobList = getDriver().findElements(By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div/div[3]/div/div[2]/div[*]/div"));
 
@@ -95,8 +80,6 @@ public class JobTitlesPage extends PageObject {
         }
 
         String xpath ="/html/body/div/div[1]/div[2]/div[2]/div/div/div[3]/div/div[2]/div[" + rowIndex + "]/div/div[4]/div/button[1]";
-//        /html/body/div/div[1]/div[2]/div[2]/div/div/div[3]/div/div[2]/div[1]/div/div[4]/div/button[1]
-//         /html/body/div/div[1]/div[2]/div[2]/div/div/div[3]/div/div[2]/div[2]/div/div[4]/div/button[1]
         // Find the delete button using the dynamically constructed XPath
         WebElement deleteButton = getDriver().findElement(By.xpath(xpath));
 

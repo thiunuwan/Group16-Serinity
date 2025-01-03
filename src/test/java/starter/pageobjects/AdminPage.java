@@ -4,10 +4,11 @@ import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -67,12 +68,8 @@ public class AdminPage extends PageObject {
     }
 
     public void enterPassword(String password) {
-        // Clear the field (optional) and type the password
-//        $(passwordInput).clear();
-        $(passwordInput).type(password);
 
-        // Clear the field (optional) and type the confirmation password
-//        $(confirmPasswordInput).clear();
+        $(passwordInput).type(password);
         $(confirmPasswordInput).type(password);
     }
 
@@ -82,7 +79,7 @@ public class AdminPage extends PageObject {
     }
 
     public void addUserRole(String role) {
-          // Click to open the dropdown
+        // Click to open the dropdown
         $(userRoleDropdown).click();
 
         // Select the role from the dropdown list
@@ -118,6 +115,7 @@ public class AdminPage extends PageObject {
                 .map(WebElement::getText)
                 .collect(Collectors.toList());
     }
+
     public void searchUser() {
         $(searchButton).click();
         try {
@@ -150,11 +148,6 @@ public class AdminPage extends PageObject {
 
         // Click the delete button
         deleteButton.click();
-
-
-        // Wait for the confirmation modal or button to appear (optional, can be adjusted depending on the page behavior)
-       // WebDriverWait wait = new WebDriverWait(getDriver(), 10); // Adjust timeout as needed
-       // wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[contains(text(),'Yes, Delete')]")));
 
 
         // Find the "Yes, Delete" button and click it
@@ -190,7 +183,7 @@ public class AdminPage extends PageObject {
 
         option.click();
         $(saveButtonUpdate).click();
-      }
+    }
 
     public void clickDelete2(int rowIndex) {
         // Construct the XPath dynamically using the rowIndex
@@ -204,12 +197,6 @@ public class AdminPage extends PageObject {
         // Click the delete button
         deleteButton.click();
 
-
-        // Wait for the confirmation modal or button to appear (optional, can be adjusted depending on the page behavior)
-       // WebDriverWait wait = new WebDriverWait(getDriver(), 10); // Adjust timeout as needed
-       // wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[contains(text(),'Yes, Delete')]")));
-
-
         // Find the "Yes, Delete" button and click it
         WebElement confirmDeleteButton = getDriver().findElement(By.xpath("/html/body/div[1]/div[3]/div/div/div/div[3]/button[2]"));
         confirmDeleteButton.click();
@@ -219,7 +206,6 @@ public class AdminPage extends PageObject {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
 
 
     }

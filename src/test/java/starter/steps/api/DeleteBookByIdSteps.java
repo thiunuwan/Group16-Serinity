@@ -1,4 +1,4 @@
-package starter.steps;
+package starter.steps.api;
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.When;
@@ -7,7 +7,6 @@ import net.serenitybdd.core.Serenity;
 import net.serenitybdd.rest.SerenityRest;
 import net.thucydides.core.util.EnvironmentVariables;
 import net.thucydides.core.util.SystemEnvironmentVariables;
-
 import starter.hooks.BookLifecycleHooks;
 import starter.utils.AuthUtils;
 

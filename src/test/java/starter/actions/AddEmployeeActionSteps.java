@@ -69,11 +69,6 @@ public class AddEmployeeActionSteps extends UIInteractionSteps {
 
     }
 
-//    @Step("Delete employee")
-//    public void deleteCandidate(String employeeName) {
-//        addEmployeePage.open();
-//        addEmployeePage.deleteEmployee(employeeName);
-//    }
 
     @Step("Delete test employee")
     public void deleteTestEmployee() {
@@ -101,11 +96,6 @@ public class AddEmployeeActionSteps extends UIInteractionSteps {
 
     }
 
-//    @Step("Verify employee {0} in the list")
-//    public void verifyEmployeeInList(String fullName) {
-//        List<String> employeeNameList = addEmployeePage.getEmployeeNamelist();
-//        Assert.assertTrue("Employee not found in the list!", employeeNameList.contains(fullName));
-//    }
 
     public void verifyEmployeeNotInList() {
 

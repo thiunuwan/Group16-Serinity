@@ -6,11 +6,8 @@ import net.thucydides.core.annotations.DefaultUrl;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-
-import java.time.Duration;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -80,23 +77,6 @@ public class AddEmployeePage extends PageObject {
 
     }
 
-//    public void toggleOn() {
-//        WebElement toggle = waitForElementToBeVisible(toggleInput);
-//        if (!toggleInput.isSelected()) {
-//            toggle.click(); // Enable the toggle if it's not already on
-//        }
-//    }
-//
-//    public void toggleOff() {
-//        WebElement toggle = waitForElementToBeVisible(toggleInput);
-//        if (toggle.isSelected()) {
-//            toggle.click(); // Disable the toggle if it's not already off
-//        }
-//    }
-//
-//    public boolean isToggleOn() {
-//        return waitForElementToBeVisible(toggleInput).isSelected(); // Check if the toggle is enabled
-//    }
 
     public void saveEmployee() {
         $(saveButton).click();
@@ -185,10 +165,7 @@ public class AddEmployeePage extends PageObject {
 
     public String getEmployeeNameForGivenID(String employeeIndex) {
 
-//        WebElement employeeNameElement = getDriver().findElement(By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div[2]/div[3]/div/div[2]/div[1]/div/div[3]/div", employeeIndex));
-//        return employeeNameElement.getText();
         String xpath = String.format("/html/body/div/div[1]/div[2]/div[2]/div/div[2]/div[3]/div/div[2]/div[%s]/div/div[3]/div", employeeIndex);
-//                                    /html/body/div/div[1]/div[2]/div[2]/div/div[2]/div[3]/div/div[2]/div[*]/div/div[3]/div
 
         // Find the employee name element using the dynamic XPath
         WebElement employeeNameElement = getDriver().findElement(By.xpath(xpath));
