@@ -19,5 +19,5 @@ Feature: Add Employee
   @loginAsAdmin
   Scenario: Add a new employee with username and password
     Given I am in "PIM" page
-    When I add a new employee with firstname "Denuwan" and middlename "Avishka" and lastname "Fernando" and username "Denuwan" and password "Abcde123#" confirmpassword "Abcde123#"
+    When I add a new employee with firstname "Denuwan" and middlename "Avishka" and lastname "Fernando" and username "Denuwan1234" and password "Abcde123#" confirmpassword "Abcde123#"
     Then I should see "Denuwan Avishka" in the employee list
