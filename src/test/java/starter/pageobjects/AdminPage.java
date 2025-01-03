@@ -35,7 +35,7 @@ public class AdminPage extends PageObject {
     private WebElementFacade employeeNameInput;
 
 
-    public void enterEmpName(String empName) {
+    public void enterEmpName() {
         // Type "ra" into the employee name input  and pick first suggestion
         employeeNameInput.type("ra");
 
@@ -78,11 +78,7 @@ public class AdminPage extends PageObject {
 
     public void saveUser() {
         $(saveButton).click();
-        try {
-            Thread.sleep(10000); // 5 seconds wait
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        waitABit(10000);
     }
 
     public void addUserRole(String role) {
@@ -113,12 +109,8 @@ public class AdminPage extends PageObject {
 
 
     public List<String> getUserList() {
-        try {
-            Thread.sleep(5000); // 5 seconds wait
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
+        waitABit(10000);
         List<WebElement> userElements = getDriver().findElements(By.xpath("/html/body/div[1]/div[1]/div[2]/div[2]/div/div[2]/div[3]/div/div[2]/div[*]/div/div[2]/div"));
 
         // Extract the usernames from the web elements

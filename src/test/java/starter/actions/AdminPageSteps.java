@@ -23,7 +23,7 @@ public class AdminPageSteps extends UIInteractionSteps {
     public void addNewTestUser(String username, String password, String role) {
         adminPage.clickAddUser();
         adminPage.addUserRole(role);
-        adminPage.enterEmpName("Akash");
+        adminPage.enterEmpName();
         adminPage.enterStatus2("Enabled");
         adminPage.enterUsername(username);
         adminPage.enterPassword(password);
