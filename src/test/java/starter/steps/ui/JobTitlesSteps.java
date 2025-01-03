@@ -10,7 +10,7 @@ public class JobTitlesSteps {
     @Steps
     JobTitlesActionsSteps jobTitlesActionsSteps;
 
-    @Given("I am in {string} page")
+    @Given("I am in this {string} page")
     public void iAmInThePage(String arg0) {
         jobTitlesActionsSteps.openJobTitlePage();
     }
