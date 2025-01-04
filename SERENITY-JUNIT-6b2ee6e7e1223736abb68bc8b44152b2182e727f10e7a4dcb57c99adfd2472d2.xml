@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="UTF-8"?><testsuite errors="0" failures="0" name="User Management in Admin Tab" skipped="0" tests="3" time="109.76" timestamp="2025-01-04 04:32:45"><testcase name="Add a new user"/><testcase name="Delete a user"/><testcase name="search an registered user"/></testsuite>

@@ -1,0 +1,3 @@
+"Story","Title","Result","Date","Stability","Duration (s)"
+"Job Titles","Add a new job title and verify through record","SUCCESS","2025-01-04T04:34:35.626901005Z[Etc/UTC]","0.0","22.92"
+"Job Titles","Update an added job title from the job titles page","SUCCESS","2025-01-04T04:34:58.63567576Z[Etc/UTC]","0.0","36.98"

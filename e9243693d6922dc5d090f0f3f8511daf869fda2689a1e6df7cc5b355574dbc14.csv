@@ -1,0 +1,4 @@
+"Story","Title","Result","Date","Stability","Duration (s)"
+"Get All Book List","Retrieve all books as a logged-in user","SUCCESS","2025-01-04T04:31:49.132924352Z[Etc/UTC]","0.0","0.27"
+"Get All Book List","Retrieve books with an empty database","SUCCESS","2025-01-04T04:31:49.412684184Z[Etc/UTC]","0.0","0.26"
+"Get All Book List","Unauthorized access to book list as a non-logged-in user","FAILURE","2025-01-04T04:31:49.684858481Z[Etc/UTC]","0.0","0.24"
