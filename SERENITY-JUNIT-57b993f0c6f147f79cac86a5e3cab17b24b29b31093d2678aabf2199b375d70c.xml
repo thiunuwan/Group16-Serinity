@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="UTF-8"?><testsuite errors="0" failures="0" name="Add Employee" skipped="0" tests="2" time="61.81" timestamp="2025-01-07 04:55:09"><testcase name="Add a new employee without username and password"/><testcase name="Delete an added employee from the PIM page"/></testsuite>

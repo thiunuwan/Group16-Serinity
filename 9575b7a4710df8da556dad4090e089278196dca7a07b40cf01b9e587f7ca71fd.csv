@@ -1,0 +1,7 @@
+"Story","Title","Result","Date","Stability","Duration (s)"
+"Create Book API Tests","Successfully create a new book","SUCCESS","2025-01-07T04:55:06.533535402Z[Etc/UTC]","0.0","0.24"
+"Create Book API Tests","Attempt to create a book with empty title and author as a normal user","FAILURE","2025-01-07T04:55:06.780188543Z[Etc/UTC]","0.0","0.12"
+"Create Book API Tests","Attempt to create a book with an ID that already exists","FAILURE","2025-01-07T04:55:06.905480848Z[Etc/UTC]","0.0","0.39"
+"Create Book API Tests","Attempt to create a book with missing values in title with author","FAILURE","2025-01-07T04:55:07.29876448Z[Etc/UTC]","0.0","0.11"
+"Create Book API Tests","Invalid ID format","SUCCESS","2025-01-07T04:55:07.412427149Z[Etc/UTC]","0.0","0.19"
+"Create Book API Tests","Book Already Exists by name","SUCCESS","2025-01-07T04:55:07.606934653Z[Etc/UTC]","0.0","0.39"

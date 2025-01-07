@@ -1,0 +1,4 @@
+"Story","Title","Result","Date","Stability","Duration (s)"
+"User Management in Admin Tab","Add a new user","SUCCESS","2025-01-07T04:56:11.133610267Z[Etc/UTC]","0.0","30.37"
+"User Management in Admin Tab","Delete a user","SUCCESS","2025-01-07T04:56:41.589267452Z[Etc/UTC]","0.0","45.55"
+"User Management in Admin Tab","search an registered user","SUCCESS","2025-01-07T04:57:27.228312462Z[Etc/UTC]","0.0","30.97"

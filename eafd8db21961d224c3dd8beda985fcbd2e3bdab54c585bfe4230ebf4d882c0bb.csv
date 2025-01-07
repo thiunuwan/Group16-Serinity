@@ -1,0 +1,4 @@
+"Story","Title","Result","Date","Stability","Duration (s)"
+"Delete Book by ID","Delete an existing book with a valid ID as an admin","FAILURE","2025-01-07T04:55:04.99663632Z[Etc/UTC]","0.0","0.33"
+"Delete Book by ID","Delete an existing book with a valid ID as a normal user","FAILURE","2025-01-07T04:55:05.333409323Z[Etc/UTC]","0.0","0.34"
+"Delete Book by ID","Delete a non-existent book by ID","FAILURE","2025-01-07T04:55:05.68229829Z[Etc/UTC]","0.0","0.11"

@@ -1,0 +1,4 @@
+"Story","Title","Result","Date","Stability","Duration (s)"
+"Update Book by ID","Update a book with a valid ID as an admin","SUCCESS","2025-01-07T04:55:08.006892535Z[Etc/UTC]","0.0","0.31"
+"Update Book by ID","Update a book with a valid ID as a regular user","SUCCESS","2025-01-07T04:55:08.326422945Z[Etc/UTC]","0.0","0.29"
+"Update Book by ID","Update a book with missing mandatory fields as an admin","SUCCESS","2025-01-07T04:55:08.727520712Z[Etc/UTC]","0.0","0.28"

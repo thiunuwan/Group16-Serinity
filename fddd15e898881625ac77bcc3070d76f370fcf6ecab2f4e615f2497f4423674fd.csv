@@ -1,0 +1,4 @@
+"Story","Title","Result","Date","Stability","Duration (s)"
+"Get Book by ID","Retrieve a book with a valid ID as an admin/user","FAILURE","2025-01-07T04:55:00.121669329Z[Etc/UTC]","0.0","4.23"
+"Get Book by ID","Retrieve a non-existent book by ID","FAILURE","2025-01-07T04:55:04.387497125Z[Etc/UTC]","0.0","0.29"
+"Get Book by ID","Retrieve a book with a valid ID as a non-logged-in user","FAILURE","2025-01-07T04:55:04.685424109Z[Etc/UTC]","0.0","0.3"

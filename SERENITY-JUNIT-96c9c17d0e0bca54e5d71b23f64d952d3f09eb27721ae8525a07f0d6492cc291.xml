@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?><testsuite errors="0" failures="1" name="Get All Book List" skipped="0" tests="5" time="0.71" timestamp="2025-01-07 04:55:05"><testcase name="Retrieve all books as a logged-in user"/><testcase name="Retrieve books with an empty database"/><testcase name="Unauthorized access to book list as a non-logged-in user"><failure message="Response body should contain the error message: Unauthorized access" type="java.lang.AssertionError">Response body should contain the error message: Unauthorized access</failure><system-err>Response body should contain the error message: Unauthorized access
+serenity.rest.starter@1.0.0-SNAPSHOT/starter.steps.api.GetBookByIdSteps.theResponseShouldContainTheErrorMessage(GetBookByIdSteps.java:85)
+✽.the response should contain the error message "Unauthorized access"(classpath:features/api/get_all_books.feature:34)
+</system-err></testcase></testsuite>

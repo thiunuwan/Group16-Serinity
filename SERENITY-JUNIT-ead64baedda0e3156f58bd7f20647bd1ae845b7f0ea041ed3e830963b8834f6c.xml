@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?><testsuite errors="0" failures="3" name="Delete Book by ID" skipped="0" tests="3" time="0.77" timestamp="2025-01-07 04:55:04"><testcase name="Delete an existing book with a valid ID as an admin"><failure message="1 expectation failed.&#10;Expected status code &lt;200&gt; but was &lt;403&gt;.&#10;" type="java.lang.AssertionError">1 expectation failed.
+Expected status code &lt;200&gt; but was &lt;403&gt;.
+</failure><system-err>1 expectation failed.
+Expected status code &lt;200&gt; but was &lt;403&gt;.
+
+io.restassured.internal.ResponseSpecificationImpl.validateResponseIfRequired(ResponseSpecificationImpl.groovy:674)
+io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:126)
+io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:134)
+io.restassured.internal.ValidatableResponseOptionsImpl.statusCode(ValidatableResponseOptionsImpl.java:89)
+io.restassured.internal.ValidatableResponseImpl.super$2$statusCode(ValidatableResponseImpl.groovy)
+groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:323)
+groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1267)
+io.restassured.internal.ValidatableResponseImpl.statusCode(ValidatableResponseImpl.groovy:142)
+io.restassured.internal.ValidatableResponseImpl.statusCode(ValidatableResponseImpl.groovy)
+serenity.rest.starter@1.0.0-SNAPSHOT/starter.steps.api.UtilSteps.lambda$theResponseStatusCodeShouldBe$0(UtilSteps.java:10)
+net.serenitybdd.rest.SerenityRest.restAssuredThat(SerenityRest.java:626)
+serenity.rest.starter@1.0.0-SNAPSHOT/starter.steps.api.UtilSteps.theResponseStatusCodeShouldBe(UtilSteps.java:10)
+✽.the response status code should be 200(classpath:features/api/delete_book_by_id.feature:8)
+</system-err></testcase><testcase name="Delete an existing book with a valid ID as a normal user"><failure message="1 expectation failed.&#10;Expected status code &lt;403&gt; but was &lt;200&gt;.&#10;" type="java.lang.AssertionError">1 expectation failed.
+Expected status code &lt;403&gt; but was &lt;200&gt;.
+</failure><system-err>1 expectation failed.
+Expected status code &lt;403&gt; but was &lt;200&gt;.
+
+io.restassured.internal.ResponseSpecificationImpl.validateResponseIfRequired(ResponseSpecificationImpl.groovy:674)
+io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:126)
+io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:134)
+io.restassured.internal.ValidatableResponseOptionsImpl.statusCode(ValidatableResponseOptionsImpl.java:89)
+io.restassured.internal.ValidatableResponseImpl.super$2$statusCode(ValidatableResponseImpl.groovy)
+groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:323)
+groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1267)
+io.restassured.internal.ValidatableResponseImpl.statusCode(ValidatableResponseImpl.groovy:142)
+io.restassured.internal.ValidatableResponseImpl.statusCode(ValidatableResponseImpl.groovy)
+serenity.rest.starter@1.0.0-SNAPSHOT/starter.steps.api.UtilSteps.lambda$theResponseStatusCodeShouldBe$0(UtilSteps.java:10)
+net.serenitybdd.rest.SerenityRest.restAssuredThat(SerenityRest.java:626)
+serenity.rest.starter@1.0.0-SNAPSHOT/starter.steps.api.UtilSteps.theResponseStatusCodeShouldBe(UtilSteps.java:10)
+✽.the response status code should be 403(classpath:features/api/delete_book_by_id.feature:16)
+</system-err></testcase><testcase name="Delete a non-existent book by ID"><failure message="1 expectation failed.&#10;Expected status code &lt;404&gt; but was &lt;403&gt;.&#10;" type="java.lang.AssertionError">1 expectation failed.
+Expected status code &lt;404&gt; but was &lt;403&gt;.
+</failure><system-err>1 expectation failed.
+Expected status code &lt;404&gt; but was &lt;403&gt;.
+
+io.restassured.internal.ResponseSpecificationImpl.validateResponseIfRequired(ResponseSpecificationImpl.groovy:674)
+io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:126)
+io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:134)
+io.restassured.internal.ValidatableResponseOptionsImpl.statusCode(ValidatableResponseOptionsImpl.java:89)
+io.restassured.internal.ValidatableResponseImpl.super$2$statusCode(ValidatableResponseImpl.groovy)
+groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:323)
+groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1267)
+io.restassured.internal.ValidatableResponseImpl.statusCode(ValidatableResponseImpl.groovy:142)
+io.restassured.internal.ValidatableResponseImpl.statusCode(ValidatableResponseImpl.groovy)
+serenity.rest.starter@1.0.0-SNAPSHOT/starter.steps.api.UtilSteps.lambda$theResponseStatusCodeShouldBe$0(UtilSteps.java:10)
+net.serenitybdd.rest.SerenityRest.restAssuredThat(SerenityRest.java:626)
+serenity.rest.starter@1.0.0-SNAPSHOT/starter.steps.api.UtilSteps.theResponseStatusCodeShouldBe(UtilSteps.java:10)
+✽.the response status code should be 404(classpath:features/api/delete_book_by_id.feature:23)
+</system-err></testcase></testsuite>

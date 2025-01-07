@@ -1,0 +1,3 @@
+"Story","Title","Result","Date","Stability","Duration (s)"
+"Add Employee","Add a new employee without username and password","SUCCESS","2025-01-07T04:55:09.050518083Z[Etc/UTC]","0.0","40.37"
+"Add Employee","Delete an added employee from the PIM page","SUCCESS","2025-01-07T04:55:49.57867971Z[Etc/UTC]","0.0","21.44"
