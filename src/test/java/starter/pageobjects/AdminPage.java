@@ -4,15 +4,18 @@ import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
 @DefaultUrl("https://opensource-demo.orangehrmlive.com/web/index.php/admin/viewSystemUsers")
 public class AdminPage extends PageObject {
+
+    PageUtils pageUtils = new PageUtils();
 
     // Locator for the "Add" button
     private final By addUserButton = By.xpath("//button[contains(@class, 'oxd-button--secondary') and contains(., 'Add')]");
@@ -53,36 +56,29 @@ public class AdminPage extends PageObject {
     }
 
     public void clickAddUser() {
-        $(addUserButton).click();
+        pageUtils.clickButton(addUserButton);
     }
 
     public void enterUsername(String username) {
-        // Type the username into the input field
-        $(usernameInput).type(username);
+        pageUtils.fillInputField(usernameInput,username);
     }
 
     public void enterUsernameForSearch(String username) {
-        // Type the username into the input field
-        $(usernameSearchInput).type(username);
+        pageUtils.fillInputField(usernameSearchInput,username);
     }
 
     public void enterPassword(String password) {
-        // Clear the field (optional) and type the password
-//        $(passwordInput).clear();
-        $(passwordInput).type(password);
-
-        // Clear the field (optional) and type the confirmation password
-//        $(confirmPasswordInput).clear();
-        $(confirmPasswordInput).type(password);
+        pageUtils.fillInputField(passwordInput,password);
+        pageUtils.fillInputField(confirmPasswordInput,password);
     }
 
     public void saveUser() {
-        $(saveButton).click();
-        waitABit(10000);
+        pageUtils.clickButton(saveButton);
+        waitABit(5000);
     }
 
     public void addUserRole(String role) {
-          // Click to open the dropdown
+        // Click to open the dropdown
         $(userRoleDropdown).click();
 
         // Select the role from the dropdown list
@@ -118,23 +114,15 @@ public class AdminPage extends PageObject {
                 .map(WebElement::getText)
                 .collect(Collectors.toList());
     }
-    public void searchUser() {
-        $(searchButton).click();
-        try {
-            Thread.sleep(5000); // 5 seconds wait
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
+    public void searchUser() {
+        pageUtils.clickButton(searchButton);
+        waitABit(5000);
     }
 
     public String getUserSearchResult() {
         WebElement userElement = getDriver().findElement(By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div[2]/div[3]/div/div[2]/div/div/div[2]/div"));
-        try {
-            Thread.sleep(5000); // 5 seconds wait
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        waitABit(5000);
         // Extract the usernames from the web elements
         return userElement.getText();
     }
@@ -143,23 +131,16 @@ public class AdminPage extends PageObject {
         // Construct the XPath dynamically using the rowIndex
         String xpath = "/html/body/div[1]/div[1]/div[2]/div[2]/div/div[2]/div[3]/div/div[2]/div[" + rowIndex + "]/div/div[6]/div/button[1]";
 
-
         // Find the delete button using the dynamically constructed XPath
         WebElement deleteButton = getDriver().findElement(By.xpath(xpath));
-
 
         // Click the delete button
         deleteButton.click();
 
-
-        // Wait for the confirmation modal or button to appear (optional, can be adjusted depending on the page behavior)
-       // WebDriverWait wait = new WebDriverWait(getDriver(), 10); // Adjust timeout as needed
-       // wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[contains(text(),'Yes, Delete')]")));
-
-
         // Find the "Yes, Delete" button and click it
         WebElement confirmDeleteButton = getDriver().findElement(By.xpath("/html/body/div[1]/div[3]/div/div/div/div[3]/button[2]"));
         confirmDeleteButton.click();
+        waitABit(5000);
 
     }
 
@@ -170,9 +151,9 @@ public class AdminPage extends PageObject {
         // Find the delete button using the dynamically constructed XPath
         WebElement updateButton = getDriver().findElement(By.xpath(xpath));
 
-
         // Click the update button
         updateButton.click();
+        waitABit(5000);
     }
 
 
@@ -190,7 +171,7 @@ public class AdminPage extends PageObject {
 
         option.click();
         $(saveButtonUpdate).click();
-      }
+    }
 
     public void clickDelete2(int rowIndex) {
         // Construct the XPath dynamically using the rowIndex
@@ -204,12 +185,6 @@ public class AdminPage extends PageObject {
         // Click the delete button
         deleteButton.click();
 
-
-        // Wait for the confirmation modal or button to appear (optional, can be adjusted depending on the page behavior)
-       // WebDriverWait wait = new WebDriverWait(getDriver(), 10); // Adjust timeout as needed
-       // wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[contains(text(),'Yes, Delete')]")));
-
-
         // Find the "Yes, Delete" button and click it
         WebElement confirmDeleteButton = getDriver().findElement(By.xpath("/html/body/div[1]/div[3]/div/div/div/div[3]/button[2]"));
         confirmDeleteButton.click();
@@ -219,7 +194,6 @@ public class AdminPage extends PageObject {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
 
 
     }

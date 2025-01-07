@@ -1,26 +1,17 @@
-package starter.steps;
+package starter.steps.api;
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.restassured.response.Response;
 import net.serenitybdd.core.Serenity;
 import net.serenitybdd.rest.SerenityRest;
-import net.thucydides.core.util.EnvironmentVariables;
-import net.thucydides.core.util.SystemEnvironmentVariables;
 import starter.utils.AuthUtils;
-import io.restassured.response.Response;
 
-import static net.serenitybdd.rest.SerenityRest.restAssuredThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
-import static org.junit.Assert.assertTrue;
 
-public class CreateBookSteps {
-
-    // Retrieve BASE_URL from configuration
-    private final EnvironmentVariables environmentVariables = SystemEnvironmentVariables.createEnvironmentVariables();
-    private final String BASE_URL = environmentVariables.getProperty("api.base.url", "http://localhost:8080/api");
+public class CreateBookSteps  extends BaseSteps{
 
     private Response response;
 

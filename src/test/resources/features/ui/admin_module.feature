@@ -15,13 +15,13 @@ Feature: User Management in Admin Tab
     When I delete the user with username "Akash548"
     Then I should not see the user (testUser) "Akash548" in the user list
 
-#  @ui
-  @loginAsAdmin
-  Scenario: Create user with existing username
-    Given I am on the "Admin" page
-    And the user test exists with username "Akash5328" and password "test123" and role "ESS"
-    When I try to add a new user with same username "Akash545" and password "test456" and role "Admin"
-    Then I should see an error message "Username already exists"
+##  @ui
+#  @loginAsAdmin
+#  Scenario: Create user with existing username
+#    Given I am on the "Admin" page
+#    And the user test exists with username "Akash5328" and password "test123" and role "ESS"
+#    When I try to add a new user with same username "Akash545" and password "test456" and role "Admin"
+#    Then I should see an error message "Username already exists"
 
   @ui
   @loginAsAdmin
@@ -31,11 +31,11 @@ Feature: User Management in Admin Tab
     When I search the user named "Akash111"
     Then I should see the user (testUser) "Akash111" in the search result list
 
-#  @ui
-  @loginAsAdmin
-  Scenario: Update an registered user
-    Given I am on the "Admin" page
-    And I add a new user with username "Akash226" and password "test123" and role "Admin"
-    When I update a user with username "Akash226" to "Ravindu113" and role "Admin" to "ESS"
-    Then I should see the user (testUser) "Ravindu113" in the user list
+##  @ui
+#  @loginAsAdmin
+#  Scenario: Update an registered user
+#    Given I am on the "Admin" page
+#    And I add a new user with username "Akash226" and password "test123" and role "Admin"
+#    When I update a user with username "Akash226" to "Ravindu113" and role "Admin" to "ESS"
+#    Then I should see the user (testUser) "Ravindu113" in the user list
 

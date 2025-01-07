@@ -1,21 +1,15 @@
-package starter.steps;
+package starter.steps.api;
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.serenitybdd.core.Serenity;
 import net.serenitybdd.rest.SerenityRest;
-import net.thucydides.core.util.EnvironmentVariables;
-import net.thucydides.core.util.SystemEnvironmentVariables;
 
 import static net.serenitybdd.rest.SerenityRest.restAssuredThat;
 import static org.hamcrest.Matchers.*;
 
-public class GetAllBooksSteps {
-
-    // Retrieve BASE_URL from configuration
-    private final EnvironmentVariables environmentVariables = SystemEnvironmentVariables.createEnvironmentVariables();
-    private final String BASE_URL = environmentVariables.getProperty("api.base.url", "http://localhost:8080/api");
+public class GetAllBooksSteps extends BaseSteps{
 
     @When("I send a GET request to retrieve the book list")
     public void iSendAGETRequestToRetrieveTheBookList() {
@@ -39,16 +33,12 @@ public class GetAllBooksSteps {
         restAssuredThat(response -> response.statusCode(statusCode));
     }
 
-
-
-
     @And("the response should contain a list of books")
     public void theResponseShouldContainAListOfBooks() {
         SerenityRest.lastResponse().then()
                 .body("books", notNullValue()) // Ensure the "books" field exists
                 .body("books.size()", greaterThanOrEqualTo(0)); // Ensure the list contains zero or more books
     }
-
 
     @And("the response should indicate an empty book list")
     public void theResponseShouldIndicateAnEmptyBookList() {

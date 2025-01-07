@@ -17,6 +17,8 @@ import java.util.stream.Collectors;
 @DefaultUrl("https://opensource-demo.orangehrmlive.com/web/index.php/recruitment/viewJobVacancy")
 public class RecruitmentVacanciesPage extends PageObject {
 
+    PageUtils pageUtils = new PageUtils();
+
     // Elements for "Add a new vacancy" scenario
     private final By addVacancyButton = By.xpath("//button[contains(@class, 'oxd-button') and contains(., 'Add')]");
     private final By vacancyNameInput = By.xpath("/html/body/div/div[1]/div[2]/div[2]/div/div/form/div[1]/div[1]/div/div[2]/input");
@@ -38,13 +40,11 @@ public class RecruitmentVacanciesPage extends PageObject {
 
 
     public void clickAddVacancy() {
-        $(addVacancyButton).click();
-        pause(2000);
+        pageUtils.clickButton(addVacancyButton);
     }
 
     public void enterVacancyName(String vacancyName) {
-        $(vacancyNameInput).type(vacancyName);
-        pause(2000);
+        pageUtils.fillInputField(vacancyNameInput,vacancyName);
     }
 
     public void selectJobTitle(String jobTitle) {
@@ -58,22 +58,16 @@ public class RecruitmentVacanciesPage extends PageObject {
     }
 
     public void enterHiringManager(String hiringManager) {
-        $(hiringManagerInput).typeAndEnter(hiringManager);
-        pause(2000);
+        pageUtils.fillInputField(hiringManagerInput,hiringManager);
     }
 
     public void enterNumberOfPositions(String numberOfPositions) {
-        $(numberOfPositionsInput).type(numberOfPositions);
-        pause(2000);
+        pageUtils.fillInputField(numberOfPositionsInput,numberOfPositions);
     }
 
     public void clickSaveButton() {
-        $(saveButton).click();
-        try {
-            Thread.sleep(5000); // 5 seconds wait
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        pageUtils.clickButton(saveButton);
+        waitABit(5000);
     }
 
 
@@ -83,9 +77,9 @@ public class RecruitmentVacanciesPage extends PageObject {
         for (WebElement row : rows) {
             if (row.getText().contains(vacancyName)) {
                 WebElement deleteButton = row.findElement(deleteButtonTemplate);
-                pause(5000);
+//                waitABit(5000);
                 deleteButton.click();
-
+                waitABit(5000);
                 // Confirm deletion if required
                 confirmDeletion();
                 break;
@@ -96,16 +90,8 @@ public class RecruitmentVacanciesPage extends PageObject {
 
     public void confirmDeletion() {
         WebElement confirmButton = $(By.xpath("/html/body/div/div[3]/div/div/div/div[3]/button[2]"));
-        pause(3000);
+        waitABit(3000);
         confirmButton.click();
-    }
-
-    private void pause(long milliseconds) {
-        try {
-            Thread.sleep(milliseconds);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 
     public List<String> getVacancyList() {
@@ -116,11 +102,6 @@ public class RecruitmentVacanciesPage extends PageObject {
                 .collect(Collectors.toList());
     }
 
-//    public void enterNameForSearch(String name) {
-//
-//        $(searchVacancyNameInput).type(name);
-//        pause(2000);
-//    }
 
     public void enterNameForSearch(String name) {
         // Click on the search input field
@@ -153,18 +134,9 @@ public class RecruitmentVacanciesPage extends PageObject {
     }
 
 
-
-
     public void searchVacancy() {
-        $(searchButton).click();
-        try {
-            Thread.sleep(5000); // 5 seconds wait
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        pageUtils.clickButton(searchButton);
     }
-
-
 
 
 }
