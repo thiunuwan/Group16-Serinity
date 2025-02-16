@@ -7,6 +7,8 @@ import starter.actions.LoginSteps;
 import starter.pageobjects.LoginPage;
 
 public class LoginSetupHook extends UIInteractionSteps {
+
+
     LoginPage loginPage;
     LoginSteps loginSteps;
 

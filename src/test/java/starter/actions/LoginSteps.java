@@ -2,6 +2,8 @@ package starter.actions;
 
 import net.serenitybdd.core.steps.UIInteractionSteps;
 import net.thucydides.core.annotations.Step;
+import net.thucydides.core.util.EnvironmentVariables;
+import net.thucydides.core.util.SystemEnvironmentVariables;
 import starter.pageobjects.DashboardPage;
 import starter.pageobjects.LoginPage;
 
@@ -11,6 +13,11 @@ import static org.junit.Assert.assertEquals;
 
 
 public class LoginSteps extends UIInteractionSteps {
+
+    protected final EnvironmentVariables environmentVariables = SystemEnvironmentVariables.createEnvironmentVariables();
+    protected final String orangeHRMUsername = environmentVariables.getProperty("orangeHRMUsername");
+    protected final String orangeHRMPassword = environmentVariables.getProperty("orangeHRMPassword");
+
     LoginPage loginPage;
     DashboardPage dashboardPage;
 
@@ -23,8 +30,8 @@ public class LoginSteps extends UIInteractionSteps {
 
     @Step("Enter valid OrangeHRM credentials")
     public void performValidLogin() {
-        find(LoginPage.USERNAME_FIELD).sendKeys("Admin");
-        find(LoginPage.PASSWORD_FIELD).sendKeys("admin123");
+        find(LoginPage.USERNAME_FIELD).sendKeys(orangeHRMUsername);
+        find(LoginPage.PASSWORD_FIELD).sendKeys(orangeHRMPassword);
         find(LoginPage.LOGIN_BUTTON).click();
     }
 
